@@ -1,0 +1,83 @@
+:root {
+  /* =========================
+     COLOR
+  ========================= */
+
+ --color-background: #fdfcfb;
+--color-background-soft: #f3f0ec;
+
+--color-surface: #ffffff;
+--color-surface-muted: #e8e2dc;
+  --color-text: #686460;
+  --color-text-dark: #343230;
+
+  --color-accent: #aaa097;
+  --color-accent-light: #d7d0c9;
+  --color-accent-dark: #897f76;
+
+  --color-dark: #302f2d;
+  --color-dark-soft: #3a3836;
+
+  --color-border:
+    rgba(66, 62, 58, 0.16);
+
+  --color-white:
+    #ffffff;
+
+  /* =========================
+     TIPOGRAFÍA
+  ========================= */
+
+--font-serif:
+  'Cormorant Garamond',
+  Georgia,
+  'Times New Roman',
+  serif;
+
+--font-sans:
+  'Inter',
+  Arial,
+  Helvetica,
+  sans-serif;
+
+  /* =========================
+     LAYOUT
+  ========================= */
+
+  --container-width: 1280px;
+
+  --page-padding:
+    clamp(
+      20px,
+      4vw,
+      64px
+    );
+
+  --section-space:
+    clamp(
+      100px,
+      12vw,
+      180px
+    );
+
+  /* =========================
+     ANIMACIÓN
+  ========================= */
+
+  --ease-out:
+    cubic-bezier(
+      0.22,
+      1,
+      0.36,
+      1
+    );
+
+  --transition-fast:
+    0.25s ease;
+
+  --transition-normal:
+    0.45s var(--ease-out);
+
+  --transition-slow:
+    0.8s var(--ease-out);
+}

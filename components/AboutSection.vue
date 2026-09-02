@@ -117,7 +117,7 @@
     var(--page-padding);
 
   background:
-    var(--color-background);
+    var(--color-surface);
 }
 
 .about__inner {

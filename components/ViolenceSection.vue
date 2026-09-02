@@ -5,87 +5,111 @@
     class="violence"
   >
     <div class="violence__inner">
-      <header
-        class="violence__header"
-        :class="{ 'is-visible': isVisible }"
-      >
+      <div class="violence__header">
         <p class="violence__eyebrow">
           Violencia de Género
         </p>
 
-        <h2 class="violence__title">
-          Asistencia jurídica
-          <span>especializada y confidencial.</span>
-        </h2>
-
-        <p class="violence__intro">
-          Un acompañamiento jurídico riguroso y cercano
-          durante todas las fases del procedimiento.
-        </p>
-      </header>
-
-      <div class="violence__content">
-        <div
-          class="violence__statement"
-          :class="{ 'is-visible': isVisible }"
-        >
-          <span class="violence__statement-number">
-            01
-          </span>
+        <div class="violence__heading">
+          <h2>
+            Asistencia jurídica
+            <span>
+              especializada y confidencial.
+            </span>
+          </h2>
 
           <p>
-            Actuación profesional orientada a ofrecer
-            seguridad jurídica, protección y acompañamiento
-            durante todo el proceso.
+            Una atención jurídica rigurosa,
+            cercana y especialmente cuidadosa
+            ante situaciones que requieren
+            protección y respuesta inmediata.
           </p>
-
-          <a
-            href="#contacto"
-            class="violence__cta"
-          >
-            Solicita asesoramiento
-            <span aria-hidden="true">↗</span>
-          </a>
         </div>
+      </div>
+
+      <div class="violence__body">
+        <aside class="violence__intro">
+          <div class="violence__intro-inner">
+            <p class="violence__statement">
+              Protección,
+              acompañamiento
+              y defensa jurídica.
+            </p>
+
+            <p class="violence__intro-text">
+              Cada actuación se aborda desde
+              la confidencialidad, la sensibilidad
+              y una implicación profesional absoluta.
+            </p>
+
+            <a
+              href="#contacto"
+              class="violence__cta"
+            >
+              <span>
+                Solicita asesoramiento
+              </span>
+
+              <span aria-hidden="true">
+                ↗
+              </span>
+            </a>
+          </div>
+        </aside>
 
         <div class="violence__services">
           <article
             v-for="(service, index) in services"
-            :key="service"
+            :key="service.title"
             class="violence-service"
-            :class="{ 'is-visible': isVisible }"
-            :style="{ '--delay': `${index * 80}ms` }"
+            :class="{
+              'violence-service--visible':
+                isVisible
+            }"
+            :style="{
+              '--delay':
+                `${index * 80}ms`
+            }"
           >
-            <span class="violence-service__number">
-              {{ String(index + 1).padStart(2, '0') }}
-            </span>
+            <div class="violence-service__marker">
+              <span aria-hidden="true" />
+            </div>
 
-            <p>
-              {{ service }}
-            </p>
+            <div class="violence-service__content">
+              <h3>
+                {{ service.title }}
+              </h3>
+
+              <p>
+                {{ service.text }}
+              </p>
+            </div>
+
+            <span
+              class="violence-service__arrow"
+              aria-hidden="true"
+            >
+              ↗
+            </span>
           </article>
         </div>
       </div>
 
-      <div
-        class="violence__footer"
-        :class="{ 'is-visible': isVisible }"
-      >
-        <span>
-          Atención personalizada
-        </span>
+      <div class="violence__footer">
+        <p>
+          Asesoramiento · Defensa ·
+          Protección · Acompañamiento
+        </p>
 
-        <span class="violence__footer-line" />
+        <a href="#contacto">
+          <span>
+            Contactar
+          </span>
 
-        <span>
-          Confidencialidad
-        </span>
-
-        <span class="violence__footer-line" />
-
-        <span>
-          Acompañamiento
-        </span>
+          <span aria-hidden="true">
+            ↗
+          </span>
+        </a>
       </div>
     </div>
   </section>
@@ -98,36 +122,83 @@ import {
   ref
 } from 'vue'
 
-const sectionRef = ref<HTMLElement | null>(null)
-const isVisible = ref(false)
+const sectionRef =
+  ref<HTMLElement | null>(null)
+
+const isVisible =
+  ref(false)
 
 const services = [
-  'Asesoramiento jurídico inmediato, confidencial y altamente especializado.',
-  'Defensa penal rigurosa en todas las fases del proceso.',
-  'Coordinación con servicios sociales y recursos especializados.',
-  'Acompañamiento continuo, cercano y comprometido, con especial implicación en la protección de menores y del entorno familiar.',
-  'Gestión coordinada de procedimientos civiles asociados: custodia, vivienda y pensiones.',
-  'Tramitación integral de prestaciones y otros derechos de la víctima.'
+  {
+    title:
+      'Asesoramiento jurídico inmediato',
+
+    text:
+      'Atención jurídica confidencial y altamente especializada desde el primer momento.'
+  },
+  {
+    title:
+      'Defensa penal',
+
+    text:
+      'Defensa penal rigurosa durante todas las fases del procedimiento.'
+  },
+  {
+    title:
+      'Coordinación profesional',
+
+    text:
+      'Coordinación con servicios sociales y recursos especializados cuando las circunstancias lo requieren.'
+  },
+  {
+    title:
+      'Acompañamiento continuo',
+
+    text:
+      'Acompañamiento cercano y comprometido, con especial implicación en la protección de menores y del entorno familiar.'
+  },
+  {
+    title:
+      'Procedimientos civiles asociados',
+
+    text:
+      'Gestión coordinada de cuestiones como custodia, vivienda, pensiones y otras medidas vinculadas al procedimiento.'
+  },
+  {
+    title:
+      'Prestaciones y derechos',
+
+    text:
+      'Tramitación integral de prestaciones y otros derechos reconocidos a la víctima.'
+  }
 ]
 
-let observer: IntersectionObserver | null = null
+let observer:
+  IntersectionObserver | null = null
 
 onMounted(() => {
   if (!sectionRef.value) return
 
-  observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry?.isIntersecting) {
-        isVisible.value = true
-        observer?.disconnect()
-      }
-    },
-    {
-      threshold: 0.12
-    }
-  )
+  observer =
+    new IntersectionObserver(
+      ([entry]) => {
+        if (
+          entry &&
+          entry.isIntersecting
+        ) {
+          isVisible.value = true
 
-  observer.observe(sectionRef.value)
+          observer?.disconnect()
+        }
+      },
+      {
+        threshold: 0.12
+      }
+    )
+
+  observer.observe(
+    sectionRef.value
+  )
 })
 
 onBeforeUnmount(() => {
@@ -137,17 +208,72 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .violence {
+  position: relative;
+
   padding:
-    clamp(110px, 12vw, 190px)
-    clamp(20px, 4vw, 64px);
+    var(--section-space)
+    var(--page-padding);
 
-  background: #2f2e2d;
+  overflow: hidden;
 
-  color: #ffffff;
+  background:
+    #302c29;
+
+  color:
+    rgba(244, 237, 231, 0.58);
+}
+
+.violence::before {
+  content: '';
+
+  position: absolute;
+
+  top: -220px;
+  right: -180px;
+
+  width: 620px;
+  height: 620px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.045);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.violence::after {
+  content: '';
+
+  position: absolute;
+
+  top: -70px;
+  right: -30px;
+
+  width: 340px;
+  height: 340px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.035);
+
+  border-radius: 50%;
+
+  pointer-events: none;
 }
 
 .violence__inner {
-  width: min(100%, var(--container-width));
+  position: relative;
+
+  z-index: 2;
+
+  width:
+    min(
+      100%,
+      var(--container-width)
+    );
+
   margin: 0 auto;
 }
 
@@ -156,270 +282,409 @@ onBeforeUnmount(() => {
 ========================= */
 
 .violence__header {
-  max-width: 1050px;
+  display: grid;
+
+  grid-template-columns:
+    minmax(130px, 0.35fr)
+    minmax(0, 1.65fr);
+
+  gap:
+    clamp(
+      35px,
+      6vw,
+      100px
+    );
 
   margin-bottom:
     clamp(
-      70px,
-      9vw,
-      120px
+      80px,
+      10vw,
+      145px
     );
-
-  opacity: 0;
-
-  transform:
-    translateY(30px);
-
-  transition:
-    opacity 0.85s ease,
-    transform 0.85s ease;
-}
-
-.violence__header.is-visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .violence__eyebrow {
-  margin-bottom: 22px;
+  margin:
+    12px
+    0
+    0;
 
-  font-size: 0.7rem;
+  font-size: 0.62rem;
 
-  letter-spacing: 0.22em;
+  font-weight: 500;
+
+  letter-spacing: 0.16em;
+
   text-transform: uppercase;
 
   color:
-    rgba(255, 255, 255, 0.5);
+    rgba(255, 255, 255, 0.48);
 }
 
-.violence__title {
-  margin-bottom: 30px;
+.violence__heading {
+  display: grid;
 
-  font-size:
+  grid-template-columns:
+    minmax(0, 1.1fr)
+    minmax(240px, 0.55fr);
+
+  gap:
     clamp(
-      3rem,
-      6vw,
-      6.5rem
+      40px,
+      7vw,
+      110px
     );
 
-  line-height: 0.94;
-  letter-spacing: -0.045em;
-
-  color: white;
+  align-items: end;
 }
 
-.violence__title span {
-  display: block;
-
-  color:
-    rgba(255, 255, 255, 0.5);
-}
-
-.violence__intro {
-  max-width: 660px;
-
+.violence__heading h2 {
   margin: 0;
 
   font-size:
     clamp(
-      1rem,
-      1.4vw,
-      1.18rem
+      3.5rem,
+      5.8vw,
+      6.8rem
     );
+
+  line-height: 0.93;
+
+  letter-spacing: -0.05em;
+
+  color:
+    var(--color-white);
+}
+
+.violence__heading h2 span {
+  display: block;
+
+  font-style: italic;
+
+  color:
+    rgba(255, 255, 255, 0.56);
+}
+
+.violence__heading > p {
+  margin: 0;
+
+  padding-bottom: 8px;
+
+  font-size: 0.94rem;
 
   line-height: 1.8;
 
   color:
-    rgba(255, 255, 255, 0.65);
+    rgba(255, 255, 255, 0.55);
 }
 
 /* =========================
-   CONTENT
+   BODY
 ========================= */
 
-.violence__content {
+.violence__body {
   display: grid;
 
   grid-template-columns:
-    minmax(280px, 0.7fr)
-    minmax(0, 1.3fr);
+    minmax(260px, 0.55fr)
+    minmax(0, 1.25fr);
 
   gap:
     clamp(
-      50px,
-      8vw,
-      120px
+      70px,
+      10vw,
+      150px
     );
 
   align-items: start;
 }
 
 /* =========================
-   STATEMENT
+   INTRO
 ========================= */
 
-.violence__statement {
+.violence__intro {
+  position: relative;
+}
+
+.violence__intro-inner {
   position: sticky;
-  top: 150px;
 
-  opacity: 0;
-  transform: translateY(25px);
-
-  transition:
-    opacity 0.8s ease 0.15s,
-    transform 0.8s ease 0.15s;
+  top: 130px;
 }
 
-.violence__statement.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.violence__statement {
+  max-width: 390px;
 
-.violence__statement-number {
-  display: block;
-
-  margin-bottom: 28px;
-
-  font-family:
-    var(--font-serif);
-
-  font-size: 0.8rem;
-
-  color:
-    rgba(255, 255, 255, 0.4);
-}
-
-.violence__statement p {
-  max-width: 420px;
-
-  margin: 0;
+  margin:
+    0
+    0
+    30px;
 
   font-family:
     var(--font-serif);
 
   font-size:
     clamp(
-      1.8rem,
-      2.8vw,
-      3rem
+      2.2rem,
+      3.7vw,
+      4.1rem
     );
 
-  line-height: 1.12;
+  line-height: 1;
 
-  letter-spacing: -0.025em;
+  letter-spacing: -0.04em;
 
   color:
-    rgba(255, 255, 255, 0.92);
+    var(--color-white);
+}
+
+.violence__intro-text {
+  max-width: 360px;
+
+  margin:
+    0
+    0
+    42px;
+
+  font-size: 0.92rem;
+
+  line-height: 1.8;
+
+  color:
+    rgba(255, 255, 255, 0.52);
 }
 
 .violence__cta {
+  width: fit-content;
+
   display: inline-flex;
+
   align-items: center;
 
-  gap: 12px;
+  gap: 18px;
 
-  margin-top: 38px;
-
-  padding-bottom: 6px;
+  padding-bottom: 7px;
 
   border-bottom:
-    1px solid rgba(255, 255, 255, 0.55);
+    1px solid
+    rgba(255, 255, 255, 0.55);
 
-  font-size: 0.7rem;
+  font-size: 0.63rem;
+
+  font-weight: 500;
 
   letter-spacing: 0.1em;
+
   text-transform: uppercase;
 
-  color: white;
+  color:
+    var(--color-white);
 }
 
-.violence__cta span {
+.violence__cta
+span:last-child {
   transition:
-    transform 0.25s ease;
+    transform
+    0.35s
+    var(--ease-out);
 }
 
-.violence__cta:hover span {
+.violence__cta:hover
+span:last-child {
   transform:
-    translate(3px, -3px);
+    translate(4px, -4px);
 }
 
 /* =========================
-   SERVICIOS
+   SERVICES
 ========================= */
 
 .violence__services {
   border-top:
-    1px solid rgba(255, 255, 255, 0.14);
+    1px solid
+    rgba(255, 255, 255, 0.12);
 }
 
 .violence-service {
+  --delay: 0ms;
+
+  position: relative;
+
   display: grid;
 
   grid-template-columns:
-    50px
-    minmax(0, 1fr);
+    42px
+    minmax(0, 1fr)
+    30px;
 
-  gap: 25px;
+  gap:
+    clamp(
+      22px,
+      4vw,
+      55px
+    );
+
+  align-items: start;
 
   padding:
     clamp(
-      26px,
-      3vw,
-      40px
+      32px,
+      4vw,
+      48px
     )
     0;
 
   border-bottom:
-    1px solid rgba(255, 255, 255, 0.14);
+    1px solid
+    rgba(255, 255, 255, 0.12);
 
   opacity: 0;
 
   transform:
-    translateY(20px);
+    translateY(22px);
 
   transition:
-    opacity 0.7s ease var(--delay),
-    transform 0.7s ease var(--delay),
-    padding-left 0.3s ease;
+    opacity
+    0.75s
+    var(--ease-out)
+    var(--delay),
+
+    transform
+    0.75s
+    var(--ease-out)
+    var(--delay),
+
+    padding-left
+    0.4s
+    var(--ease-out);
 }
 
-.violence-service.is-visible {
+.violence-service--visible {
   opacity: 1;
-  transform: translateY(0);
+
+  transform:
+    translateY(0);
 }
 
 .violence-service:hover {
   padding-left: 12px;
 }
 
-.violence-service__number {
-  padding-top: 5px;
+/* =========================
+   MARKER
+========================= */
 
-  font-family:
-    var(--font-serif);
-
-  font-size: 0.72rem;
-
-  color:
-    rgba(255, 255, 255, 0.35);
+.violence-service__marker {
+  padding-top: 9px;
 }
 
-.violence-service p {
-  max-width: 720px;
+.violence-service__marker span {
+  display: block;
 
+  width: 7px;
+  height: 7px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.5);
+
+  border-radius: 50%;
+
+  transition:
+    background
+    0.35s ease,
+
+    transform
+    0.35s
+    var(--ease-out);
+}
+
+.violence-service:hover
+.violence-service__marker span {
+  background:
+    var(--color-white);
+
+  transform:
+    scale(1.35);
+}
+
+/* =========================
+   SERVICE CONTENT
+========================= */
+
+.violence-service__content {
+  display: grid;
+
+  grid-template-columns:
+    minmax(230px, 0.7fr)
+    minmax(0, 1fr);
+
+  gap:
+    clamp(
+      30px,
+      5vw,
+      70px
+    );
+}
+
+.violence-service h3 {
   margin: 0;
 
   font-size:
     clamp(
-      1rem,
-      1.5vw,
-      1.2rem
+      1.65rem,
+      2.4vw,
+      2.6rem
     );
 
-  line-height: 1.65;
+  line-height: 1.02;
+
+  letter-spacing: -0.03em;
 
   color:
-    rgba(255, 255, 255, 0.78);
+    var(--color-white);
+}
+
+.violence-service p {
+  max-width: 520px;
+
+  margin: 0;
+
+  font-size: 0.9rem;
+
+  line-height: 1.8;
+
+  color:
+    rgba(255, 255, 255, 0.52);
+}
+
+/* =========================
+   ARROW
+========================= */
+
+.violence-service__arrow {
+  justify-self: end;
+
+  padding-top: 5px;
+
+  color:
+    rgba(255, 255, 255, 0.35);
+
+  transition:
+    color 0.3s ease,
+    transform
+    0.35s
+    var(--ease-out);
+}
+
+.violence-service:hover
+.violence-service__arrow {
+  color:
+    var(--color-white);
+
+  transform:
+    translate(4px, -4px);
 }
 
 /* =========================
@@ -429,65 +694,110 @@ onBeforeUnmount(() => {
 .violence__footer {
   margin-top:
     clamp(
-      80px,
-      10vw,
-      140px
+      90px,
+      11vw,
+      150px
     );
 
-  padding-top: 28px;
+  padding-top: 22px;
 
   display: flex;
-  align-items: center;
-  justify-content: center;
 
-  gap: 22px;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  gap: 40px;
 
   border-top:
-    1px solid rgba(255, 255, 255, 0.14);
-
-  opacity: 0;
-
-  transition:
-    opacity 0.8s ease 0.4s;
+    1px solid
+    rgba(255, 255, 255, 0.12);
 }
 
-.violence__footer.is-visible {
-  opacity: 1;
+.violence__footer p {
+  margin: 0;
+
+  font-family:
+    var(--font-serif);
+
+  font-size:
+    clamp(
+      1.25rem,
+      2vw,
+      2rem
+    );
+
+  line-height: 1.2;
+
+  color:
+    rgba(255, 255, 255, 0.58);
 }
 
-.violence__footer span {
-  font-size: 0.63rem;
+.violence__footer a {
+  flex-shrink: 0;
 
-  letter-spacing: 0.16em;
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  padding-bottom: 7px;
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.5);
+
+  font-size: 0.62rem;
+
+  font-weight: 500;
+
+  letter-spacing: 0.1em;
+
   text-transform: uppercase;
 
   color:
-    rgba(255, 255, 255, 0.4);
-}
-
-.violence__footer-line {
-  width: 40px;
-  height: 1px;
-
-  background:
-    rgba(255, 255, 255, 0.2);
+    var(--color-white);
 }
 
 /* =========================
    TABLET
 ========================= */
 
-@media (max-width: 950px) {
-  .violence__content {
+@media (max-width: 1000px) {
+  .violence__header {
     grid-template-columns: 1fr;
 
-    gap: 65px;
+    gap: 28px;
   }
 
-  .violence__statement {
-    position: static;
+  .violence__eyebrow {
+    margin: 0;
+  }
 
-    max-width: 650px;
+  .violence__heading {
+    grid-template-columns: 1fr;
+
+    gap: 30px;
+  }
+
+  .violence__heading > p {
+    max-width: 520px;
+
+    margin-left: auto;
+  }
+
+  .violence__body {
+    grid-template-columns:
+      minmax(210px, 0.45fr)
+      minmax(0, 1fr);
+
+    gap: 55px;
+  }
+
+  .violence-service__content {
+    grid-template-columns: 1fr;
+
+    gap: 17px;
   }
 }
 
@@ -495,46 +805,50 @@ onBeforeUnmount(() => {
    MÓVIL
 ========================= */
 
-@media (max-width: 640px) {
+@media (max-width: 720px) {
   .violence {
     padding:
-      90px
+      95px
       20px;
   }
 
-  .violence__title {
+  .violence__heading h2 {
     font-size:
       clamp(
-        2.9rem,
-        13vw,
+        3rem,
+        14vw,
         4.4rem
       );
-
-    line-height: 0.98;
   }
 
-  .violence__content {
-    gap: 55px;
+  .violence__body {
+    grid-template-columns: 1fr;
+
+    gap: 70px;
   }
 
-  .violence__statement p {
+  .violence__intro-inner {
+    position: static;
+  }
+
+  .violence__statement {
     font-size:
       clamp(
-        1.8rem,
-        8vw,
-        2.5rem
+        2.2rem,
+        11vw,
+        3.3rem
       );
   }
 
   .violence-service {
     grid-template-columns:
-      34px
+      25px
       minmax(0, 1fr);
 
-    gap: 15px;
+    gap: 18px;
 
     padding:
-      25px
+      30px
       0;
   }
 
@@ -542,46 +856,50 @@ onBeforeUnmount(() => {
     padding-left: 0;
   }
 
-  .violence-service p {
-    font-size: 0.96rem;
+  .violence-service__content {
+    gap: 14px;
+  }
+
+  .violence-service h3 {
+    font-size:
+      clamp(
+        1.7rem,
+        8vw,
+        2.25rem
+      );
+  }
+
+  .violence-service__arrow {
+    display: none;
   }
 
   .violence__footer {
     flex-direction: column;
 
-    gap: 14px;
-
     align-items: flex-start;
-  }
 
-  .violence__footer-line {
-    display: none;
+    margin-top: 75px;
   }
 }
 
 /* =========================
-   SIN HOVER
+   REDUCED MOTION
 ========================= */
 
-@media (hover: none) {
-  .violence-service:hover {
-    padding-left: 0;
-  }
-}
-
-/* =========================
-   ACCESIBILIDAD
-========================= */
-
-@media (prefers-reduced-motion: reduce) {
-  .violence__header,
-  .violence__statement,
-  .violence-service,
-  .violence__footer {
+@media (
+  prefers-reduced-motion: reduce
+) {
+  .violence-service {
     opacity: 1;
 
     transform: none;
 
+    transition: none;
+  }
+
+  .violence-service__marker span,
+  .violence-service__arrow,
+  .violence__cta span {
     transition: none;
   }
 }

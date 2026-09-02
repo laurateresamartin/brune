@@ -4,131 +4,99 @@
     ref="sectionRef"
     class="mediation"
   >
-    <!-- Palabra decorativa -->
-    <div
-      class="mediation__background-word"
-      aria-hidden="true"
-    >
+    <div class="mediation__word" aria-hidden="true">
       DIÁLOGO
     </div>
 
     <div class="mediation__inner">
-      <!-- Cabecera -->
-      <header
-        class="mediation__header"
-        :class="{ 'is-visible': isVisible }"
-      >
+      <div class="mediation__header">
         <p class="mediation__eyebrow">
           Mediación Familiar
         </p>
 
-        <h2 class="mediation__title">
-          El diálogo como
-          <span>primera opción.</span>
-        </h2>
-      </header>
+        <div class="mediation__heading">
+          <h2>
+            El diálogo
+            <span>como primera opción.</span>
+          </h2>
 
-      <!-- Introducción -->
-      <div
-        class="mediation__intro"
-        :class="{ 'is-visible': isVisible }"
-      >
-        <span class="mediation__intro-number">
-          01
-        </span>
-
-        <p>
-          Durante el proceso de Mediación ofrecemos un
-          acompañamiento profesional, imparcial y orientado
-          a facilitar la comunicación.
-        </p>
-
-        <p>
-          Ayudamos a las partes a identificar intereses comunes
-          y encontrar acuerdos y soluciones equilibradas,
-          duraderas y adaptadas a las necesidades de cada familia.
-        </p>
-      </div>
-
-      <!-- Ámbitos -->
-      <div class="mediation__areas">
-        <article
-          class="mediation-area mediation-area--left"
-          :class="{ 'is-visible': isVisible }"
-        >
-          <div class="mediation-area__top">
-            <span>01</span>
-            <span>Ámbito de mediación</span>
-          </div>
-
-          <div class="mediation-area__content">
-            <h3>
-              Gestión de
-              <span>Ruptura Familiar</span>
-            </h3>
-
-            <p>
-              Divorcios, separaciones, custodias,
-              regímenes de visitas, alimentos y
-              planificación jurídica para afrontar
-              cambios personales y familiares.
-            </p>
-          </div>
-
-          <div
-            class="mediation-area__circle"
-            aria-hidden="true"
-          />
-        </article>
-
-        <article
-          class="mediation-area mediation-area--right"
-          :class="{ 'is-visible': isVisible }"
-        >
-          <div class="mediation-area__top">
-            <span>02</span>
-            <span>Ámbito de mediación</span>
-          </div>
-
-          <div class="mediation-area__content">
-            <h3>
-              Conflictos
-              <span>Familiares</span>
-            </h3>
-
-            <p>
-              Desacuerdos y conflictos entre familiares,
-              conflictos parentales, relacionados con el
-              cuidado de personas dependientes, cuestiones
-              económicas y otras situaciones familiares.
-            </p>
-          </div>
-
-          <div
-            class="mediation-area__circle"
-            aria-hidden="true"
-          />
-        </article>
-      </div>
-
-      <!-- Cierre -->
-      <div
-        class="mediation__footer"
-        :class="{ 'is-visible': isVisible }"
-      >
-        <div class="mediation__footer-line" />
-
-        <div class="mediation__footer-content">
           <p>
-            Hay conflictos que no necesitan
-            empezar en un juzgado.
+            Durante el proceso de mediación ofrecemos
+            un acompañamiento profesional, imparcial
+            y orientado a facilitar la comunicación.
           </p>
+        </div>
+      </div>
+
+      <div class="mediation__intro">
+        <p>
+          Ayudamos a las partes a identificar intereses
+          comunes y a encontrar acuerdos y soluciones
+          equilibradas, duraderas y adaptadas a las
+          necesidades de cada familia.
+        </p>
+      </div>
+
+      <div class="mediation__services">
+        <article
+          v-for="(service, index) in services"
+          :key="service.title"
+          class="mediation-card"
+          :class="[
+            {
+              'mediation-card--visible':
+                isVisible
+            },
+            `mediation-card--${index + 1}`
+          ]"
+        >
+          <div class="mediation-card__top">
+            <span>
+              Mediación
+            </span>
+
+            <span aria-hidden="true">
+              ↗
+            </span>
+          </div>
+
+          <div class="mediation-card__content">
+            <h3>
+              {{ service.title }}
+            </h3>
+
+            <p>
+              {{ service.text }}
+            </p>
+          </div>
 
           <a href="#contacto">
-            Solicita información
-            <span aria-hidden="true">↗</span>
+            <span>
+              Consultar
+            </span>
+
+            <span aria-hidden="true">
+              ↗
+            </span>
           </a>
-        </div>
+        </article>
+      </div>
+
+      <div class="mediation__closing">
+        <p>
+          Hay conflictos que pueden encontrar
+          solución a través del diálogo.
+        </p>
+
+        <a href="#contacto">
+          <span>
+            Solicita una consulta
+          </span>
+
+          <span aria-hidden="true">
+            ↗
+          </span>
+        </a>
       </div>
     </div>
   </section>
@@ -141,29 +109,55 @@ import {
   ref
 } from 'vue'
 
-const sectionRef = ref<HTMLElement | null>(null)
+const sectionRef =
+  ref<HTMLElement | null>(null)
 
-const isVisible = ref(false)
+const isVisible =
+  ref(false)
 
-let observer: IntersectionObserver | null = null
+const services = [
+  {
+    title:
+      'Gestión de Ruptura Familiar',
+
+    text:
+      'Divorcios, separaciones, custodias, regímenes de visitas, alimentos y planificación jurídica para afrontar cambios personales y familiares.'
+  },
+  {
+    title:
+      'Conflictos Familiares',
+
+    text:
+      'Desacuerdos y conflictos entre familiares: conflictos parentales, de cuidado de dependientes, económicos y otras situaciones familiares.'
+  }
+]
+
+let observer:
+  IntersectionObserver | null = null
 
 onMounted(() => {
   if (!sectionRef.value) return
 
-  observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry?.isIntersecting) {
-        isVisible.value = true
+  observer =
+    new IntersectionObserver(
+      ([entry]) => {
+        if (
+          entry &&
+          entry.isIntersecting
+        ) {
+          isVisible.value = true
 
-        observer?.disconnect()
+          observer?.disconnect()
+        }
+      },
+      {
+        threshold: 0.18
       }
-    },
-    {
-      threshold: 0.12
-    }
-  )
+    )
 
-  observer.observe(sectionRef.value)
+  observer.observe(
+    sectionRef.value
+  )
 })
 
 onBeforeUnmount(() => {
@@ -176,61 +170,76 @@ onBeforeUnmount(() => {
   position: relative;
 
   padding:
-    clamp(110px, 13vw, 200px)
-    clamp(20px, 4vw, 64px);
+    var(--section-space)
+    var(--page-padding);
 
   overflow: hidden;
 
-  background: #e7e1da;
+  background:
+    #e8d8c9;
 }
 
 .mediation__inner {
   position: relative;
+
   z-index: 2;
 
-  width: min(
-    100%,
-    var(--container-width)
-  );
+  width:
+    min(
+      100%,
+      var(--container-width)
+    );
 
   margin: 0 auto;
 }
 
 /* =========================
-   PALABRA DE FONDO
+   PALABRA DECORATIVA
 ========================= */
 
-.mediation__background-word {
+.mediation__word {
   position: absolute;
 
-  top: 70px;
-  left: 50%;
+  top:
+    clamp(
+      55px,
+      7vw,
+      100px
+    );
+
+  right:
+    clamp(
+      -40px,
+      -2vw,
+      -10px
+    );
 
   z-index: 0;
-
-  transform:
-    translateX(-50%);
 
   font-family:
     var(--font-serif);
 
   font-size:
     clamp(
-      8rem,
-      20vw,
-      22rem
+      7rem,
+      16vw,
+      17rem
     );
 
   line-height: 0.8;
 
   letter-spacing: -0.07em;
 
-  white-space: nowrap;
-
   color:
-    rgba(255, 255, 255, 0.25);
+    rgba(
+      111,
+      91,
+      76,
+      0.07
+    );
 
   pointer-events: none;
+
   user-select: none;
 }
 
@@ -239,74 +248,98 @@ onBeforeUnmount(() => {
 ========================= */
 
 .mediation__header {
-  position: relative;
+  display: grid;
 
-  max-width: 980px;
+  grid-template-columns:
+    minmax(130px, 0.35fr)
+    minmax(0, 1.65fr);
 
-  margin-bottom:
+  gap:
     clamp(
-      70px,
-      10vw,
-      140px
+      35px,
+      6vw,
+      100px
     );
-
-  opacity: 0;
-
-  transform:
-    translateY(35px);
-
-  transition:
-    opacity 0.9s ease,
-    transform 0.9s ease;
-}
-
-.mediation__header.is-visible {
-  opacity: 1;
-
-  transform:
-    translateY(0);
 }
 
 .mediation__eyebrow {
-  margin-bottom: 22px;
+  margin:
+    12px
+    0
+    0;
 
-  font-size: 0.7rem;
+  font-size: 0.62rem;
+
   font-weight: 500;
 
-  letter-spacing: 0.22em;
+  letter-spacing: 0.16em;
+
   text-transform: uppercase;
 
   color:
     var(--color-accent-dark);
 }
 
-.mediation__title {
+.mediation__heading {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.05fr)
+    minmax(240px, 0.55fr);
+
+  gap:
+    clamp(
+      40px,
+      7vw,
+      110px
+    );
+
+  align-items: end;
+}
+
+.mediation__heading h2 {
   margin: 0;
 
   font-size:
     clamp(
-      3.4rem,
-      7vw,
-      7.5rem
+      3.6rem,
+      6vw,
+      7rem
     );
 
-  line-height: 0.88;
+  line-height: 0.92;
 
-  letter-spacing: -0.055em;
+  letter-spacing: -0.05em;
+
+  color:
+    var(--color-text-dark);
 }
 
-.mediation__title span {
+.mediation__heading h2 span {
   display: block;
 
-  margin-left:
-    clamp(
-      0px,
-      8vw,
-      130px
-    );
+  font-style: italic;
 
   color:
     var(--color-accent-dark);
+}
+
+.mediation__heading > p {
+  margin: 0;
+
+  padding-bottom: 8px;
+
+  font-size: 0.95rem;
+
+  line-height: 1.8;
+
+  color:
+    rgba(
+      64,
+      60,
+      57,
+      0.7
+    );
 }
 
 /* =========================
@@ -314,83 +347,53 @@ onBeforeUnmount(() => {
 ========================= */
 
 .mediation__intro {
-  width: min(100%, 680px);
-
-  margin-left: auto;
-
-  margin-bottom:
+  margin:
     clamp(
-      90px,
-      12vw,
-      170px
-    );
-
-  padding-left:
+      70px,
+      9vw,
+      130px
+    )
+    0
     clamp(
-      25px,
-      4vw,
-      55px
+      70px,
+      9vw,
+      130px
+    )
+    auto;
+
+  width:
+    min(
+      100%,
+      780px
     );
-
-  border-left:
-    1px solid var(--color-accent);
-
-  opacity: 0;
-
-  transform:
-    translateY(30px);
-
-  transition:
-    opacity 0.9s ease 0.2s,
-    transform 0.9s ease 0.2s;
-}
-
-.mediation__intro.is-visible {
-  opacity: 1;
-
-  transform:
-    translateY(0);
-}
-
-.mediation__intro-number {
-  display: block;
-
-  margin-bottom: 28px;
-
-  font-family:
-    var(--font-serif);
-
-  font-size: 0.75rem;
-
-  color:
-    var(--color-accent-dark);
 }
 
 .mediation__intro p {
   margin: 0;
 
+  font-family:
+    var(--font-serif);
+
   font-size:
     clamp(
-      1.05rem,
-      1.6vw,
-      1.3rem
+      1.9rem,
+      3.3vw,
+      3.5rem
     );
 
-  line-height: 1.75;
+  line-height: 1.12;
+
+  letter-spacing: -0.025em;
 
   color:
-    rgba(70, 68, 66, 0.86);
-}
-
-.mediation__intro p + p {
-  margin-top: 18px;
+    var(--color-text-dark);
 }
 
 /* =========================
-   ÁREAS
+   SERVICES
 ========================= */
 
-.mediation__areas {
+.mediation__services {
   display: grid;
 
   grid-template-columns:
@@ -399,21 +402,24 @@ onBeforeUnmount(() => {
   gap:
     clamp(
       30px,
-      6vw,
-      90px
+      5vw,
+      75px
     );
 
   align-items: start;
 }
 
-.mediation-area {
-  position: relative;
-
-  min-height: 590px;
+.mediation-card {
+  min-height:
+    clamp(
+      430px,
+      40vw,
+      560px
+    );
 
   display: flex;
+
   flex-direction: column;
-  justify-content: space-between;
 
   padding:
     clamp(
@@ -422,196 +428,252 @@ onBeforeUnmount(() => {
       50px
     );
 
-  overflow: hidden;
+  border:
+    1px solid
+    rgba(
+      90,
+      82,
+      75,
+      0.15
+    );
 
   background:
-    rgba(255, 255, 255, 0.38);
-
-  border:
-    1px solid rgba(255, 255, 255, 0.6);
-
+    rgba(
+      255,
+      252,
+      248,
+      0.48
+    );
+border-color:
+    rgba(
+      110,
+      94,
+      81,
+      0.16
+    );
   opacity: 0;
 
   transform:
-    translateY(50px);
+    translateY(40px);
 
   transition:
-    opacity 0.9s ease,
-    transform 0.9s ease,
-    background 0.45s ease;
+    opacity 0.85s
+    var(--ease-out),
+
+    transform 0.85s
+    var(--ease-out),
+
+    background 0.4s ease;
 }
 
-.mediation-area--left {
-  transition-delay: 0.2s;
+.mediation-card--2 {
+  margin-top: 110px;
+
+  transition-delay: 120ms;
 }
 
-.mediation-area--right {
-  margin-top: 100px;
-
-  transition-delay: 0.35s;
-}
-
-.mediation-area.is-visible {
+.mediation-card--visible {
   opacity: 1;
 
   transform:
     translateY(0);
 }
 
-.mediation-area:hover {
+.mediation-card:hover {
   background:
-    rgba(255, 255, 255, 0.58);
+    rgba(
+      255,
+      252,
+      248,
+      0.72
+    );
 }
 
-/* Parte superior */
+/* =========================
+   CARD TOP
+========================= */
 
-.mediation-area__top {
-  position: relative;
-  z-index: 2;
-
+.mediation-card__top {
   display: flex;
+
+  align-items: center;
+
   justify-content: space-between;
 
   gap: 20px;
 
-  font-size: 0.65rem;
+  padding-bottom: 20px;
 
-  letter-spacing: 0.14em;
+  border-bottom:
+    1px solid
+    rgba(
+      90,
+      82,
+      75,
+      0.15
+    );
+}
+
+.mediation-card__top span:first-child {
+  font-size: 0.58rem;
+
+  font-weight: 500;
+
+  letter-spacing: 0.15em;
+
   text-transform: uppercase;
 
   color:
     var(--color-accent-dark);
 }
 
-/* Contenido */
-
-.mediation-area__content {
-  position: relative;
-  z-index: 2;
-
-  max-width: 470px;
-}
-
-.mediation-area__content h3 {
-  margin-bottom: 28px;
-
-  font-size:
-    clamp(
-      2.8rem,
-      4.5vw,
-      5rem
-    );
-
-  line-height: 0.94;
-
-  letter-spacing: -0.045em;
-}
-
-.mediation-area__content h3 span {
-  display: block;
-
+.mediation-card__top span:last-child {
   color:
     var(--color-accent-dark);
-}
-
-.mediation-area__content p {
-  max-width: 400px;
-
-  margin: 0;
-
-  font-size: 1rem;
-
-  line-height: 1.75;
-
-  color:
-    rgba(70, 68, 66, 0.78);
-}
-
-/* Decoración */
-
-.mediation-area__circle {
-  position: absolute;
-
-  width: 330px;
-  height: 330px;
-
-  top: 50%;
-  right: -210px;
-
-  border:
-    1px solid
-    rgba(145, 135, 125, 0.16);
-
-  border-radius: 50%;
-
-  transform:
-    translateY(-50%);
 
   transition:
-    right 0.7s
-    cubic-bezier(
-      0.22,
-      1,
-      0.36,
-      1
-    );
+    transform 0.35s
+    var(--ease-out);
 }
 
-.mediation-area:hover
-.mediation-area__circle {
-  right: -150px;
+.mediation-card:hover
+.mediation-card__top
+span:last-child {
+  transform:
+    translate(
+      4px,
+      -4px
+    );
 }
 
 /* =========================
-   FOOTER
+   CARD CONTENT
 ========================= */
 
-.mediation__footer {
+.mediation-card__content {
+  margin-top: auto;
+
+  padding:
+    clamp(
+      65px,
+      8vw,
+      125px
+    )
+    0
+    35px;
+}
+
+.mediation-card h3 {
+  max-width: 460px;
+
+  margin:
+    0
+    0
+    30px;
+
+  font-size:
+    clamp(
+      2.7rem,
+      4vw,
+      4.6rem
+    );
+
+  line-height: 0.97;
+
+  letter-spacing: -0.045em;
+
+  color:
+    var(--color-text-dark);
+}
+
+.mediation-card p {
+  max-width: 490px;
+
+  margin: 0;
+
+  font-size: 0.94rem;
+
+  line-height: 1.8;
+
+  color:
+    rgba(
+      60,
+      57,
+      54,
+      0.7
+    );
+}
+
+/* =========================
+   CARD LINK
+========================= */
+
+.mediation-card > a {
+  width: fit-content;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  padding-bottom: 6px;
+
+  border-bottom:
+    1px solid
+    var(--color-text-dark);
+
+  font-size: 0.62rem;
+
+  font-weight: 500;
+
+  letter-spacing: 0.11em;
+
+  text-transform: uppercase;
+
+  color:
+    var(--color-text-dark);
+}
+
+/* =========================
+   CLOSING
+========================= */
+
+.mediation__closing {
   margin-top:
     clamp(
-      100px,
+      90px,
       12vw,
       170px
     );
 
-  opacity: 0;
+  padding-top:
+    clamp(
+      35px,
+      5vw,
+      60px
+    );
 
-  transform:
-    translateY(30px);
-
-  transition:
-    opacity 0.8s ease 0.4s,
-    transform 0.8s ease 0.4s;
-}
-
-.mediation__footer.is-visible {
-  opacity: 1;
-
-  transform:
-    translateY(0);
-}
-
-.mediation__footer-line {
-  width: 100%;
-  height: 1px;
-
-  margin-bottom: 35px;
-
-  background:
-    rgba(145, 135, 125, 0.35);
-}
-
-.mediation__footer-content {
   display: flex;
 
-  align-items: flex-start;
+  align-items: flex-end;
+
   justify-content: space-between;
 
-  gap: 40px;
+  gap: 50px;
+
+  border-top:
+    1px solid
+    rgba(
+      90,
+      82,
+      75,
+      0.18
+    );
 }
 
-.mediation__footer-content p {
-  max-width: 580px;
+.mediation__closing p {
+  max-width: 760px;
 
   margin: 0;
 
@@ -620,64 +682,79 @@ onBeforeUnmount(() => {
 
   font-size:
     clamp(
-      1.8rem,
-      3vw,
-      3rem
+      2.2rem,
+      4.3vw,
+      4.8rem
     );
 
-  line-height: 1.1;
+  line-height: 1;
 
-  letter-spacing: -0.025em;
+  letter-spacing: -0.04em;
+
+  color:
+    var(--color-text-dark);
 }
 
-.mediation__footer-content a {
+.mediation__closing > a {
   flex-shrink: 0;
 
   display: inline-flex;
+
   align-items: center;
 
-  gap: 12px;
+  gap: 20px;
 
-  padding-bottom: 6px;
+  padding-bottom: 7px;
 
   border-bottom:
-    1px solid var(--color-text-dark);
+    1px solid
+    var(--color-text-dark);
 
-  font-size: 0.72rem;
+  font-size: 0.65rem;
+
+  font-weight: 500;
 
   letter-spacing: 0.1em;
+
   text-transform: uppercase;
-}
 
-.mediation__footer-content a span {
-  transition:
-    transform 0.25s ease;
-}
-
-.mediation__footer-content a:hover span {
-  transform:
-    translate(3px, -3px);
+  color:
+    var(--color-text-dark);
 }
 
 /* =========================
    TABLET
 ========================= */
 
-@media (max-width: 900px) {
-  .mediation__areas {
+@media (max-width: 950px) {
+  .mediation__header {
     grid-template-columns: 1fr;
+
+    gap: 28px;
   }
 
-  .mediation-area {
-    min-height: 480px;
+  .mediation__eyebrow {
+    margin: 0;
   }
 
-  .mediation-area--right {
-    margin-top: 0;
+  .mediation__heading {
+    grid-template-columns: 1fr;
+
+    gap: 30px;
   }
 
-  .mediation__title span {
-    margin-left: 0;
+  .mediation__heading > p {
+    max-width: 520px;
+
+    margin-left: auto;
+  }
+
+  .mediation__services {
+    gap: 30px;
+  }
+
+  .mediation-card--2 {
+    margin-top: 70px;
   }
 }
 
@@ -685,85 +762,88 @@ onBeforeUnmount(() => {
    MÓVIL
 ========================= */
 
-@media (max-width: 640px) {
+@media (max-width: 720px) {
   .mediation {
     padding:
-      90px
+      95px
       20px;
   }
 
-  .mediation__background-word {
-    top: 80px;
+  .mediation__word {
+    top: 70px;
 
-    font-size: 30vw;
+    right: -20px;
+
+    font-size: 7rem;
+
   }
 
-  .mediation__header {
-    margin-bottom: 65px;
-  }
-
-  .mediation__title {
+  .mediation__heading h2 {
     font-size:
       clamp(
         3rem,
         14vw,
-        4.6rem
+        4.4rem
       );
-
-    line-height: 0.94;
   }
 
   .mediation__intro {
-    margin-bottom: 75px;
-
-    padding-left: 22px;
+    margin:
+      65px
+      0;
   }
 
   .mediation__intro p {
-    font-size: 1rem;
-  }
-
-  .mediation__areas {
-    gap: 20px;
-  }
-
-  .mediation-area {
-    min-height: 430px;
-
-    padding: 26px 22px;
-  }
-
-  .mediation-area__content h3 {
     font-size:
       clamp(
-        2.7rem,
-        12vw,
-        3.8rem
+        1.7rem,
+        8vw,
+        2.5rem
       );
   }
 
-  .mediation__footer {
-    margin-top: 75px;
+  .mediation__services {
+    grid-template-columns: 1fr;
   }
 
-  .mediation__footer-content {
+  .mediation-card {
+    min-height: 390px;
+
+    padding:
+      28px
+      24px;
+  }
+
+  .mediation-card--2 {
+    margin-top: 0;
+  }
+
+  .mediation-card h3 {
+    font-size:
+      clamp(
+        2.4rem,
+        11vw,
+        3.5rem
+      );
+  }
+
+  .mediation__closing {
     flex-direction: column;
-  }
-}
 
-/* =========================
-   SIN HOVER
-========================= */
+    align-items: flex-start;
 
-@media (hover: none) {
-  .mediation-area:hover {
-    background:
-      rgba(255, 255, 255, 0.38);
+    gap: 38px;
+
+    margin-top: 80px;
   }
 
-  .mediation-area:hover
-  .mediation-area__circle {
-    right: -210px;
+  .mediation__closing p {
+    font-size:
+      clamp(
+        2rem,
+        10vw,
+        3.2rem
+      );
   }
 }
 
@@ -771,11 +851,10 @@ onBeforeUnmount(() => {
    REDUCED MOTION
 ========================= */
 
-@media (prefers-reduced-motion: reduce) {
-  .mediation__header,
-  .mediation__intro,
-  .mediation-area,
-  .mediation__footer {
+@media (
+  prefers-reduced-motion: reduce
+) {
+  .mediation-card {
     opacity: 1;
 
     transform: none;

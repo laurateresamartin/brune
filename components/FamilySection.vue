@@ -4,109 +4,114 @@
     class="family"
   >
     <div class="family__inner">
+      <div class="family__header">
+        <p class="family__eyebrow">
+          Derecho de Familia y Menores
+        </p>
 
-      <!-- Cabecera -->
-      <header class="family__header">
-        <div class="family__header-left">
-          <p class="family__eyebrow">
-            Derecho de Familia y Menores
-          </p>
-
-          <h2 class="family__title">
+        <div class="family__heading">
+          <h2>
             La familia cambia.
-            <span>El acompañamiento permanece.</span>
+            <span>
+              El acompañamiento permanece.
+            </span>
           </h2>
-        </div>
 
-        <div class="family__header-right">
           <p>
             La separación no es el final de una familia,
-            es su transformación.
-          </p>
-
-          <p>
-            La redefinimos contigo con respeto,
-            equilibrio y seguridad jurídica.
+            es su transformación. La redefinimos contigo
+            con respeto, equilibrio y seguridad jurídica.
           </p>
         </div>
-      </header>
+      </div>
 
-      <!-- Servicios -->
-      <div class="family__services">
+      <div class="family__grid">
         <article
-          v-for="(service, index) in services"
-          :key="service.id"
+          v-for="area in areas"
+          :key="area.id"
           class="family-card"
           :class="{
-            'family-card--active': activeCard === service.id
+            'family-card--active':
+              activeCard === area.id
           }"
           tabindex="0"
-          :aria-expanded="activeCard === service.id"
-          @click="toggleCard(service.id)"
-          @keydown.enter.prevent="toggleCard(service.id)"
-          @keydown.space.prevent="toggleCard(service.id)"
+          role="button"
+          :aria-expanded="activeCard === area.id"
+          @click="toggleCard(area.id)"
+          @keydown.enter.prevent="toggleCard(area.id)"
+          @keydown.space.prevent="toggleCard(area.id)"
+          @mouseenter="activateDesktop(area.id)"
+          @mouseleave="deactivateDesktop"
         >
-          <!-- Número -->
-          <div class="family-card__number">
-            {{ String(index + 1).padStart(2, '0') }}
-          </div>
-
-          <!-- Contenido principal -->
-          <div class="family-card__main">
-            <h3>
-              {{ service.title }}
-            </h3>
+          <div class="family-card__top">
+            <span class="family-card__label">
+              Área de actuación
+            </span>
 
             <span
-              class="family-card__indicator"
+              class="family-card__plus"
               aria-hidden="true"
             >
               +
             </span>
           </div>
 
-          <!-- Información desplegable -->
-          <div class="family-card__details">
-            <div class="family-card__details-inner">
-              <p class="family-card__label">
-                Servicios
-              </p>
+          <div class="family-card__content">
+            <h3>
+              {{ area.title }}
+            </h3>
 
+            <div class="family-card__details">
               <ul>
                 <li
-                  v-for="item in service.items"
+                  v-for="item in area.items"
                   :key="item"
                 >
-                  <span>{{ item }}</span>
-                  <span aria-hidden="true">↗</span>
+                  {{ item }}
                 </li>
               </ul>
+
+              <a
+                href="#contacto"
+                @click.stop
+              >
+                <span>
+                  Consultar
+                </span>
+
+                <span aria-hidden="true">
+                  ↗
+                </span>
+              </a>
             </div>
           </div>
 
-          <!-- Decoración -->
           <span
-            class="family-card__decoration"
+            class="family-card__index"
             aria-hidden="true"
-          />
+          >
+            {{ area.short }}
+          </span>
         </article>
       </div>
 
-      <!-- CTA -->
       <div class="family__footer">
         <p>
-          ¿Necesitas asesoramiento en Derecho de Familia?
+          Cada procedimiento requiere una valoración
+          jurídica específica y adaptada a la realidad
+          de cada familia.
         </p>
 
-        <a
-          href="#contacto"
-          class="family__cta"
-        >
-          Cuéntanos tu caso
-          <span aria-hidden="true">↗</span>
+        <a href="#contacto">
+          <span>
+            Solicita una consulta
+          </span>
+
+          <span aria-hidden="true">
+            ↗
+          </span>
         </a>
       </div>
-
     </div>
   </section>
 </template>
@@ -114,12 +119,17 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-const activeCard = ref<string | null>(null)
+const activeCard =
+  ref<string | null>(null)
 
-const services = [
+const areas = [
   {
     id: 'matrimonios',
-    title: 'Matrimonios y Uniones de Hecho',
+    short: '01',
+
+    title:
+      'Matrimonios y Uniones de Hecho',
+
     items: [
       'Divorcios, Separaciones y Nulidades',
       'Mutuo Acuerdo y Contencioso',
@@ -129,7 +139,11 @@ const services = [
   },
   {
     id: 'medidas',
-    title: 'Medidas de Familia',
+    short: '02',
+
+    title:
+      'Medidas de Familia',
+
     items: [
       'Patria Potestad y Custodia',
       'Alimentos y Visitas',
@@ -140,7 +154,11 @@ const services = [
   },
   {
     id: 'menores',
-    title: 'Menores',
+    short: '03',
+
+    title:
+      'Menores',
+
     items: [
       'Filiación y Adopción',
       'Jurisdicción Voluntaria',
@@ -150,7 +168,11 @@ const services = [
   },
   {
     id: 'internacional',
-    title: 'Derecho Internacional',
+    short: '04',
+
+    title:
+      'Derecho Internacional',
+
     items: [
       'Sustracción Internacional de Menores',
       'Matrimonios Mixtos'
@@ -164,19 +186,47 @@ const toggleCard = (id: string) => {
       ? null
       : id
 }
+
+const activateDesktop = (id: string) => {
+  if (
+    window.matchMedia(
+      '(hover: hover) and (pointer: fine)'
+    ).matches
+  ) {
+    activeCard.value = id
+  }
+}
+
+const deactivateDesktop = () => {
+  if (
+    window.matchMedia(
+      '(hover: hover) and (pointer: fine)'
+    ).matches
+  ) {
+    activeCard.value = null
+  }
+}
 </script>
 
 <style scoped>
 .family {
-  padding:
-    clamp(100px, 11vw, 170px)
-    clamp(20px, 4vw, 64px);
+  position: relative;
 
-  background: var(--color-background);
+  padding:
+    var(--section-space)
+    var(--page-padding);
+
+  background:
+    var(--color-surface-warm);
 }
 
 .family__inner {
-  width: min(100%, var(--container-width));
+  width:
+    min(
+      100%,
+      var(--container-width)
+    );
+
   margin: 0 auto;
 }
 
@@ -186,88 +236,117 @@ const toggleCard = (id: string) => {
 
 .family__header {
   display: grid;
+
   grid-template-columns:
-    minmax(0, 1.4fr)
-    minmax(280px, 0.6fr);
+    minmax(130px, 0.35fr)
+    minmax(0, 1.65fr);
 
-  gap: clamp(50px, 8vw, 120px);
-
-  align-items: end;
+  gap:
+    clamp(
+      35px,
+      6vw,
+      100px
+    );
 
   margin-bottom:
-    clamp(70px, 9vw, 120px);
+    clamp(
+      70px,
+      8vw,
+      120px
+    );
 }
 
 .family__eyebrow {
-  margin-bottom: 22px;
+  margin:
+    12px
+    0
+    0;
 
-  font-size: 0.72rem;
+  font-size: 0.62rem;
+
   font-weight: 500;
 
-  letter-spacing: 0.2em;
+  letter-spacing: 0.16em;
+
   text-transform: uppercase;
 
-  color: var(--color-accent-dark);
+  color:
+    var(--color-accent-dark);
 }
 
-.family__title {
-  max-width: 850px;
+.family__heading {
+  display: grid;
 
+  grid-template-columns:
+    minmax(0, 1.1fr)
+    minmax(250px, 0.55fr);
+
+  gap:
+    clamp(
+      40px,
+      7vw,
+      110px
+    );
+
+  align-items: end;
+}
+
+.family__heading h2 {
   margin: 0;
 
   font-size:
     clamp(
-      3rem,
-      6vw,
-      6.4rem
+      3.5rem,
+      5.8vw,
+      6.8rem
     );
 
-  line-height: 0.92;
-  letter-spacing: -0.045em;
+  line-height: 0.93;
+
+  letter-spacing: -0.05em;
+
+  color:
+    var(--color-text-dark);
 }
 
-.family__title span {
+.family__heading h2 span {
   display: block;
 
-  color: var(--color-accent);
+  color:
+    var(--color-accent-dark);
+
+  font-style: italic;
 }
 
-.family__header-right {
-  padding-bottom: 8px;
-}
-
-.family__header-right p {
+.family__heading > p {
   margin: 0;
 
-  font-size:
-    clamp(
-      1rem,
-      1.3vw,
-      1.1rem
-    );
+  padding-bottom: 8px;
 
-  line-height: 1.75;
+  font-size: 0.96rem;
 
-  color: rgba(85, 84, 83, 0.8);
-}
+  line-height: 1.8;
 
-.family__header-right p + p {
-  margin-top: 12px;
+  color:
+    rgba(65, 62, 59, 0.68);
 }
 
 /* =========================
    GRID
 ========================= */
 
-.family__services {
+.family__grid {
   display: grid;
+
   grid-template-columns:
     repeat(2, minmax(0, 1fr));
 
-  border-top:
-    1px solid var(--color-border);
+  gap: 1px;
 
-  border-left:
+  background:
+    var(--color-border);
+
+  border:
     1px solid var(--color-border);
 }
 
@@ -278,178 +357,229 @@ const toggleCard = (id: string) => {
 .family-card {
   position: relative;
 
-  min-height: 500px;
+  min-height:
+    clamp(
+      430px,
+      34vw,
+      560px
+    );
 
   display: flex;
+
   flex-direction: column;
 
+  justify-content: space-between;
+
   padding:
-    clamp(28px, 4vw, 48px);
+    clamp(
+      30px,
+      3.8vw,
+      52px
+    );
 
   overflow: hidden;
 
-  border-right:
-    1px solid var(--color-border);
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.42
+    );
 
-  border-bottom:
-    1px solid var(--color-border);
+  border-color:
+    rgba(
+      111,
+      97,
+      85,
+      0.14
+    );
 
   cursor: pointer;
 
   outline: none;
 
-  transition:
-    background 0.5s ease,
-    color 0.5s ease;
+  isolation: isolate;
 }
-
-/* Fondo hover */
 
 .family-card::before {
   content: '';
 
   position: absolute;
+
   inset: 0;
+
+  z-index: -1;
 
   background:
     linear-gradient(
       145deg,
-      #b6ada4 0%,
-      #978d83 100%
+      var(--color-background-soft),
+      #ddd5cd
     );
 
-  opacity: 0;
+  transform:
+    scaleY(0);
+
+  transform-origin:
+    bottom center;
 
   transition:
-    opacity 0.5s ease;
+    transform
+    0.58s
+    var(--ease-out);
 }
 
 .family-card:hover::before,
 .family-card:focus-visible::before,
 .family-card--active::before {
-  opacity: 1;
+  transform:
+    scaleY(1);
+    background:
+    var(--color-surface-beige);
 }
 
 /* =========================
-   NÚMERO
+   TOP
 ========================= */
 
-.family-card__number {
-  position: relative;
-  z-index: 2;
-
-  font-family: var(--font-serif);
-
-  font-size: 0.8rem;
-
-  color: var(--color-accent-dark);
-
-  transition:
-    color 0.45s ease;
-}
-
-.family-card:hover
-.family-card__number,
-.family-card:focus-visible
-.family-card__number,
-.family-card--active
-.family-card__number {
-  color:
-    rgba(255, 255, 255, 0.7);
-}
-
-/* =========================
-   TÍTULO
-========================= */
-
-.family-card__main {
-  position: relative;
-  z-index: 2;
-
-  margin-top: auto;
-
+.family-card__top {
   display: flex;
-  align-items: flex-end;
+
+  align-items: center;
+
   justify-content: space-between;
 
-  gap: 30px;
-
-  transition:
-    transform 0.5s ease;
+  gap: 25px;
 }
 
-.family-card__main h3 {
-  max-width: 480px;
+.family-card__label {
+  font-size: 0.58rem;
 
-  margin: 0;
+  font-weight: 500;
 
-  font-size:
-    clamp(
-      2.7rem,
-      4.3vw,
-      4.8rem
-    );
+  letter-spacing: 0.15em;
 
-  line-height: 0.96;
-  letter-spacing: -0.04em;
+  text-transform: uppercase;
 
-  transition:
-    color 0.45s ease;
+  color:
+    var(--color-accent-dark);
 }
 
-.family-card:hover
-.family-card__main h3,
-.family-card:focus-visible
-.family-card__main h3,
-.family-card--active
-.family-card__main h3 {
-  color: #ffffff;
-}
+.family-card__plus {
+  width: 38px;
 
-.family-card__indicator {
-  flex-shrink: 0;
-
-  width: 42px;
-  height: 42px;
+  height: 38px;
 
   display: grid;
+
   place-items: center;
 
   border:
-    1px solid var(--color-border);
+    1px solid
+    rgba(90, 85, 80, 0.22);
 
   border-radius: 50%;
 
-  font-size: 1.2rem;
+  font-family:
+    var(--font-sans);
+
+  font-size: 1.1rem;
+
+  font-weight: 300;
+
+  color:
+    var(--color-text-dark);
+     border-color:
+    rgba(
+      116,
+      103,
+      93,
+      0.3
+    );
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.3
+    );
 
   transition:
-    transform 0.45s ease,
-    color 0.45s ease,
-    border-color 0.45s ease;
+    transform
+    0.45s
+    var(--ease-out),
+
+    background
+    0.35s ease;
 }
 
 .family-card:hover
-.family-card__indicator,
-.family-card:focus-visible
-.family-card__indicator,
+.family-card__plus,
 .family-card--active
-.family-card__indicator {
-  color: white;
+.family-card__plus {
+  transform:
+    rotate(45deg);
 
-  border-color:
-    rgba(255, 255, 255, 0.5);
-
-  transform: rotate(45deg);
+  background:
+    rgba(255, 255, 255, 0.4);
 }
 
 /* =========================
-   DETALLES
+   CONTENT
+========================= */
+
+.family-card__content {
+  margin-top: auto;
+
+  padding-top:
+    clamp(
+      65px,
+      8vw,
+      130px
+    );
+}
+
+.family-card h3 {
+  max-width: 470px;
+
+  margin:
+    0
+    0
+    30px;
+
+  font-size:
+    clamp(
+      2.8rem,
+      4.1vw,
+      4.8rem
+    );
+
+  line-height: 0.95;
+
+  letter-spacing: -0.045em;
+
+  color:
+    var(--color-text-dark);
+
+  transition:
+    transform
+    0.5s
+    var(--ease-out);
+}
+
+.family-card:hover h3,
+.family-card--active h3 {
+  transform:
+    translateY(-8px);
+}
+
+/* =========================
+   DETAILS
 ========================= */
 
 .family-card__details {
-  position: relative;
-  z-index: 2;
-
   max-height: 0;
 
   overflow: hidden;
@@ -457,13 +587,19 @@ const toggleCard = (id: string) => {
   opacity: 0;
 
   transform:
-    translateY(24px);
+    translateY(18px);
 
   transition:
-    max-height 0.65s ease,
-    opacity 0.4s ease,
-    transform 0.5s ease,
-    margin-top 0.5s ease;
+    max-height
+    0.62s
+    var(--ease-out),
+
+    opacity
+    0.4s ease,
+
+    transform
+    0.55s
+    var(--ease-out);
 }
 
 .family-card:hover
@@ -474,124 +610,143 @@ const toggleCard = (id: string) => {
 .family-card__details {
   max-height: 420px;
 
-  margin-top: 36px;
-
   opacity: 1;
 
   transform:
     translateY(0);
 }
 
-.family-card__details-inner {
-  padding-top: 24px;
-
-  border-top:
-    1px solid rgba(255, 255, 255, 0.3);
-}
-
-.family-card__label {
-  margin-bottom: 18px;
-
-  font-size: 0.62rem;
-
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-
-  color:
-    rgba(255, 255, 255, 0.62);
-}
-
 .family-card__details ul {
-  margin: 0;
+  margin:
+    0
+    0
+    30px;
+
   padding: 0;
 
   list-style: none;
 }
 
 .family-card__details li {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 20px;
+  position: relative;
 
   padding:
-    10px 0;
+    9px
+    0
+    9px
+    19px;
 
   border-bottom:
-    1px solid rgba(255, 255, 255, 0.13);
+    1px solid
+    rgba(90, 84, 78, 0.13);
 
-  font-size:
-    clamp(
-      0.88rem,
-      1.1vw,
-      1rem
-    );
+  font-size: 0.9rem;
+
+  line-height: 1.5;
 
   color:
-    rgba(255, 255, 255, 0.9);
+    rgba(60, 57, 54, 0.75);
 }
 
-.family-card__details li:last-child {
-  border-bottom: 0;
-}
+.family-card__details li::before {
+  content: '';
 
-.family-card__details li span:last-child {
-  opacity: 0.45;
-
-  transition:
-    opacity 0.25s ease,
-    transform 0.25s ease;
-}
-
-.family-card__details li:hover
-span:last-child {
-  opacity: 1;
-
-  transform:
-    translate(3px, -3px);
-}
-
-/* =========================
-   DECORACIÓN
-========================= */
-
-.family-card__decoration {
   position: absolute;
 
-  top: -90px;
-  right: -90px;
+  top: 18px;
+  left: 0;
 
-  z-index: 1;
-
-  width: 250px;
-  height: 250px;
-
-  border:
-    1px solid rgba(255, 255, 255, 0.16);
+  width: 5px;
+  height: 5px;
 
   border-radius: 50%;
 
-  opacity: 0;
+  background:
+    var(--color-accent-dark);
+}
 
-  transform:
-    scale(0.7);
+.family-card__details a {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  padding-bottom: 6px;
+
+  border-bottom:
+    1px solid
+    var(--color-text-dark);
+
+  font-size: 0.62rem;
+
+  font-weight: 500;
+
+  letter-spacing: 0.11em;
+
+  text-transform: uppercase;
+
+  color:
+    var(--color-text-dark);
+}
+
+/* =========================
+   INDEX
+========================= */
+
+.family-card__index {
+  position: absolute;
+
+  right:
+    clamp(
+      20px,
+      3vw,
+      42px
+    );
+
+  bottom:
+    clamp(
+      18px,
+      3vw,
+      35px
+    );
+
+  z-index: -1;
+
+  font-family:
+    var(--font-serif);
+
+  font-size:
+    clamp(
+      6rem,
+      11vw,
+      10rem
+    );
+
+  line-height: 0.7;
+
+  color:
+    rgba(120, 110, 100, 0.06);
+
+  pointer-events: none;
 
   transition:
-    opacity 0.5s ease,
-    transform 0.7s ease;
+    transform
+    0.5s
+    var(--ease-out),
+
+    opacity
+    0.5s ease;
 }
 
 .family-card:hover
-.family-card__decoration,
-.family-card:focus-visible
-.family-card__decoration,
+.family-card__index,
 .family-card--active
-.family-card__decoration {
-  opacity: 1;
-
+.family-card__index {
   transform:
-    scale(1);
+    translateY(10px);
+
+  opacity: 0.45;
 }
 
 /* =========================
@@ -601,19 +756,23 @@ span:last-child {
 .family__footer {
   margin-top:
     clamp(
-      50px,
-      6vw,
-      80px
+      60px,
+      8vw,
+      105px
     );
 
   display: flex;
-  align-items: center;
+
+  align-items: flex-end;
+
   justify-content: space-between;
 
-  gap: 30px;
+  gap: 45px;
 }
 
 .family__footer p {
+  max-width: 620px;
+
   margin: 0;
 
   font-family:
@@ -621,58 +780,74 @@ span:last-child {
 
   font-size:
     clamp(
-      1.4rem,
-      2vw,
-      2rem
+      1.45rem,
+      2.4vw,
+      2.5rem
     );
+
+  line-height: 1.17;
+
+  letter-spacing: -0.025em;
+
+  color:
+    var(--color-text-dark);
 }
 
-.family__cta {
+.family__footer > a {
   flex-shrink: 0;
 
   display: inline-flex;
+
   align-items: center;
 
-  gap: 12px;
+  gap: 20px;
 
-  padding-bottom: 6px;
+  padding-bottom: 7px;
 
   border-bottom:
     1px solid var(--color-text-dark);
 
-  font-size: 0.72rem;
+  font-size: 0.65rem;
+
+  font-weight: 500;
 
   letter-spacing: 0.1em;
+
   text-transform: uppercase;
-}
 
-.family__cta span {
-  transition:
-    transform 0.25s ease;
-}
-
-.family__cta:hover span {
-  transform:
-    translate(3px, -3px);
+  color:
+    var(--color-text-dark);
 }
 
 /* =========================
    TABLET
 ========================= */
 
-@media (max-width: 950px) {
+@media (max-width: 1000px) {
   .family__header {
     grid-template-columns: 1fr;
 
-    gap: 34px;
+    gap: 28px;
   }
 
-  .family__header-right {
-    max-width: 620px;
+  .family__eyebrow {
+    margin: 0;
+  }
+
+  .family__heading {
+    grid-template-columns: 1fr;
+
+    gap: 30px;
+  }
+
+  .family__heading > p {
+    max-width: 520px;
+
+    margin-left: auto;
   }
 
   .family-card {
-    min-height: 440px;
+    min-height: 410px;
   }
 }
 
@@ -680,29 +855,27 @@ span:last-child {
    MÓVIL
 ========================= */
 
-@media (max-width: 700px) {
+@media (max-width: 720px) {
   .family {
     padding:
-      85px
+      95px
       20px;
   }
 
   .family__header {
-    margin-bottom: 55px;
+    margin-bottom: 58px;
   }
 
-  .family__title {
+  .family__heading h2 {
     font-size:
       clamp(
-        2.7rem,
-        12vw,
-        4rem
+        3rem,
+        14vw,
+        4.4rem
       );
-
-    line-height: 0.98;
   }
 
-  .family__services {
+  .family__grid {
     grid-template-columns: 1fr;
   }
 
@@ -710,92 +883,48 @@ span:last-child {
     min-height: 360px;
 
     padding:
-      26px
-      22px;
+      28px
+      24px;
   }
 
-  .family-card__main h3 {
+  .family-card__content {
+    padding-top: 65px;
+  }
+
+  .family-card h3 {
     font-size:
       clamp(
-        2.5rem,
+        2.4rem,
         11vw,
-        3.6rem
+        3.5rem
       );
   }
 
-  .family-card__indicator {
-    width: 38px;
-    height: 38px;
+  .family-card__index {
+    font-size: 7rem;
   }
 
   .family__footer {
-    align-items: flex-start;
     flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 35px;
   }
 }
 
 /* =========================
-   DISPOSITIVOS TÁCTILES
+   REDUCED MOTION
 ========================= */
 
-@media (hover: none) {
-
-  .family-card:hover::before {
-    opacity: 0;
-  }
-
-  .family-card:hover
-  .family-card__details {
-    max-height: 0;
-
-    margin-top: 0;
-
-    opacity: 0;
-
-    transform:
-      translateY(24px);
-  }
-
-  .family-card:hover
-  .family-card__main h3 {
-    color:
-      var(--color-text-dark);
-  }
-
-  .family-card--active::before {
-    opacity: 1;
-  }
-
-  .family-card--active
-  .family-card__main h3 {
-    color: white;
-  }
-
-  .family-card--active
-  .family-card__details {
-    max-height: 500px;
-
-    margin-top: 32px;
-
-    opacity: 1;
-
-    transform:
-      translateY(0);
-  }
-}
-
-/* =========================
-   ACCESIBILIDAD
-========================= */
-
-@media (prefers-reduced-motion: reduce) {
-
-  .family-card,
+@media (
+  prefers-reduced-motion: reduce
+) {
   .family-card::before,
-  .family-card__main,
-  .family-card__indicator,
+  .family-card__plus,
+  .family-card h3,
   .family-card__details,
-  .family-card__decoration {
+  .family-card__index {
     transition: none;
   }
 }

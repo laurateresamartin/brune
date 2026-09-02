@@ -19,7 +19,7 @@
 
       <div class="hero__logo-wrapper">
         <img
-          src="/images/brune-logo.jpg"
+          src="/images/logo-recortado-transparent.png"
           alt="Bruné Abogacía y Mediación"
           class="hero__logo"
         >
@@ -101,7 +101,7 @@
   overflow: hidden;
 
   background:
-    var(--color-background);
+    #f4efe9;
 }
 
 .hero__inner {
@@ -144,6 +144,13 @@
     rgba(137, 127, 118, 0.13);
 
   border-radius: 50%;
+   border-color:
+    rgba(
+      132,
+      118,
+      107,
+      0.12
+    );
 }
 
 .hero__circle--one {
@@ -217,7 +224,6 @@
 /* =========================
    LOGO
 ========================= */
-
 .hero__logo-wrapper {
   width: 100%;
 
@@ -227,45 +233,38 @@
 
   padding:
     clamp(
-      45px,
-      5.5vw,
-      80px
+      18px,
+      2.2vw,
+      12px
     )
     0
     clamp(
-      32px,
-      3.5vw,
-      50px
+      12px,
+      1.5vw,
+      22px
     );
 
-  transform-origin: center bottom;
+  transform-origin:
+    center center;
 
   animation:
     logoEntrance
-    1.05s
+    2.6s
     var(--ease-out)
     both;
 }
-
 .hero__logo {
   display: block;
 
   width:
     min(
-      90vw,
-      1000px
+      72vw,
+      780px
     );
 
   height: auto;
 
   object-fit: contain;
-
-  /*
-   * Temporal mientras siga siendo JPG.
-   * Cuando tengamos SVG/PNG transparente,
-   * eliminar.
-   */
-  mix-blend-mode: multiply;
 }
 
 @keyframes logoEntrance {
@@ -273,29 +272,30 @@
     opacity: 0;
 
     transform:
-      translateY(-28px)
-      scale(0.97);
+      scale(0.72);
   }
 
-  55% {
+  38% {
     opacity: 1;
 
     transform:
-      translateY(7px)
-      scale(1.01);
+      scale(1.035);
+  }
+
+  58% {
+    transform:
+      scale(0.985);
   }
 
   76% {
     transform:
-      translateY(-3px)
-      scale(1);
+      scale(1.012);
   }
 
   100% {
     opacity: 1;
 
     transform:
-      translateY(0)
       scale(1);
   }
 }
@@ -611,20 +611,20 @@
     display: none;
   }
 
-  .hero__logo-wrapper {
-    padding:
-      38px
-      0
-      30px;
-  }
+.hero__logo-wrapper {
+  padding:
+    22px
+    0
+    18px;
+}
 
-  .hero__logo {
-    width:
-      min(
-        100%,
-        520px
-      );
-  }
+.hero__logo {
+  width:
+    min(
+      88vw,
+      500px
+    );
+}
 
   .hero__main {
     padding:
@@ -686,12 +686,12 @@
 @media
   (max-width: 640px)
   and (max-height: 720px) {
-  .hero__logo-wrapper {
-    padding:
-      25px
-      0
-      20px;
-  }
+ .hero__logo-wrapper {
+  padding:
+    15px
+    0
+    12px;
+}
 
   .hero__main {
     padding-bottom: 25px;

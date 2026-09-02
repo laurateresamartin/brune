@@ -10,95 +10,173 @@
           ¿Por qué elegirnos?
         </p>
 
-        <h2 class="why__title">
-          Rigor jurídico.
-          <span>Cercanía personal.</span>
-        </h2>
+        <div class="why__heading">
+          <h2>
+            Rigor jurídico.
+            <span>Cercanía personal.</span>
+          </h2>
 
-        <p class="why__intro">
-          Una forma de ejercer la abogacía basada en la especialización,
-          la responsabilidad y un acompañamiento real durante todo el proceso.
-        </p>
+          <p>
+            Una forma de ejercer la abogacía basada
+            en la especialización, el acompañamiento
+            y la implicación real en cada asunto.
+          </p>
+        </div>
       </div>
 
-      <div class="why__grid">
+      <div class="why__list">
         <article
           v-for="(item, index) in items"
           :key="item.title"
           class="why__item"
-          :class="{ 'why__item--visible': isVisible }"
-          :style="{ '--delay': `${index * 110}ms` }"
+          :class="{
+            'why__item--visible': isVisible
+          }"
+          :style="{
+            '--delay': `${index * 90}ms`
+          }"
         >
-          <div class="why__item-top">
-            <span class="why__number">
-              {{ String(index + 1).padStart(2, '0') }}
-            </span>
+          <div
+            class="why__symbol"
+            aria-hidden="true"
+          >
+            <span
+              v-if="item.symbol === 'circle'"
+              class="why__shape why__shape--circle"
+            />
 
-            <span class="why__line" />
+            <span
+              v-else-if="item.symbol === 'line'"
+              class="why__shape why__shape--line"
+            />
+
+            <span
+              v-else-if="item.symbol === 'cross'"
+              class="why__shape why__shape--cross"
+            />
+
+            <span
+              v-else
+              class="why__shape why__shape--diamond"
+            />
           </div>
 
-          <div class="why__item-content">
+          <div class="why__item-copy">
             <h3>
               {{ item.title }}
             </h3>
 
             <p>
-              {{ item.description }}
+              {{ item.text }}
             </p>
           </div>
+
+          <span
+            class="why__arrow"
+            aria-hidden="true"
+          >
+            ↗
+          </span>
         </article>
+      </div>
+
+      <div class="why__footer">
+        <p>
+          Cada familia requiere una respuesta jurídica
+          propia, no una solución genérica.
+        </p>
+
+        <a href="#contacto">
+          <span>Cuéntanos tu caso</span>
+          <span aria-hidden="true">↗</span>
+        </a>
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import {
+  onBeforeUnmount,
+  onMounted,
+  ref
+} from 'vue'
 
-const sectionRef = ref<HTMLElement | null>(null)
-const isVisible = ref(false)
+const sectionRef =
+  ref<HTMLElement | null>(null)
+
+const isVisible =
+  ref(false)
 
 const items = [
   {
-    title: 'Experiencia y Especialización',
-    description:
-      'Amplia experiencia en el asesoramiento jurídico, unida a una formación continua y rigurosa, para ofrecer una asistencia sólida, personalizada y de calidad.'
+    title:
+      'Experiencia y Especialización',
+
+    text:
+      'Amplia experiencia en el asesoramiento jurídico combinada con una continua y rigurosa formación nos permite ofrecer un asesoramiento y asistencia jurídicos sólidos, personalizados y de calidad.',
+
+    symbol:
+      'circle'
   },
   {
-    title: 'El interés del menor',
-    description:
-      'El bienestar de los menores guía cada actuación, protegiendo sus derechos y favoreciendo soluciones que reduzcan el impacto del conflicto familiar.'
+    title:
+      'El interés del menor',
+
+    text:
+      'El bienestar de los menores guía nuestra actuación. Trabajamos para proteger sus derechos, preservar su estabilidad y favorecer soluciones que minimicen el impacto del conflicto familiar.',
+
+    symbol:
+      'line'
   },
   {
-    title: 'Acompañamiento',
-    description:
-      'Cada procedimiento tiene una historia personal detrás. Por eso ofrecemos un acompañamiento cercano, honesto y respetuoso durante todo el proceso.'
+    title:
+      'Acompañamiento',
+
+    text:
+      'Sabemos que detrás de cada procedimiento hay una historia personal. Por ello, ofrecemos un acompañamiento cercano, honesto y respetuoso, proporcionando seguridad jurídica y apoyo durante todo el proceso.',
+
+    symbol:
+      'cross'
   },
   {
-    title: 'Compromiso',
-    description:
-      'Ejercicio de la abogacía desde la seriedad, la responsabilidad, el trato humanizado y la implicación en cada asunto.'
+    title:
+      'Compromiso',
+
+    text:
+      'Ejercicio de la abogacía desde la seriedad, la responsabilidad y el trato humanizado, con sensibilidad y absoluta implicación en cada asunto, adaptado a las circunstancias y necesidades reales de cada familia.',
+
+    symbol:
+      'diamond'
   }
 ]
 
-let observer: IntersectionObserver | null = null
+let observer:
+  IntersectionObserver | null = null
 
 onMounted(() => {
   if (!sectionRef.value) return
 
-  observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry?.isIntersecting) {
-        isVisible.value = true
-        observer?.disconnect()
-      }
-    },
-    {
-      threshold: 0.2
-    }
-  )
+  observer =
+    new IntersectionObserver(
+      ([entry]) => {
+        if (
+          entry &&
+          entry.isIntersecting
+        ) {
+          isVisible.value = true
 
-  observer.observe(sectionRef.value)
+          observer?.disconnect()
+        }
+      },
+      {
+        threshold: 0.15
+      }
+    )
+
+  observer.observe(
+    sectionRef.value
+  )
 })
 
 onBeforeUnmount(() => {
@@ -108,239 +186,726 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .why {
-  padding:
-    clamp(90px, 10vw, 150px)
-    clamp(20px, 4vw, 64px);
+  position: relative;
 
-  background: #efebe6;
+  padding:
+    var(--section-space)
+    var(--page-padding);
+
+  overflow: hidden;
+
+ background:
+    #f3eee8;
 }
 
 .why__inner {
-  width: min(100%, var(--container-width));
+  width:
+    min(
+      100%,
+      var(--container-width)
+    );
+
   margin: 0 auto;
 }
 
-/* Cabecera */
+/* =========================
+   CABECERA
+========================= */
 
 .why__header {
-  max-width: 900px;
+  display: grid;
+
+  grid-template-columns:
+    minmax(130px, 0.35fr)
+    minmax(0, 1.65fr);
+
+  gap:
+    clamp(
+      35px,
+      6vw,
+      100px
+    );
 
   margin-bottom:
+    clamp(
+      65px,
+      8vw,
+      115px
+    );
+}
+
+.why__eyebrow {
+  margin:
+    12px
+    0
+    0;
+
+  font-size: 0.62rem;
+  font-weight: 500;
+
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+
+  color:
+    var(--color-accent-dark);
+}
+
+.why__heading {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.15fr)
+    minmax(240px, 0.55fr);
+
+  gap:
+    clamp(
+      35px,
+      7vw,
+      110px
+    );
+
+  align-items: end;
+}
+
+.why__heading h2 {
+  margin: 0;
+
+  font-size:
+    clamp(
+      3.5rem,
+      5.8vw,
+      6.7rem
+    );
+
+  line-height: 0.93;
+
+  letter-spacing:
+    -0.05em;
+
+  color:
+    var(--color-text-dark);
+}
+
+.why__heading h2 span {
+  display: block;
+
+  color:
+    var(--color-taupe-dark);
+
+  font-style: italic;
+}
+
+.why__heading > p {
+  margin: 0;
+
+  padding-bottom: 7px;
+
+  font-size: 0.95rem;
+
+  line-height: 1.8;
+
+  color:
+    rgba(
+      52,
+      47,
+      43,
+      0.72
+    );
+}
+
+/* =========================
+   LISTA
+========================= */
+
+.why__list {
+  border-top:
+    1px solid var(--color-border);
+}
+
+.why__item {
+  --delay: 0ms;
+
+  position: relative;
+
+  min-height:
+    clamp(
+      150px,
+      15vw,
+      205px
+    );
+
+  display: grid;
+
+  grid-template-columns:
+    120px
+    minmax(0, 1fr)
+    50px;
+
+  gap:
+    clamp(
+      25px,
+      5vw,
+      75px
+    );
+
+  align-items: center;
+
+
+  border-bottom:
+    1px solid var(--color-border);
+
+  opacity: 0;
+
+  transform:
+    translateY(24px);
+
+ padding:
+    clamp(34px, 4vw, 52px)
+    clamp(20px, 2vw, 28px);
+
+  transition:
+    background 0.35s ease,
+    transform 0.4s var(--ease-out);
+}
+
+.why__item--visible {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+}
+
+.why__item::before {
+  content: '';
+
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 0;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.55
+    );
+
+  transform:
+    scaleY(0);
+
+  transform-origin:
+    bottom center;
+
+  transition:
+    transform 0.45s
+    var(--ease-out);
+}
+
+.why__item:hover::before {
+  transform:
+    scaleY(1);
+}
+
+.why__item:hover {
+  padding-left: 18px;
+   background:
+    rgba(255, 255, 255, 0.48);
+
+  transform:
+    translateX(6px);
+}
+.why-us__symbol::before,
+.why-us__symbol::after {
+  border-color:
+    var(--color-accent-dark);
+
+  background:
+    var(--color-accent-dark);
+}
+.why__symbol,
+.why__item-copy,
+.why__arrow {
+  position: relative;
+
+  z-index: 1;
+}
+
+/* =========================
+   SÍMBOLOS
+========================= */
+
+.why__symbol {
+  width: 88px;
+  height: 88px;
+
+  display: grid;
+
+  place-items: center;
+
+  border:
+    1px solid
+    rgba(
+      120,
+      110,
+      101,
+      0.2
+    );
+
+  border-radius: 50%;
+
+  transition:
+    transform 0.45s
+    var(--ease-out),
+
+    background 0.45s ease;
+}
+
+.why__item:hover
+.why__symbol {
+  transform:
+    rotate(7deg)
+    scale(1.04);
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.55
+    );
+}
+
+.why__shape {
+  position: relative;
+
+  display: block;
+}
+
+.why__shape--circle {
+  width: 25px;
+  height: 25px;
+
+  border:
+    1px solid
+    var(--color-accent-dark);
+
+  border-radius: 50%;
+}
+
+.why__shape--line {
+  width: 34px;
+  height: 1px;
+
+  background:
+    var(--color-accent-dark);
+}
+
+.why__shape--cross {
+  width: 30px;
+  height: 30px;
+}
+
+.why__shape--cross::before,
+.why__shape--cross::after {
+  content: '';
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 30px;
+  height: 1px;
+
+  background:
+    var(--color-accent-dark);
+}
+
+.why__shape--cross::before {
+  transform:
+    translate(-50%, -50%);
+}
+
+.why__shape--cross::after {
+  transform:
+    translate(-50%, -50%)
+    rotate(90deg);
+}
+
+.why__shape--diamond {
+  width: 23px;
+  height: 23px;
+
+  border:
+    1px solid
+    var(--color-accent-dark);
+
+  transform:
+    rotate(45deg);
+}
+
+/* =========================
+   COPY
+========================= */
+
+.why__item-copy {
+  display: grid;
+
+  grid-template-columns:
+    minmax(220px, 0.65fr)
+    minmax(0, 1fr);
+
+  gap:
+    clamp(
+      30px,
+      6vw,
+      90px
+    );
+
+  align-items: center;
+}
+
+.why__item-copy h3 {
+  margin: 0;
+
+  font-size:
+    clamp(
+      1.75rem,
+      2.7vw,
+      3rem
+    );
+
+  line-height: 1;
+
+  letter-spacing:
+    -0.03em;
+
+  color:
+    var(--color-text-dark);
+}
+
+.why__item-copy p {
+  max-width: 650px;
+
+  margin: 0;
+
+  font-size: 0.93rem;
+
+  line-height: 1.8;
+
+  color:
+    rgba(
+      65,
+      62,
+      59,
+      0.67
+    );
+}
+
+/* =========================
+   FLECHA
+========================= */
+
+.why__arrow {
+  justify-self: end;
+
+  font-size: 1.1rem;
+
+  color:
+    var(--color-accent-dark);
+
+  opacity: 0.45;
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.4s
+    var(--ease-out);
+}
+
+.why__item:hover
+.why__arrow {
+  opacity: 1;
+
+  transform:
+    translate(
+      5px,
+      -5px
+    );
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.why__footer {
+  margin-top:
     clamp(
       60px,
       8vw,
       100px
     );
-}
-
-.why__eyebrow {
-  margin-bottom: 20px;
-
-  font-size: 0.72rem;
-  font-weight: 500;
-
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-
-  color: var(--color-accent);
-}
-
-.why__title {
-  margin-bottom: 26px;
-
-  font-size:
-    clamp(
-      2.8rem,
-      5vw,
-      5.2rem
-    );
-
-  line-height: 0.98;
-  letter-spacing: -0.035em;
-}
-
-.why__title span {
-  display: block;
-
-  color: var(--color-text);
-}
-
-.why__intro {
-  max-width: 680px;
-
-  margin: 0;
-
-  font-size:
-    clamp(
-      1rem,
-      1.4vw,
-      1.15rem
-    );
-
-  line-height: 1.8;
-
-  color: rgba(85, 84, 83, 0.84);
-}
-
-/* Grid */
-
-.why__grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-
-  border-top: 1px solid var(--color-border);
-  border-left: 1px solid var(--color-border);
-}
-
-/* Item */
-
-.why__item {
-  min-height: 390px;
-
-  padding:
-    clamp(
-      28px,
-      4vw,
-      48px
-    );
 
   display: flex;
-  flex-direction: column;
+
+  align-items: flex-end;
   justify-content: space-between;
 
-  border-right: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-
-  background: transparent;
-
-  opacity: 0;
-  transform: translateY(28px);
-
-  transition:
-    opacity 0.75s ease var(--delay),
-    transform 0.75s ease var(--delay),
-    background 0.4s ease;
+  gap: 45px;
 }
 
-.why__item--visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.why__footer p {
+  max-width: 620px;
 
-.why__item:hover {
-  background: rgba(255, 255, 255, 0.4);
-}
+  margin: 0;
 
-.why__item-top {
-  display: flex;
-  align-items: center;
-
-  gap: 14px;
-}
-
-.why__number {
-  font-family: var(--font-serif);
-
-  font-size: 0.82rem;
-
-  color: var(--color-accent);
-}
-
-.why__line {
-  width: 42px;
-  height: 1px;
-
-  background: var(--color-border);
-}
-
-.why__item-content {
-  max-width: 470px;
-}
-
-.why__item-content h3 {
-  margin-bottom: 18px;
+  font-family:
+    var(--font-serif);
 
   font-size:
     clamp(
-      2rem,
-      3vw,
-      3.1rem
+      1.5rem,
+      2.5vw,
+      2.6rem
     );
 
-  line-height: 1.04;
-  letter-spacing: -0.025em;
+  line-height: 1.16;
+
+  letter-spacing:
+    -0.025em;
+
+  color:
+    var(--color-text-dark);
 }
 
-.why__item-content p {
-  margin: 0;
+.why__footer a {
+  flex-shrink: 0;
 
-  max-width: 420px;
+  display: inline-flex;
 
-  font-size: 0.98rem;
-  line-height: 1.75;
+  align-items: center;
 
-  color: rgba(85, 84, 83, 0.84);
+  gap: 20px;
+
+  padding-bottom: 7px;
+
+  border-bottom:
+    1px solid var(--color-text-dark);
+
+  font-size: 0.66rem;
+  font-weight: 500;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  color:
+    var(--color-text-dark);
 }
 
-/* Tablet */
+.why__footer a
+span:last-child {
+  transition:
+    transform 0.3s
+    var(--ease-out);
+}
 
-@media (max-width: 900px) {
-  .why__grid {
+.why__footer a:hover
+span:last-child {
+  transform:
+    translate(
+      4px,
+      -4px
+    );
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 950px) {
+  .why__header {
     grid-template-columns: 1fr;
+
+    gap: 28px;
+  }
+
+  .why__eyebrow {
+    margin: 0;
+  }
+
+  .why__heading {
+    grid-template-columns: 1fr;
+
+    gap: 30px;
+  }
+
+  .why__heading > p {
+    max-width: 520px;
+
+    margin-left: auto;
   }
 
   .why__item {
-    min-height: 330px;
+    grid-template-columns:
+      90px
+      minmax(0, 1fr)
+      30px;
+
+    gap: 30px;
+  }
+
+  .why__symbol {
+    width: 70px;
+    height: 70px;
+  }
+
+  .why__item-copy {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+  .why__item-copy p {
+    max-width: 620px;
   }
 }
 
-/* Móvil */
+/* =========================
+   MÓVIL
+========================= */
 
-@media (max-width: 640px) {
+@media (max-width: 680px) {
   .why {
     padding:
-      80px
+      95px
       20px;
+
   }
 
-  .why__title {
+  .why__header {
+    margin-bottom: 60px;
+  }
+
+  .why__heading h2 {
     font-size:
       clamp(
-        2.5rem,
-        11vw,
-        3.8rem
+        3rem,
+        14vw,
+        4.4rem
       );
-
-    line-height: 1.02;
-  }
-
-  .why__intro {
-    font-size: 0.97rem;
-    line-height: 1.7;
   }
 
   .why__item {
-    min-height: 300px;
+    min-height: auto;
 
-    padding: 28px 24px;
+    grid-template-columns:
+      58px
+      minmax(0, 1fr);
+
+    gap:
+      20px
+      22px;
+
+    padding:
+      32px
+      0;
   }
 
-  .why__item-content h3 {
+  .why__item:hover {
+    padding-left: 0;
+  }
+
+  .why__symbol {
+    width: 54px;
+    height: 54px;
+  }
+
+  .why__shape--circle {
+    width: 20px;
+    height: 20px;
+  }
+
+  .why__shape--line {
+    width: 26px;
+  }
+
+  .why__shape--cross {
+    width: 23px;
+    height: 23px;
+  }
+
+  .why__shape--cross::before,
+  .why__shape--cross::after {
+    width: 23px;
+  }
+
+  .why__shape--diamond {
+    width: 18px;
+    height: 18px;
+  }
+
+  .why__item-copy {
+    grid-column: 2;
+
+    gap: 14px;
+  }
+
+  .why__item-copy h3 {
     font-size:
       clamp(
-        2rem,
-        9vw,
-        2.9rem
+        1.65rem,
+        8vw,
+        2.25rem
+      );
+  }
+
+  .why__item-copy p {
+    font-size: 0.91rem;
+  }
+
+  .why__arrow {
+    display: none;
+  }
+
+  .why__footer {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 35px;
+
+    margin-top: 60px;
+  }
+
+  .why__footer p {
+    font-size:
+      clamp(
+        1.6rem,
+        8vw,
+        2.2rem
       );
   }
 }
 
-/* Accesibilidad */
+/* =========================
+   REDUCED MOTION
+========================= */
 
-@media (prefers-reduced-motion: reduce) {
+@media (
+  prefers-reduced-motion: reduce
+) {
   .why__item {
     opacity: 1;
+
     transform: none;
+
+    transition: none;
+  }
+
+  .why__item::before,
+  .why__symbol,
+  .why__arrow {
     transition: none;
   }
 }

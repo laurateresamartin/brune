@@ -1,62 +1,63 @@
 <template>
   <section
     id="otras-areas"
-    ref="sectionRef"
     class="other-areas"
   >
     <div class="other-areas__inner">
-      <header
-        class="other-areas__header"
-        :class="{ 'is-visible': isVisible }"
-      >
+      <div class="other-areas__header">
         <p class="other-areas__eyebrow">
           Otras Áreas de Actuación
         </p>
 
-        <h2>
-          Asesoramiento jurídico
-          <span>más allá del ámbito familiar.</span>
-        </h2>
-      </header>
+        <div class="other-areas__heading">
+          <h2>
+            Asesoramiento jurídico
+            <span>más allá del ámbito familiar.</span>
+          </h2>
+
+          <p>
+            El despacho presta también asistencia
+            en otras materias jurídicas, con un enfoque
+            cercano, riguroso y adaptado a cada caso.
+          </p>
+        </div>
+      </div>
 
       <div class="other-areas__list">
         <article
-          v-for="(area, index) in areas"
-          :key="area.id"
-          class="area"
-          :class="{
-            'area--active': activeArea === area.id,
-            'is-visible': isVisible
-          }"
-          :style="{ '--delay': `${index * 100}ms` }"
-          tabindex="0"
-          :aria-expanded="activeArea === area.id"
-          @click="toggleArea(area.id)"
-          @keydown.enter.prevent="toggleArea(area.id)"
-          @keydown.space.prevent="toggleArea(area.id)"
-        >
-          <div class="area__heading">
-            <span class="area__number">
-              {{ String(index + 1).padStart(2, '0') }}
+            v-for="area in areas"
+            :id="area.id"
+            :key="area.id"
+            class="other-area"
+            :class="{
+                'other-area--active':
+                activeArea === area.id
+            }"
+            >
+          <button
+            type="button"
+            class="other-area__trigger"
+            :aria-expanded="activeArea === area.id"
+            :aria-controls="`panel-${area.id}`"
+            @click="toggleArea(area.id)"
+          >
+            <span class="other-area__title">
+              {{ area.title }}
             </span>
 
-            <h3>
-              {{ area.title }}
-            </h3>
-
-            <button
-              type="button"
-              class="area__button"
-              tabindex="-1"
+            <span
+              class="other-area__plus"
               aria-hidden="true"
             >
-              <span />
-              <span />
-            </button>
-          </div>
+              +
+            </span>
+          </button>
 
-          <div class="area__details">
-            <div class="area__details-inner">
+          <div
+            :id="`panel-${area.id}`"
+            class="other-area__panel"
+          >
+            <div class="other-area__panel-inner">
               <ul>
                 <li
                   v-for="item in area.items"
@@ -66,36 +67,54 @@
                 </li>
               </ul>
 
-              <a
-                href="#contacto"
-                @click.stop
-              >
-                Consultar
-                <span aria-hidden="true">↗</span>
+              <a href="#contacto">
+                <span>
+                  Consultar
+                </span>
+
+                <span aria-hidden="true">
+                  ↗
+                </span>
               </a>
             </div>
           </div>
         </article>
+      </div>
+
+      <div class="other-areas__footer">
+        <p>
+          Si tu consulta no encaja en estas áreas,
+          puedes contactar con el despacho para valorar
+          tu caso de forma personalizada.
+        </p>
+
+        <a href="#contacto">
+          <span>
+            Contactar
+          </span>
+
+          <span aria-hidden="true">
+            ↗
+          </span>
+        </a>
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import {
-  onBeforeUnmount,
-  onMounted,
-  ref
-} from 'vue'
+import { ref } from 'vue'
 
-const sectionRef = ref<HTMLElement | null>(null)
-const isVisible = ref(false)
-const activeArea = ref<string | null>(null)
+const activeArea =
+  ref<string | null>('civil')
 
 const areas = [
   {
     id: 'civil',
-    title: 'Derecho Civil',
+
+    title:
+      'Derecho Civil',
+
     items: [
       'Herencias y Sucesiones',
       'Derecho Bancario',
@@ -107,7 +126,10 @@ const areas = [
   },
   {
     id: 'extranjeria',
-    title: 'Extranjería y Nacionalidad',
+
+    title:
+      'Extranjería y Nacionalidad',
+
     items: [
       'Visados y permisos de residencia',
       'Nacionalidad española',
@@ -118,7 +140,10 @@ const areas = [
   },
   {
     id: 'penal',
-    title: 'Derecho Penal',
+
+    title:
+      'Derecho Penal',
+
     items: [
       'Asesoramiento legal en materia penal',
       'Asistencia letrada',
@@ -134,273 +159,351 @@ const toggleArea = (id: string) => {
       ? null
       : id
 }
-
-let observer: IntersectionObserver | null = null
-
-onMounted(() => {
-  if (!sectionRef.value) return
-
-  observer = new IntersectionObserver(
-    ([entry]) => {
-      if (entry?.isIntersecting) {
-        isVisible.value = true
-        observer?.disconnect()
-      }
-    },
-    {
-      threshold: 0.1
-    }
-  )
-
-  observer.observe(sectionRef.value)
-})
-
-onBeforeUnmount(() => {
-  observer?.disconnect()
-})
 </script>
 
 <style scoped>
 .other-areas {
+  position: relative;
+ transition:
+    background
+    0.35s ease;
   padding:
-    clamp(100px, 11vw, 170px)
-    clamp(20px, 4vw, 64px);
+    var(--section-space)
+    var(--page-padding);
 
-  background: #f5f2ed;
+  background:
+    var(--color-surface);
 }
 
 .other-areas__inner {
-  width: min(100%, var(--container-width));
+  width:
+    min(
+      100%,
+      var(--container-width)
+    );
+
   margin: 0 auto;
 }
 
+/* =========================
+   HEADER
+========================= */
+
 .other-areas__header {
-  max-width: 900px;
+  display: grid;
+
+  grid-template-columns:
+    minmax(130px, 0.35fr)
+    minmax(0, 1.65fr);
+
+  gap:
+    clamp(
+      35px,
+      6vw,
+      100px
+    );
 
   margin-bottom:
-    clamp(65px, 8vw, 110px);
-
-  opacity: 0;
-  transform: translateY(30px);
-
-  transition:
-    opacity 0.8s ease,
-    transform 0.8s ease;
-}
-
-.other-areas__header.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+    clamp(
+      70px,
+      9vw,
+      125px
+    );
 }
 
 .other-areas__eyebrow {
-  margin-bottom: 20px;
+  margin:
+    12px
+    0
+    0;
 
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
+  font-size: 0.62rem;
+
+  font-weight: 500;
+
+  letter-spacing: 0.16em;
+
   text-transform: uppercase;
 
-  color: var(--color-accent-dark);
+  color:
+    var(--color-accent-dark);
 }
 
-.other-areas__header h2 {
+.other-areas__heading {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.1fr)
+    minmax(240px, 0.55fr);
+
+  gap:
+    clamp(
+      40px,
+      7vw,
+      110px
+    );
+
+  align-items: end;
+}
+
+.other-areas__heading h2 {
   margin: 0;
 
   font-size:
-    clamp(3rem, 5.5vw, 5.8rem);
+    clamp(
+      3.5rem,
+      5.8vw,
+      6.8rem
+    );
 
-  line-height: 0.96;
-  letter-spacing: -0.04em;
+  line-height: 0.93;
+
+  letter-spacing: -0.05em;
+
+  color:
+    var(--color-text-dark);
 }
 
-.other-areas__header h2 span {
+.other-areas__heading h2 span {
   display: block;
-  color: var(--color-accent);
+
+  font-style: italic;
+
+  color:
+    var(--color-accent-dark);
 }
 
-/* LISTADO */
+.other-areas__heading > p {
+  margin: 0;
+
+  padding-bottom: 7px;
+
+  font-size: 0.95rem;
+
+  line-height: 1.8;
+
+  color:
+    rgba(65, 62, 59, 0.68);
+}
+
+/* =========================
+   LIST
+========================= */
 
 .other-areas__list {
   border-top:
-    1px solid var(--color-border);
+    1px solid
+    var(--color-border);
 }
 
-.area {
+.other-area {
   border-bottom:
-    1px solid var(--color-border);
-
-  cursor: pointer;
-
-  opacity: 0;
-  transform: translateY(20px);
-
-  transition:
-    opacity 0.7s ease var(--delay),
-    transform 0.7s ease var(--delay);
+    1px solid
+    var(--color-border);
 }
 
-.area.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.other-area__trigger {
+  width: 100%;
+ padding-left:
+    clamp(
+      20px,
+      2vw,
+      30px
+    );
 
-.area__heading {
-  min-height: 155px;
-
+  padding-right:
+    clamp(
+      20px,
+      2vw,
+      30px
+    );
   display: grid;
-  grid-template-columns:
-    70px
-    minmax(0, 1fr)
-    50px;
 
-  gap: 25px;
+  grid-template-columns:
+    minmax(0, 1fr)
+    54px;
+
+  gap: 30px;
 
   align-items: center;
 
-  transition:
-    padding-left 0.35s ease;
+  padding:
+    clamp(
+      34px,
+      5vw,
+      60px
+    )
+    0;
+
+  border: 0;
+
+  background: transparent;
+
+  color:
+    var(--color-text-dark);
+
+  text-align: left;
+
+  cursor: pointer;
 }
 
-.area:hover .area__heading {
-  padding-left: 15px;
-}
-
-.area__number {
+.other-area__title {
   font-family:
     var(--font-serif);
 
-  font-size: 0.78rem;
-
-  color: var(--color-accent-dark);
-}
-
-.area__heading h3 {
-  margin: 0;
-
   font-size:
-    clamp(2.2rem, 4vw, 4.4rem);
+    clamp(
+      2.8rem,
+      5vw,
+      5.8rem
+    );
 
-  line-height: 1;
-  letter-spacing: -0.035em;
+  line-height: 0.98;
+
+  letter-spacing: -0.045em;
 }
 
-/* BOTÓN + */
+.other-area__plus {
+  width: 48px;
+  height: 48px;
 
-.area__button {
-  position: relative;
+  display: grid;
 
-  width: 46px;
-  height: 46px;
+  place-items: center;
 
-  padding: 0;
+  justify-self: end;
 
   border:
-    1px solid var(--color-border);
+    1px solid
+    rgba(90, 84, 78, 0.18);
 
   border-radius: 50%;
 
-  background: transparent;
-}
+  font-family:
+    var(--font-sans);
 
-.area__button span {
-  position: absolute;
+  font-size: 1.2rem;
 
-  top: 50%;
-  left: 50%;
+  font-weight: 300;
 
-  width: 14px;
-  height: 1px;
-
-  background:
+  color:
     var(--color-text-dark);
 
-  transform:
-    translate(-50%, -50%);
-
   transition:
-    transform 0.4s ease;
+    transform
+    0.4s
+    var(--ease-out),
+
+    background
+    0.35s ease;
 }
 
-.area__button span:last-child {
+.other-area--active
+.other-area__plus {
   transform:
-    translate(-50%, -50%)
-    rotate(90deg);
+    rotate(45deg);
+
+ background:
+    rgba(
+      238,
+      232,
+      225,
+      0.42
+    );
 }
 
-.area--active
-.area__button span:last-child {
-  transform:
-    translate(-50%, -50%)
-    rotate(0);
-}
+/* =========================
+   PANEL
+========================= */
 
-/* DETALLES */
+.other-area__panel {
+  display: grid;
 
-.area__details {
-  max-height: 0;
+  grid-template-rows: 0fr;
 
   overflow: hidden;
 
-  opacity: 0;
-
   transition:
-    max-height 0.65s ease,
-    opacity 0.4s ease;
+    grid-template-rows
+    0.55s
+    var(--ease-out);
 }
 
-.area--active
-.area__details {
-  max-height: 600px;
-  opacity: 1;
+.other-area--active
+.other-area__panel {
+  grid-template-rows: 1fr;
 }
 
-.area__details-inner {
+.other-area__panel-inner {
+  min-height: 0;
+
   display: grid;
 
   grid-template-columns:
     minmax(0, 1fr)
     auto;
 
-  gap: 50px;
+  gap:
+    clamp(
+      40px,
+      8vw,
+      120px
+    );
+
+  align-items: end;
 
   padding:
     0
     0
-    55px
-    95px;
+    clamp(
+      40px,
+      5vw,
+      62px
+    )
+    clamp(
+      40px,
+      10vw,
+      150px
+    );
 }
 
-.area__details ul {
+.other-area__panel ul {
   margin: 0;
-  padding: 0;
 
-  columns: 2;
-  column-gap: 60px;
+  padding: 0;
 
   list-style: none;
 }
 
-.area__details li {
+.other-area__panel li {
   position: relative;
 
-  padding:
-    9px
-    0
-    9px
-    20px;
+  max-width: 760px;
 
-  break-inside: avoid;
+  padding:
+    12px
+    0
+    12px
+    22px;
+
+  border-bottom:
+    1px solid
+    rgba(80, 75, 70, 0.1);
+
+  font-size: 0.95rem;
+
+  line-height: 1.6;
 
   color:
-    rgba(70, 68, 66, 0.78);
+    rgba(60, 57, 54, 0.72);
 }
 
-.area__details li::before {
+.other-area__panel li::before {
   content: '';
 
   position: absolute;
 
-  top: 19px;
+  top: 21px;
   left: 0;
 
   width: 5px;
@@ -412,113 +515,240 @@ onBeforeUnmount(() => {
     var(--color-accent-dark);
 }
 
-.area__details a {
-  align-self: end;
+.other-area__panel a {
+  flex-shrink: 0;
 
   display: inline-flex;
+
   align-items: center;
 
-  gap: 10px;
+  gap: 16px;
 
-  padding-bottom: 5px;
+  padding-bottom: 6px;
 
   border-bottom:
-    1px solid var(--color-text-dark);
+    1px solid
+    var(--color-text-dark);
 
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
+  font-size: 0.62rem;
+
+  font-weight: 500;
+
+  letter-spacing: 0.11em;
+
   text-transform: uppercase;
+
+  color:
+    var(--color-text-dark);
 }
 
-/* TABLET */
+/* =========================
+   HOVER
+========================= */
 
-@media (max-width: 800px) {
-  .area__heading {
-    grid-template-columns:
-      45px
-      minmax(0, 1fr)
-      46px;
-
-    min-height: 130px;
+@media (
+  hover: hover
+) and (
+  pointer: fine
+) {
+  .other-area__trigger:hover
+  .other-area__title {
+    color:
+      var(--color-accent-dark);
   }
 
-  .area__details-inner {
+  .other-area__trigger:hover
+  .other-area__plus {
+    background:
+      var(--color-background-soft);
+  }
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.other-areas__footer {
+  margin-top:
+    clamp(
+      75px,
+      9vw,
+      120px
+    );
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 45px;
+}
+
+.other-areas__footer p {
+  max-width: 660px;
+
+  margin: 0;
+
+  font-family:
+    var(--font-serif);
+
+  font-size:
+    clamp(
+      1.5rem,
+      2.6vw,
+      2.7rem
+    );
+
+  line-height: 1.15;
+
+  letter-spacing: -0.025em;
+
+  color:
+    var(--color-text-dark);
+}
+
+.other-areas__footer > a {
+  flex-shrink: 0;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  padding-bottom: 7px;
+
+  border-bottom:
+    1px solid
+    var(--color-text-dark);
+
+  font-size: 0.63rem;
+
+  font-weight: 500;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+
+  color:
+    var(--color-text-dark);
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 950px) {
+  .other-areas__header {
+    grid-template-columns: 1fr;
+
+    gap: 28px;
+  }
+
+  .other-areas__eyebrow {
+    margin: 0;
+  }
+
+  .other-areas__heading {
+    grid-template-columns: 1fr;
+
+    gap: 30px;
+  }
+
+  .other-areas__heading > p {
+    max-width: 520px;
+
+    margin-left: auto;
+  }
+
+  .other-area__panel-inner {
     padding-left: 70px;
   }
 }
 
-/* MÓVIL */
+/* =========================
+   MOBILE
+========================= */
 
-@media (max-width: 640px) {
+@media (max-width: 720px) {
   .other-areas {
     padding:
-      85px
+      95px
       20px;
   }
 
-  .other-areas__header h2 {
-    font-size:
-      clamp(2.8rem, 12vw, 4rem);
+  .other-areas__header {
+    margin-bottom: 60px;
   }
 
-  .area__heading {
-    min-height: 120px;
+  .other-areas__heading h2 {
+    font-size:
+      clamp(
+        3rem,
+        14vw,
+        4.4rem
+      );
+  }
 
+  .other-area__trigger {
     grid-template-columns:
-      30px
       minmax(0, 1fr)
-      40px;
+      42px;
 
-    gap: 12px;
+    gap: 20px;
+
+    padding:
+      30px
+      0;
   }
 
-  .area__heading h3 {
+  .other-area__title {
     font-size:
-      clamp(2rem, 9vw, 3rem);
+      clamp(
+        2.4rem,
+        11vw,
+        3.5rem
+      );
   }
 
-  .area__button {
-    width: 38px;
-    height: 38px;
+  .other-area__plus {
+    width: 40px;
+    height: 40px;
   }
 
-  .area:hover
-  .area__heading {
-    padding-left: 0;
-  }
-
-  .area__details-inner {
+  .other-area__panel-inner {
     grid-template-columns: 1fr;
 
-    gap: 30px;
+    gap: 32px;
 
     padding:
       0
       0
-      40px
-      42px;
+      38px;
   }
 
-  .area__details ul {
-    columns: 1;
-  }
+  .other-areas__footer {
+    flex-direction: column;
 
-  .area__details a {
-    justify-self: start;
+    align-items: flex-start;
+
+    gap: 34px;
+
+    margin-top: 70px;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .other-areas__header,
-  .area,
-  .area__details {
-    transition: none;
-  }
+/* =========================
+   REDUCED MOTION
+========================= */
 
-  .other-areas__header,
-  .area {
-    opacity: 1;
-    transform: none;
+@media (
+  prefers-reduced-motion: reduce
+) {
+  .other-area__panel,
+  .other-area__plus {
+    transition: none;
   }
 }
 </style>

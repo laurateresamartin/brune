@@ -4,7 +4,11 @@
     class="contact"
   >
     <div class="contact__inner">
-      <div class="contact__info">
+      <!-- =====================
+           CABECERA
+      ====================== -->
+
+      <div class="contact__header">
         <p class="contact__eyebrow">
           Contacto
         </p>
@@ -13,81 +17,94 @@
           Estamos aquí
           <span>para ayudarte.</span>
         </h2>
-
-        <p class="contact__intro">
-          Contáctanos para una consulta personalizada.
-          Atendemos bajo cita previa.
-        </p>
-
-        <div class="contact__details">
-          <a
-            href="tel:+34638812473"
-            class="contact-detail"
-          >
-            <span class="contact-detail__label">
-              Teléfono
-            </span>
-
-            <span class="contact-detail__value">
-              638 812 473
-            </span>
-          </a>
-
-          <a
-            href="mailto:consultabrune@gmail.com"
-            class="contact-detail"
-          >
-            <span class="contact-detail__label">
-              Email
-            </span>
-
-            <span class="contact-detail__value">
-              consultabrune@gmail.com
-            </span>
-          </a>
-
-          <a
-            href="https://maps.google.com/?q=Avda.+Gran+Via+de+San+Marcos+42+Leon"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="contact-detail"
-          >
-            <span class="contact-detail__label">
-              Despacho
-            </span>
-
-            <span class="contact-detail__value">
-              Avda. Gran Vía de San Marcos,
-              N.º 42, 1ºB
-              <br>
-              24002 León
-            </span>
-          </a>
-        </div>
-        <div class="contact__map">
-            <iframe
-                title="Ubicación de Bruné Abogacía y Mediación"
-                src="https://www.google.com/maps?q=Avda.%20Gran%20V%C3%ADa%20de%20San%20Marcos%2042%2C%2024002%20Le%C3%B3n&output=embed"
-                width="100%"
-                height="100%"
-                style="border: 0"
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                allowfullscreen
-            />
-        </div>
       </div>
 
-      <div class="contact__form-wrapper">
-        <form
-          class="contact-form"
-          @submit.prevent="submitForm"
-        >
-          <div class="contact-form__row">
-            <label class="contact-form__field">
-              <span>Nombre completo</span>
+      <!-- =====================
+           CONTENIDO
+      ====================== -->
+
+      <div class="contact__content">
+        <!-- INFO -->
+
+        <div class="contact__info">
+          <p class="contact__intro">
+            Contáctanos para una consulta
+            personalizada.
+          </p>
+
+          <p class="contact__appointment">
+            Atendemos bajo cita previa.
+          </p>
+
+          <div class="contact__details">
+            <div class="contact__detail">
+              <span class="contact__label">
+                Teléfono
+              </span>
+
+              <a href="tel:+34638812473">
+                638 812 473
+              </a>
+            </div>
+
+            <div class="contact__detail">
+              <span class="contact__label">
+                Email
+              </span>
+
+              <a href="mailto:consultabrune@gmail.com">
+                consultabrune@gmail.com
+              </a>
+            </div>
+
+            <div class="contact__detail">
+              <span class="contact__label">
+                Despacho
+              </span>
+
+              <address>
+                Avda. Gran Vía de San Marcos,
+                N.º 42, 1ºB<br>
+                24002 León
+              </address>
+            </div>
+          </div>
+
+          <!-- MAPA -->
+
+          <div class="contact__map">
+            <iframe
+              title="Ubicación de Bruné Abogacía y Mediación"
+              src="https://www.google.com/maps?q=Avda.%20Gran%20V%C3%ADa%20de%20San%20Marcos%2042%2C%2024002%20Le%C3%B3n&output=embed"
+              width="100%"
+              height="100%"
+              style="border: 0"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+            />
+          </div>
+        </div>
+
+        <!-- FORMULARIO -->
+
+        <div class="contact__form-wrapper">
+          <p class="contact__form-heading">
+            Cuéntanos brevemente
+            <em>cómo podemos ayudarte.</em>
+          </p>
+
+          <form
+            class="contact__form"
+            @submit.prevent="submitForm"
+          >
+            <div class="contact__field">
+              <label for="name">
+                Nombre
+              </label>
 
               <input
+                id="name"
                 v-model="form.name"
                 type="text"
                 name="name"
@@ -95,12 +112,15 @@
                 required
                 placeholder="Tu nombre"
               >
-            </label>
+            </div>
 
-            <label class="contact-form__field">
-              <span>Email</span>
+            <div class="contact__field">
+              <label for="email">
+                Email
+              </label>
 
               <input
+                id="email"
                 v-model="form.email"
                 type="email"
                 name="email"
@@ -108,502 +128,487 @@
                 required
                 placeholder="tu@email.com"
               >
-            </label>
-          </div>
-
-          <label class="contact-form__field">
-            <span>Asunto</span>
-
-            <input
-              v-model="form.subject"
-              type="text"
-              name="subject"
-              required
-              placeholder="¿En qué podemos ayudarte?"
-            >
-          </label>
-
-          <label class="contact-form__field">
-            <span>Mensaje</span>
-
-            <textarea
-              v-model="form.message"
-              name="message"
-              rows="5"
-              required
-              placeholder="Cuéntanos brevemente tu consulta"
-            />
-          </label>
-
-          <label class="contact-form__checkbox">
-            <input
-              v-model="form.privacy"
-              type="checkbox"
-              required
-            >
-
-            <span>
-              He leído y acepto la
-              <a href="/politica-privacidad">
-                Política de Privacidad
-              </a>.
-            </span>
-          </label>
-
-          <label class="contact-form__checkbox">
-            <input
-              v-model="form.legal"
-              type="checkbox"
-              required
-            >
-
-            <span>
-              Acepto las condiciones establecidas
-              en el
-              <a href="/aviso-legal">
-                Aviso Legal
-              </a>.
-            </span>
-          </label>
-          <div class="contact-form__captcha">
-            <p class="contact-form__captcha-text">
-                Por favor, verifica que eres una persona antes de enviar.
-            </p>
-
-            <div
-                ref="recaptchaElement"
-                class="g-recaptcha"
-            />
             </div>
-                <p
+
+            <div class="contact__field">
+              <label for="subject">
+                Asunto
+              </label>
+
+              <input
+                id="subject"
+                v-model="form.subject"
+                type="text"
+                name="subject"
+                required
+                placeholder="Motivo de la consulta"
+              >
+            </div>
+
+            <div class="contact__field">
+              <label for="message">
+                Mensaje
+              </label>
+
+              <textarea
+                id="message"
+                v-model="form.message"
+                name="message"
+                rows="5"
+                required
+                placeholder="Escribe tu consulta"
+              />
+            </div>
+
+            <!-- PRIVACIDAD -->
+
+            <label class="contact__privacy">
+              <input
+                v-model="form.privacy"
+                type="checkbox"
+                required
+              >
+
+              <span>
+                He leído y acepto la
+
+                <NuxtLink to="/politica-privacidad">
+                  Política de Privacidad
+                </NuxtLink>.
+              </span>
+            </label>
+
+            <!-- CAPTCHA -->
+
+            <div class="contact__captcha">
+              <p>
+                Por favor, verifica que eres una
+                persona antes de enviar.
+              </p>
+
+              <div
+                ref="captchaElement"
+                class="contact__captcha-widget"
+              />
+
+              <p
                 v-if="captchaError"
-                class="contact-form__error"
+                class="contact__error"
                 role="alert"
-                >
-                Debes verificar que eres una persona
-                antes de enviar el formulario.
-                </p>
-          <button
-            type="submit"
-            class="contact-form__submit"
-          >
-            <span>
-              Enviar consulta
-            </span>
+              >
+                Completa la verificación antes
+                de enviar el formulario.
+              </p>
+            </div>
 
-            <span aria-hidden="true">
-              ↗
-            </span>
-          </button>
+            <button
+              type="submit"
+              class="contact__submit"
+            >
+              <span>
+                Enviar consulta
+              </span>
 
-          <p
-            v-if="submitted"
-            class="contact-form__notice"
-          >
-            El formulario está preparado visualmente.
-            Conectaremos el envío cuando configuremos
-            el servidor o servicio de correo.
+              <span aria-hidden="true">
+                ↗
+              </span>
+            </button>
+          </form>
+
+          <p class="contact__notice">
+            La información enviada a través de este
+            formulario será utilizada únicamente para
+            atender tu consulta.
           </p>
-        </form>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, onMounted } from 'vue'
+import {
+  nextTick,
+  onMounted,
+  reactive,
+  ref
+} from 'vue'
 
-const submitted = ref(false)
 declare global {
   interface Window {
     grecaptcha?: {
       render: (
-        container: HTMLElement,
-        parameters: {
+        element: HTMLElement,
+        options: {
           sitekey: string
-          callback?: (token: string) => void
-          'expired-callback'?: () => void
-          'error-callback'?: () => void
+          callback: (token: string) => void
+          'expired-callback': () => void
         }
       ) => number
     }
   }
 }
-const captchaError = ref(false)
-const recaptchaElement =
+
+const captchaElement =
   ref<HTMLElement | null>(null)
 
-const recaptchaToken = ref('')
+const captchaToken =
+  ref('')
+
+const captchaError =
+  ref(false)
+
 const form = reactive({
   name: '',
   email: '',
   subject: '',
   message: '',
-  privacy: false,
-  legal: false
+  privacy: false
 })
-onMounted(() => {
-  const renderRecaptcha = () => {
-    if (
-      !window.grecaptcha ||
-      !recaptchaElement.value
-    ) {
-      return
-    }
 
-    window.grecaptcha.render(
-      recaptchaElement.value,
-      {
-        sitekey:
-          '6LdAR4srAAAAAII-1fpPnGQVhU2KAlahfByQxtIJ',
+const renderCaptcha = async () => {
+  await nextTick()
 
-        callback: (token: string) => {
-          recaptchaToken.value = token
-          captchaError.value = false
-        },
-
-        'expired-callback': () => {
-          recaptchaToken.value = ''
-        },
-
-        'error-callback': () => {
-          recaptchaToken.value = ''
-        }
-      }
-    )
-  }
-
-  if (window.grecaptcha) {
-    renderRecaptcha()
+  if (
+    !captchaElement.value ||
+    !window.grecaptcha
+  ) {
     return
   }
 
-const script =
+  window.grecaptcha.render(
+    captchaElement.value,
+    {
+      sitekey:
+        '6LdAR4srAAAAAII-1fpPnGQVhU2KAlahfByQxtIJ',
+
+      callback: (token: string) => {
+        captchaToken.value = token
+        captchaError.value = false
+      },
+
+      'expired-callback': () => {
+        captchaToken.value = ''
+      }
+    }
+  )
+}
+
+onMounted(() => {
+  if (window.grecaptcha) {
+    renderCaptcha()
+    return
+  }
+
+  const existingScript =
+    document.querySelector(
+      'script[data-brune-recaptcha]'
+    )
+
+  if (existingScript) {
+    existingScript.addEventListener(
+      'load',
+      renderCaptcha,
+      { once: true }
+    )
+
+    return
+  }
+
+  const script =
     document.createElement('script')
 
-    script.src =
-        'https://www.google.com/recaptcha/api.js?hl=es'
+  script.src =
+    'https://www.google.com/recaptcha/api.js?hl=es'
 
-    script.async = true
-    script.defer = true
+  script.async = true
+  script.defer = true
 
-    script.onload = renderRecaptcha
+  script.dataset.bruneRecaptcha = 'true'
 
-    document.head.appendChild(script)
+  script.addEventListener(
+    'load',
+    renderCaptcha,
+    { once: true }
+  )
+
+  document.head.appendChild(script)
 })
 
 const submitForm = () => {
-submitted.value = false
-
-if (!recaptchaToken.value) {
+  if (!captchaToken.value) {
     captchaError.value = true
     return
   }
 
-  captchaError.value = false
   /*
-   * Temporal.
+   * En el siguiente paso conectaremos:
    *
-   * Más adelante conectaremos esto
-   * con el backend / servicio de correo.
+   * await $fetch('/api/contact', {
+   *   method: 'POST',
+   *   body: {
+   *     ...form,
+   *     captchaToken: captchaToken.value
+   *   }
+   * })
    */
 
-  submitted.value = true
+  console.log(
+    'Formulario preparado para enviar',
+    {
+      ...form,
+      captchaToken:
+        captchaToken.value
+    }
+  )
 }
 </script>
 
 <style scoped>
 .contact {
+  position: relative;
+
   padding:
-    clamp(110px, 12vw, 190px)
-    clamp(20px, 4vw, 64px);
+    var(--section-space)
+    var(--page-padding);
 
   background:
-    #e4ded7;
+    var(--color-background-soft);
 }
 
 .contact__inner {
-  width: min(100%, var(--container-width));
+  width:
+    min(
+      100%,
+      var(--container-width)
+    );
 
   margin: 0 auto;
+}
 
+/* =========================
+   HEADER
+========================= */
+
+.contact__header {
   display: grid;
 
   grid-template-columns:
-    minmax(300px, 0.8fr)
-    minmax(0, 1.2fr);
+    minmax(130px, 0.35fr)
+    minmax(0, 1.65fr);
 
   gap:
-    clamp(70px, 10vw, 150px);
+    clamp(
+      35px,
+      6vw,
+      100px
+    );
+
+  margin-bottom:
+    clamp(
+      70px,
+      9vw,
+      125px
+    );
 }
 
-/* INFO */
-
 .contact__eyebrow {
-  margin-bottom: 22px;
+  margin:
+    12px
+    0
+    0;
 
-  font-size: 0.7rem;
+  font-size: 0.62rem;
+  font-weight: 500;
 
-  letter-spacing: 0.2em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 
   color:
     var(--color-accent-dark);
 }
 
-.contact__info h2 {
-  margin-bottom: 28px;
+.contact__header h2 {
+  max-width: 900px;
+
+  margin: 0;
 
   font-size:
-    clamp(3rem, 5.5vw, 5.8rem);
+    clamp(
+      3.7rem,
+      6.5vw,
+      7.4rem
+    );
 
-  line-height: 0.94;
+  line-height: 0.91;
 
-  letter-spacing: -0.045em;
+  letter-spacing: -0.055em;
+
+  color:
+    var(--color-text-dark);
 }
 
-.contact__info h2 span {
+.contact__header h2 span {
   display: block;
+
+  font-style: italic;
 
   color:
     var(--color-accent-dark);
 }
 
-.contact__intro {
-  max-width: 480px;
+/* =========================
+   CONTENT
+========================= */
 
-  margin-bottom: 60px;
-
-  font-size:
-    clamp(1rem, 1.4vw, 1.15rem);
-
-  line-height: 1.75;
-
-  color:
-    rgba(70, 68, 66, 0.78);
-}
-
-/* DATOS */
-
-.contact__details {
-  border-top:
-    1px solid rgba(80, 76, 72, 0.18);
-}
-
-.contact-detail {
+.contact__content {
   display: grid;
 
   grid-template-columns:
-    100px
+    minmax(300px, 0.75fr)
+    minmax(400px, 1fr);
+
+  gap:
+    clamp(
+      70px,
+      11vw,
+      170px
+    );
+
+  align-items: start;
+}
+
+/* =========================
+   INFO
+========================= */
+
+.contact__intro {
+  max-width: 480px;
+
+  margin:
+    0
+    0
+    14px;
+
+  font-family:
+    var(--font-serif);
+
+  font-size:
+    clamp(
+      1.8rem,
+      3vw,
+      3.1rem
+    );
+
+  line-height: 1.12;
+
+  letter-spacing: -0.025em;
+
+  color:
+    var(--color-text-dark);
+}
+
+.contact__appointment {
+  margin:
+    0
+    0
+    55px;
+
+  font-size: 0.8rem;
+
+  letter-spacing: 0.05em;
+
+  color:
+    var(--color-accent-dark);
+}
+
+.contact__details {
+  border-top:
+    1px solid var(--color-border);
+}
+
+.contact__detail {
+  display: grid;
+
+  grid-template-columns:
+    105px
     minmax(0, 1fr);
 
   gap: 25px;
 
   padding:
-    24px
+    22px
     0;
 
   border-bottom:
-    1px solid rgba(80, 76, 72, 0.18);
+    1px solid var(--color-border);
 }
 
-.contact-detail__label {
-  padding-top: 4px;
+.contact__label {
+  padding-top: 3px;
 
-  font-size: 0.62rem;
+  font-size: 0.59rem;
 
-  letter-spacing: 0.13em;
+  font-weight: 500;
+
+  letter-spacing: 0.12em;
+
   text-transform: uppercase;
 
   color:
     var(--color-accent-dark);
 }
 
-.contact-detail__value {
+.contact__detail a,
+.contact__detail address {
+  margin: 0;
+
   font-family:
     var(--font-serif);
 
   font-size:
-    clamp(1.1rem, 1.5vw, 1.35rem);
+    clamp(
+      1rem,
+      1.4vw,
+      1.25rem
+    );
 
-  line-height: 1.4;
+  line-height: 1.5;
 
+  font-style: normal;
+
+  color:
+    var(--color-text-dark);
+}
+
+.contact__detail a {
   transition:
-    opacity 0.25s ease;
+    color 0.25s ease;
 }
 
-.contact-detail:hover
-.contact-detail__value {
-  opacity: 0.58;
-}
-
-/* FORM */
-
-.contact__form-wrapper {
-  padding:
-    clamp(30px, 5vw, 65px);
-
-  background:
-    rgba(255, 255, 255, 0.48);
-
-  border:
-    1px solid rgba(255, 255, 255, 0.7);
-}
-
-.contact-form {
-  display: grid;
-
-  gap: 32px;
-}
-
-.contact-form__row {
-  display: grid;
-
-  grid-template-columns:
-    repeat(2, minmax(0, 1fr));
-
-  gap: 25px;
-}
-
-.contact-form__field {
-  display: grid;
-  gap: 10px;
-}
-
-.contact-form__field > span {
-  font-size: 0.63rem;
-
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-
+.contact__detail a:hover {
   color:
     var(--color-accent-dark);
 }
 
-.contact-form input,
-.contact-form textarea {
-  width: 100%;
+/* =========================
+   MAPA
+========================= */
 
-  padding:
-    13px
-    0;
-
-  border: 0;
-  border-bottom:
-    1px solid rgba(70, 68, 66, 0.25);
-
-  border-radius: 0;
-
-  outline: none;
-
-  background: transparent;
-
-  color:
-    var(--color-text-dark);
-
-  transition:
-    border-color 0.25s ease;
-}
-
-.contact-form textarea {
-  min-height: 130px;
-
-  resize: vertical;
-}
-
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
-  color:
-    rgba(70, 68, 66, 0.35);
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-  border-color:
-    var(--color-text-dark);
-}
-
-/* CHECKBOX */
-
-.contact-form__checkbox {
-  display: flex;
-
-  align-items: flex-start;
-
-  gap: 12px;
-
-  font-size: 0.78rem;
-
-  line-height: 1.55;
-
-  color:
-    rgba(70, 68, 66, 0.75);
-}
-
-.contact-form__checkbox input {
-  width: 16px;
-  height: 16px;
-
-  flex-shrink: 0;
-
-  margin-top: 2px;
-}
-
-.contact-form__checkbox a {
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-/* SUBMIT */
-
-.contact-form__submit {
-  min-height: 62px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 30px;
-
-  margin-top: 5px;
-
-  padding:
-    0
-    25px;
-
-  border:
-    1px solid var(--color-text-dark);
-
-  background:
-    var(--color-text-dark);
-
-  color: white;
-
-  cursor: pointer;
-
-  font-size: 0.72rem;
-
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
-
-  transition:
-    background 0.3s ease,
-    color 0.3s ease;
-}
 .contact__map {
-  position: relative;
-
   width: 100%;
   height: 330px;
 
-  margin-top: 40px;
+  margin-top: 42px;
 
   overflow: hidden;
 
-  background: #d8d2cb;
-
   border:
-    1px solid rgba(80, 76, 72, 0.15);
+    1px solid
+    var(--color-border);
+
+  background:
+    var(--color-surface-muted);
 }
 
 .contact__map iframe {
@@ -611,151 +616,431 @@ if (!recaptchaToken.value) {
 
   width: 100%;
   height: 100%;
+
+  filter:
+    grayscale(0.35)
+    contrast(0.94)
+    sepia(0.12);
 }
 
-/* Tablet */
+/* =========================
+   FORM HEADER
+========================= */
 
-@media (max-width: 950px) {
-  .contact__map {
-    height: 380px;
-  }
+.contact__form-wrapper {
+  padding:
+    clamp(
+      35px,
+      5vw,
+      65px
+    );
+
+  background:
+    rgba(255, 255, 255, 0.52);
+
+  border:
+    1px solid
+    rgba(100, 92, 85, 0.12);
 }
 
-/* Móvil */
+.contact__form-heading {
+  max-width: 520px;
 
-@media (max-width: 640px) {
-  .contact__map {
-    height: 300px;
+  margin:
+    0
+    0
+    55px;
 
-    margin-top: 32px;
-  }
-}
+  font-family:
+    var(--font-serif);
 
-.contact-form__submit:hover {
-  background: transparent;
+  font-size:
+    clamp(
+      2rem,
+      3.5vw,
+      3.6rem
+    );
+
+  line-height: 1.05;
+
+  letter-spacing: -0.035em;
 
   color:
     var(--color-text-dark);
 }
 
-.contact-form__submit
+.contact__form-heading em {
+  display: block;
+
+  font-weight: 400;
+
+  color:
+    var(--color-accent-dark);
+}
+
+/* =========================
+   FORM
+========================= */
+
+.contact__form {
+  display: grid;
+
+  gap: 30px;
+}
+
+.contact__field {
+  display: grid;
+
+  gap: 8px;
+}
+
+.contact__field label {
+  font-size: 0.59rem;
+
+  font-weight: 500;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+
+  color:
+    var(--color-accent-dark);
+}
+
+.contact__field input,
+.contact__field textarea {
+  width: 100%;
+
+  padding:
+    12px
+    0
+    15px;
+
+  border: 0;
+
+  border-bottom:
+    1px solid
+    rgba(75, 70, 66, 0.22);
+
+  border-radius: 0;
+
+  outline: none;
+
+  background: transparent;
+
+  font: inherit;
+
+  font-size: 0.98rem;
+
+  color:
+    var(--color-text-dark);
+
+  transition:
+    border-color
+    0.25s ease;
+}
+
+.contact__field textarea {
+  min-height: 125px;
+
+  resize: vertical;
+}
+
+.contact__field input::placeholder,
+.contact__field textarea::placeholder {
+  color:
+    rgba(70, 66, 62, 0.35);
+}
+
+.contact__field input:focus,
+.contact__field textarea:focus {
+  border-color:
+    var(--color-text-dark);
+}
+
+/* =========================
+   PRIVACY
+========================= */
+
+.contact__privacy {
+  display: grid;
+
+  grid-template-columns:
+    18px
+    minmax(0, 1fr);
+
+  gap: 12px;
+
+  align-items: start;
+
+  cursor: pointer;
+}
+
+.contact__privacy input {
+  width: 15px;
+  height: 15px;
+
+  margin-top: 4px;
+
+  accent-color:
+    var(--color-dark);
+}
+
+.contact__privacy span {
+  font-size: 0.75rem;
+
+  line-height: 1.6;
+
+  color:
+    rgba(60, 57, 54, 0.65);
+}
+
+.contact__privacy a {
+  text-decoration: underline;
+
+  text-underline-offset: 3px;
+
+  color:
+    var(--color-text-dark);
+}
+
+/* =========================
+   CAPTCHA
+========================= */
+
+.contact__captcha {
+  padding:
+    24px
+    0
+    4px;
+
+  border-top:
+    1px solid var(--color-border);
+}
+
+.contact__captcha > p:first-child {
+  margin:
+    0
+    0
+    18px;
+
+  font-size: 0.77rem;
+
+  line-height: 1.6;
+
+  color:
+    rgba(60, 57, 54, 0.62);
+}
+
+.contact__captcha-widget {
+  min-height: 78px;
+}
+
+.contact__error {
+  margin:
+    12px
+    0
+    0;
+
+  font-size: 0.74rem;
+
+  color: #8b3d38;
+}
+
+/* =========================
+   SUBMIT
+========================= */
+
+.contact__submit {
+  width: 100%;
+
+  min-height: 58px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 25px;
+
+  padding:
+    0
+    24px;
+
+  border:
+    1px solid var(--color-dark);
+
+  background:
+    var(--color-dark);
+
+  color:
+    var(--color-white);
+
+  font-size: 0.64rem;
+
+  font-weight: 500;
+
+  letter-spacing: 0.11em;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background 0.35s ease,
+    color 0.35s ease;
+}
+
+.contact__submit
 span:last-child {
   font-size: 1rem;
 
   transition:
-    transform 0.25s ease;
+    transform
+    0.35s
+    var(--ease-out);
 }
 
-.contact-form__submit:hover
+.contact__submit:hover {
+  background: transparent;
+
+  color:
+    var(--color-dark);
+}
+
+.contact__submit:hover
 span:last-child {
   transform:
-    translate(3px, -3px);
+    translate(5px, -5px);
 }
 
-.contact-form__notice {
-  margin: 0;
+.contact__notice {
+  margin:
+    25px
+    0
+    0;
 
-  padding:
-    14px
-    18px;
+  font-size: 0.68rem;
 
-  border:
-    1px solid rgba(70, 68, 66, 0.15);
+  line-height: 1.6;
 
-  font-size: 0.78rem;
-  line-height: 1.5;
+  color:
+    rgba(60, 57, 54, 0.48);
 }
 
-/* TABLET */
+/* =========================
+   TABLET
+========================= */
 
 @media (max-width: 950px) {
-  .contact__inner {
+  .contact__header {
     grid-template-columns: 1fr;
+
+    gap: 28px;
+  }
+
+  .contact__eyebrow {
+    margin: 0;
+  }
+
+  .contact__content {
+    grid-template-columns: 1fr;
+
+    gap: 75px;
   }
 
   .contact__info {
-    max-width: 760px;
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 0.8fr)
+      minmax(300px, 1fr);
+
+    column-gap: 55px;
+  }
+
+  .contact__intro,
+  .contact__appointment {
+    grid-column: 1;
+  }
+
+  .contact__details {
+    grid-column: 1;
+  }
+
+  .contact__map {
+    grid-column: 2;
+
+    grid-row:
+      1 / span 3;
+
+    height: 100%;
+
+    min-height: 380px;
+
+    margin-top: 0;
   }
 }
 
-/* MÓVIL */
+/* =========================
+   MOBILE
+========================= */
 
-@media (max-width: 640px) {
+@media (max-width: 680px) {
   .contact {
     padding:
-      85px
+      95px
       20px;
   }
 
-  .contact__inner {
-    gap: 60px;
+  .contact__header {
+    margin-bottom: 60px;
   }
 
-  .contact__info h2 {
+  .contact__header h2 {
     font-size:
-      clamp(2.9rem, 13vw, 4.2rem);
+      clamp(
+        3.1rem,
+        15vw,
+        4.6rem
+      );
   }
 
-  .contact__intro {
-    margin-bottom: 45px;
+  .contact__info {
+    display: block;
   }
 
-  .contact-detail {
+  .contact__appointment {
+    margin-bottom: 40px;
+  }
+
+  .contact__detail {
     grid-template-columns: 1fr;
 
     gap: 8px;
   }
 
+  .contact__map {
+    height: 300px;
+
+    min-height: 0;
+
+    margin-top: 38px;
+  }
+
   .contact__form-wrapper {
     padding:
-      30px
+      35px
       22px;
   }
 
-  .contact-form__row {
-    grid-template-columns: 1fr;
+  .contact__form-heading {
+    margin-bottom: 42px;
   }
-  .contact-form__captcha {
-  display: grid;
 
-  gap: 14px;
-
-  padding-top: 5px;
-}
-
-.contact-form__captcha-text {
-  margin: 0;
-
-  font-size: 0.78rem;
-
-  line-height: 1.5;
-
-  color:
-    rgba(70, 68, 66, 0.75);
-}
-
-.contact-form__error {
-  margin: -5px 0 0;
-
-  font-size: 0.76rem;
-
-  line-height: 1.5;
-
-  color: #7a3f3f;
-}
-
-.g-recaptcha {
-  max-width: 100%;
-  overflow: hidden;
-}
-
-@media (max-width: 380px) {
-  .g-recaptcha {
-    transform: scale(0.88);
-    transform-origin: left top;
-
-    margin-bottom: -8px;
+  .contact__captcha-widget {
+    overflow-x: auto;
   }
-}
 }
 </style>

@@ -8,7 +8,7 @@
           aria-label="Bruné Abogacía y Mediación - Inicio"
         >
           <img
-            src="/images/brune-logo.jpg"
+            src="/images/brune-logo-transparent.png"
             alt="Bruné Abogacía y Mediación"
           >
         </a>
@@ -141,16 +141,12 @@ const currentYear =
 
 .footer__brand {
   width:
-    min(100%, 310px);
+    min(100%, 410px);
 }
 
 .footer__brand img {
   width: 100%;
-
   mix-blend-mode: screen;
-
-  opacity: 0.75;
-
   filter:
     grayscale(1)
     brightness(2);

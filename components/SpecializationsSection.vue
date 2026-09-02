@@ -1,548 +1,1185 @@
 <template>
   <section
     id="especializacion"
+    ref="sectionRef"
     class="specializations"
   >
     <div class="specializations__inner">
+      <!-- CABECERA -->
+
       <div class="specializations__header">
         <p class="specializations__eyebrow">
           Áreas de Especialización
         </p>
 
-        <h2 class="specializations__title">
-          Especialización jurídica
-          <span>con una mirada humana.</span>
-        </h2>
+        <div class="specializations__heading">
+          <h2>
+            Especialización jurídica
+            <span>con una mirada humana.</span>
+          </h2>
 
-        <p class="specializations__intro">
-          Acompañamos cada caso desde el rigor jurídico, la cercanía
-          y una atención especialmente sensible a las circunstancias
-          personales y familiares.
-        </p>
+          <p>
+            Acompañamiento jurídico especializado en
+            situaciones especialmente sensibles para
+            las personas y sus familias.
+          </p>
+        </div>
       </div>
 
+      <!-- TARJETAS -->
+
       <div class="specializations__grid">
-        <article
-          v-for="(item, index) in specializations"
-          :key="item.id"
+        <a
+          v-for="(area, index) in areas"
+          :key="area.id"
+          :href="area.href"
           class="specialization-card"
           :class="{
-            'specialization-card--active': activeCard === item.id
+            'specialization-card--visible': isVisible
           }"
-          tabindex="0"
-          @click="toggleCard(item.id)"
-          @keydown.enter.prevent="toggleCard(item.id)"
-          @keydown.space.prevent="toggleCard(item.id)"
+          :style="{
+            '--delay': `${index * 110}ms`
+          }"
+          :aria-label="`Ir a ${area.title}`"
         >
-          <div class="specialization-card__top">
-            <span class="specialization-card__number">
-              {{ String(index + 1).padStart(2, '0') }}
-            </span>
+          <!-- ICONO -->
 
-            <span class="specialization-card__category">
-              Especialización
-            </span>
+          <div class="specialization-card__icon">
+            <!-- FAMILIA / RAMA -->
+
+            <svg
+              v-if="area.icon === 'family'"
+              viewBox="0 0 64 64"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M32 53V21"
+                stroke="currentColor"
+                stroke-width="1.4"
+                stroke-linecap="round"
+              />
+
+              <path
+                d="M32 38C25 36 21 31 20 25C27 25 32 29 32 38Z"
+                stroke="currentColor"
+                stroke-width="1.4"
+              />
+
+              <path
+                d="M32 31C39 29 43 24 44 18C37 18 32 22 32 31Z"
+                stroke="currentColor"
+                stroke-width="1.4"
+              />
+
+              <path
+                d="M32 47C39 45 43 40 44 34C37 34 32 38 32 47Z"
+                stroke="currentColor"
+                stroke-width="1.4"
+              />
+
+              <circle
+                cx="32"
+                cy="15"
+                r="2"
+                fill="currentColor"
+              />
+            </svg>
+
+            <!-- MEDIACIÓN / BALANZA -->
+
+            <svg
+              v-else-if="area.icon === 'mediation'"
+              viewBox="0 0 64 64"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M32 13V51"
+                stroke="currentColor"
+                stroke-width="1.4"
+                stroke-linecap="round"
+              />
+
+              <path
+                d="M19 18H45"
+                stroke="currentColor"
+                stroke-width="1.4"
+                stroke-linecap="round"
+              />
+
+              <path
+                d="M32 13L27 18"
+                stroke="currentColor"
+                stroke-width="1.4"
+                stroke-linecap="round"
+              />
+
+              <path
+                d="M32 13L37 18"
+                stroke="currentColor"
+                stroke-width="1.4"
+                stroke-linecap="round"
+              />
+
+              <path
+                d="M19 18L12 34H26L19 18Z"
+                stroke="currentColor"
+                stroke-width="1.4"
+                stroke-linejoin="round"
+              />
+
+              <path
+                d="M45 18L38 34H52L45 18Z"
+                stroke="currentColor"
+                stroke-width="1.4"
+                stroke-linejoin="round"
+              />
+
+              <path
+                d="M25 51H39"
+                stroke="currentColor"
+                stroke-width="1.4"
+                stroke-linecap="round"
+              />
+            </svg>
+
+            <!-- VIOLENCIA / PERFIL -->
+
+            <svg
+              v-else
+              viewBox="0 0 64 64"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M40 18C34 13 25 15 22 22C19 29 22 36 27 40"
+                stroke="currentColor"
+                stroke-width="1.4"
+                stroke-linecap="round"
+              />
+
+              <path
+                d="M39 18C38 24 40 28 45 31L41 34V39C41 42 39 44 36 44H31"
+                stroke="currentColor"
+                stroke-width="1.4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+
+              <path
+                d="M27 40C23 45 21 50 21 54"
+                stroke="currentColor"
+                stroke-width="1.4"
+                stroke-linecap="round"
+              />
+
+              <path
+                d="M31 44C33 48 34 51 34 54"
+                stroke="currentColor"
+                stroke-width="1.4"
+                stroke-linecap="round"
+              />
+
+              <path
+                d="M22 22C17 24 14 29 15 35C16 40 19 43 23 45"
+                stroke="currentColor"
+                stroke-width="1.4"
+                stroke-linecap="round"
+              />
+            </svg>
           </div>
+
+          <!-- CONTENIDO -->
 
           <div class="specialization-card__content">
             <h3>
-              {{ item.title }}
+              {{ area.title }}
             </h3>
 
-            <div class="specialization-card__description">
+            <div class="specialization-card__reveal">
               <p>
-                {{ item.description }}
+                {{ area.text }}
               </p>
 
-              <a
-                :href="item.link"
-                class="specialization-card__link"
-                @click.stop
-              >
-                Descubrir área
-                <span aria-hidden="true">↗</span>
-              </a>
+              <span class="specialization-card__link">
+                <span>
+                  Ver área
+                </span>
+
+                <span aria-hidden="true">
+                  ↗
+                </span>
+              </span>
             </div>
           </div>
 
+          <!-- FLECHA -->
+
           <span
-            class="specialization-card__circle"
+            class="specialization-card__arrow"
             aria-hidden="true"
-          />
-        </article>
+          >
+            ↗
+          </span>
+        </a>
+      </div>
+
+      <!-- FOOTER -->
+
+      <div class="specializations__footer">
+        <p>
+          Cada asunto requiere una estrategia
+          jurídica adaptada a sus circunstancias.
+        </p>
+
+        <a href="#contacto">
+          <span>
+            Solicita una consulta
+          </span>
+
+          <span aria-hidden="true">
+            ↗
+          </span>
+        </a>
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import {
+  onBeforeUnmount,
+  onMounted,
+  ref
+} from 'vue'
 
-const activeCard = ref<string | null>(null)
+const sectionRef =
+  ref<HTMLElement | null>(null)
 
-const specializations = [
+const isVisible =
+  ref(false)
+
+const areas = [
   {
     id: 'familia',
-    title: 'Derecho de Familia y Menores',
-    description:
-      'Asesoramiento especializado en los distintos ámbitos del Derecho de Familia, con especial atención a la protección del menor y a las necesidades reales de cada familia.',
-    link: '#familia'
+
+    icon: 'family',
+
+    title:
+      'Derecho de Familia y Menores',
+
+    text:
+      'Asesoramiento y asistencia jurídica en procedimientos familiares, protección de menores, medidas de familia, rupturas y situaciones de especial sensibilidad.',
+
+    href:
+      '#familia'
   },
   {
     id: 'mediacion',
-    title: 'Mediación Familiar',
-    description:
-      'Un espacio profesional e imparcial orientado a facilitar el diálogo, gestionar el conflicto y alcanzar soluciones equilibradas y duraderas.',
-    link: '#mediacion'
+
+    icon: 'mediation',
+
+    title:
+      'Mediación Familiar',
+
+    text:
+      'Una vía orientada al diálogo y a la búsqueda de acuerdos equilibrados, duraderos y adaptados a las necesidades reales de cada familia.',
+
+    href:
+      '#mediacion'
   },
   {
     id: 'violencia',
-    title: 'Violencia de Género',
-    description:
-      'Asistencia jurídica inmediata, confidencial y especializada, con acompañamiento durante todas las fases del procedimiento.',
-    link: '#violencia-genero'
+
+    icon: 'violence',
+
+    title:
+      'Violencia de Género',
+
+    text:
+      'Asesoramiento jurídico inmediato, confidencial y especializado, con acompañamiento durante todas las fases del procedimiento.',
+
+    href:
+      '#violencia-genero'
   }
 ]
 
-const toggleCard = (id: string) => {
-  activeCard.value =
-    activeCard.value === id
-      ? null
-      : id
-}
+let observer:
+  IntersectionObserver | null = null
+
+onMounted(() => {
+  if (!sectionRef.value) return
+
+  observer =
+    new IntersectionObserver(
+      ([entry]) => {
+        if (
+          entry &&
+          entry.isIntersecting
+        ) {
+          isVisible.value = true
+
+          observer?.disconnect()
+        }
+      },
+      {
+        threshold: 0.15
+      }
+    )
+
+  observer.observe(
+    sectionRef.value
+  )
+})
+
+onBeforeUnmount(() => {
+  observer?.disconnect()
+})
 </script>
 
 <style scoped>
 .specializations {
-  padding:
-    clamp(90px, 10vw, 150px)
-    clamp(20px, 4vw, 64px);
+  position: relative;
 
-  background: var(--color-text-dark);
+  padding:
+    var(--section-space)
+    var(--page-padding);
+
+  background:
+    #fbfaf8;
 }
 
 .specializations__inner {
-  width: min(100%, var(--container-width));
+  width:
+    min(
+      100%,
+      var(--container-width)
+    );
+
   margin: 0 auto;
 }
 
-/* Cabecera */
+/* =========================
+   HEADER
+========================= */
 
 .specializations__header {
-  max-width: 900px;
+  display: grid;
+
+  grid-template-columns:
+    minmax(130px, 0.35fr)
+    minmax(0, 1.65fr);
+
+  gap:
+    clamp(
+      35px,
+      6vw,
+      100px
+    );
 
   margin-bottom:
     clamp(
-      60px,
+      65px,
       8vw,
-      100px
+      115px
     );
 }
 
 .specializations__eyebrow {
-  margin-bottom: 20px;
+  margin:
+    12px
+    0
+    0;
 
-  font-size: 0.72rem;
+  font-size: 0.62rem;
   font-weight: 500;
 
-  letter-spacing: 0.2em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 
-  color: var(--color-accent-light);
+  color:
+    var(--color-accent-dark);
 }
 
-.specializations__title {
-  margin-bottom: 28px;
+.specializations__heading {
+  display: grid;
 
-  font-size:
+  grid-template-columns:
+    minmax(0, 1.1fr)
+    minmax(240px, 0.55fr);
+
+  gap:
     clamp(
-      2.8rem,
-      5vw,
-      5.2rem
+      35px,
+      7vw,
+      110px
     );
 
-  line-height: 0.98;
-  letter-spacing: -0.035em;
-
-  color: #ffffff;
+  align-items: end;
 }
 
-.specializations__title span {
-  display: block;
-
-  color: rgba(255, 255, 255, 0.55);
-}
-
-.specializations__intro {
-  max-width: 680px;
-
+.specializations__heading h2 {
   margin: 0;
 
   font-size:
     clamp(
-      1rem,
-      1.4vw,
-      1.15rem
+      3.5rem,
+      5.8vw,
+      6.8rem
     );
+
+  line-height: 0.93;
+
+  letter-spacing: -0.05em;
+
+  color:
+    var(--color-text-dark);
+}
+
+.specializations__heading h2 span {
+  display: block;
+
+  font-style: italic;
+
+  color:
+    var(--color-accent-dark);
+}
+
+.specializations__heading > p {
+  margin: 0;
+
+  padding-bottom: 7px;
+
+  font-size: 0.95rem;
 
   line-height: 1.8;
 
-  color: rgba(255, 255, 255, 0.68);
+  color:
+    rgba(65, 62, 59, 0.68);
 }
 
-/* Grid */
+/* =========================
+   GRID
+========================= */
 
 .specializations__grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
 
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
-  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap:
+    clamp(
+      16px,
+      2vw,
+      28px
+    );
 }
 
-/* Card */
+/* =========================
+   CARD
+========================= */
 
 .specialization-card {
+  --delay: 0ms;
+
   position: relative;
 
-  min-height: 560px;
+  min-height:
+    clamp(
+      470px,
+      38vw,
+      570px
+    );
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 
   padding:
     clamp(
-      28px,
+      30px,
       3vw,
       42px
     );
 
   overflow: hidden;
 
-  border-right: 1px solid rgba(255, 255, 255, 0.15);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  border:
+    1px solid
+    rgba(
+      132,
+      118,
+      107,
+      0.19
+    );
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.54
+    );
+
+  color:
+    var(--color-text-dark);
 
   cursor: pointer;
 
   outline: none;
 
+  opacity: 0;
+
+  transform:
+    scale(0.76);
+
+  transform-origin:
+    center center;
+
   transition:
-    background 0.45s ease,
-    color 0.45s ease;
+    opacity
+    0.65s ease
+    var(--delay),
+
+    transform
+    0.95s
+    var(--ease-out)
+    var(--delay),
+
+    border-color
+    0.4s ease,
+
+    box-shadow
+    0.4s ease;
 }
+
+.specialization-card--visible {
+  opacity: 1;
+
+  transform:
+    scale(1);
+}
+
+/* =========================
+   FONDO HOVER
+
+   Ya NO es negro.
+   Nace desde el centro.
+========================= */
 
 .specialization-card::before {
   content: '';
 
   position: absolute;
+
   inset: 0;
 
   background:
     linear-gradient(
-      155deg,
-      rgba(197, 187, 176, 0.98),
-      rgba(159, 148, 137, 0.98)
+      145deg,
+      #eee6dd,
+      #e4d8cc
     );
 
   opacity: 0;
 
-  transition: opacity 0.45s ease;
+  transform:
+    scale(0.08);
+
+  transform-origin:
+    center center;
+
+  transition:
+    transform
+    0.7s
+    var(--ease-out),
+
+    opacity
+    0.18s ease;
 }
 
 .specialization-card:hover::before,
-.specialization-card:focus-visible::before,
-.specialization-card--active::before {
+.specialization-card:focus-visible::before {
   opacity: 1;
+
+  transform:
+    scale(1);
 }
 
-/* Cabecera card */
+.specialization-card:hover,
+.specialization-card:focus-visible {
+  border-color:
+    rgba(
+      123,
+      105,
+      91,
+      0.32
+    );
 
-.specialization-card__top {
+  box-shadow:
+    0 22px 55px
+    rgba(
+      77,
+      61,
+      49,
+      0.07
+    );
+}
+
+/* =========================
+   ICON
+========================= */
+
+.specialization-card__icon {
   position: relative;
+
   z-index: 2;
+place-self: anchor-center;
+  width:
+    clamp(
+      72px,
+      7vw,
+      92px
+    );
 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  height:
+    clamp(
+      72px,
+      7vw,
+      92px
+    );
 
-  gap: 20px;
+  display: grid;
+
+  place-items: center;
+
+  border:
+    1px solid
+    rgba(
+      132,
+      118,
+      107,
+      0.26
+    );
+
+  border-radius: 50%;
+
+  color:
+    var(--color-accent-dark);
+
+  transition:
+    color
+    0.4s ease,
+
+    border-color
+    0.4s ease,
+
+    background
+    0.4s ease,
+
+    transform
+    0.5s
+    var(--ease-out);
 }
 
-.specialization-card__number,
-.specialization-card__category {
-  font-size: 0.68rem;
-
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-
-  color: rgba(255, 255, 255, 0.55);
-
-  transition: color 0.45s ease;
+.specialization-card__icon svg {
+  width: 52%;
+  height: 52%;
 }
 
-.specialization-card:hover .specialization-card__number,
-.specialization-card:hover .specialization-card__category,
-.specialization-card:focus-visible .specialization-card__number,
-.specialization-card:focus-visible .specialization-card__category,
-.specialization-card--active .specialization-card__number,
-.specialization-card--active .specialization-card__category {
-  color: rgba(255, 255, 255, 0.82);
+.specialization-card:hover
+.specialization-card__icon,
+.specialization-card:focus-visible
+.specialization-card__icon {
+  color:
+    var(--color-taupe-dark);
+
+  border-color:
+    rgba(
+      116,
+      103,
+      93,
+      0.38
+    );
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.3
+    );
+
+  transform:
+    scale(1.05);
 }
 
-/* Contenido */
+/* =========================
+   CONTENT
+========================= */
 
 .specialization-card__content {
   position: relative;
+
   z-index: 2;
+
+  margin-top: auto;
+
+  padding-top:
+    clamp(
+      60px,
+      8vw,
+      110px
+    );
 }
 
-.specialization-card__content h3 {
-  max-width: 380px;
+.specialization-card h3 {
+  max-width: 390px;
 
-  margin: 0;
+  margin:
+    0
+    0
+    24px;
 
   font-size:
     clamp(
-      2.4rem,
-      3.5vw,
+      2.45rem,
+      3.3vw,
       4rem
     );
 
   line-height: 0.98;
-  letter-spacing: -0.035em;
 
-  color: white;
+  letter-spacing: -0.04em;
+
+  color:
+    var(--color-text-dark);
 
   transition:
-    transform 0.45s ease;
+    color
+    0.4s ease,
+
+    transform
+    0.5s
+    var(--ease-out);
 }
 
-.specialization-card__description {
-  max-height: 0;
+.specialization-card:hover h3,
+.specialization-card:focus-visible h3 {
+  color:
+    #403832;
 
-  margin-top: 0;
+  transform:
+    scale(1.015);
+}
+
+/* =========================
+   TEXTO REVEAL
+========================= */
+
+.specialization-card__reveal {
+  max-height: 0;
 
   overflow: hidden;
 
   opacity: 0;
 
-  transform: translateY(18px);
+  transform:
+    scale(0.96);
+
+  transform-origin:
+    left center;
 
   transition:
-    max-height 0.55s ease,
-    opacity 0.4s ease,
-    transform 0.45s ease,
-    margin-top 0.45s ease;
+    max-height
+    0.55s
+    var(--ease-out),
+
+    opacity
+    0.35s ease,
+
+    transform
+    0.55s
+    var(--ease-out);
 }
 
 .specialization-card:hover
-.specialization-card__description,
+.specialization-card__reveal,
 .specialization-card:focus-visible
-.specialization-card__description,
-.specialization-card--active
-.specialization-card__description {
-  max-height: 260px;
-
-  margin-top: 28px;
+.specialization-card__reveal {
+  max-height: 250px;
 
   opacity: 1;
 
-  transform: translateY(0);
-}
-
-.specialization-card__description p {
-  margin: 0;
-
-  max-width: 370px;
-
-  font-size: 0.96rem;
-  line-height: 1.72;
-
-  color: rgba(255, 255, 255, 0.84);
-}
-
-.specialization-card__link {
-  display: inline-flex;
-  align-items: center;
-
-  gap: 10px;
-
-  margin-top: 24px;
-
-  padding-bottom: 4px;
-
-  border-bottom: 1px solid rgba(255, 255, 255, 0.55);
-
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-
-  color: white;
-}
-
-.specialization-card__link span {
-  transition: transform 0.25s ease;
-}
-
-.specialization-card__link:hover span {
-  transform: translate(3px, -3px);
-}
-
-/* Decoración */
-
-.specialization-card__circle {
-  position: absolute;
-  top: 50%;
-  right: -180px;
-
-  z-index: 1;
-
-  width: 300px;
-  height: 300px;
-
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 50%;
-
   transform:
-    translateY(-50%)
-    scale(0.8);
-
-  opacity: 0;
-
-  transition:
-    opacity 0.5s ease,
-    transform 0.6s ease;
-}
-
-.specialization-card:hover
-.specialization-card__circle,
-.specialization-card:focus-visible
-.specialization-card__circle,
-.specialization-card--active
-.specialization-card__circle {
-  opacity: 1;
-
-  transform:
-    translateY(-50%)
     scale(1);
 }
 
-/* Tablet */
+.specialization-card__reveal p {
+  max-width: 390px;
 
-@media (max-width: 1050px) {
+  margin:
+    0
+    0
+    25px;
+
+  font-size: 0.9rem;
+
+  line-height: 1.7;
+
+  color:
+    rgba(
+      64,
+      56,
+      50,
+      0.68
+    );
+}
+
+/* =========================
+   VER ÁREA
+========================= */
+
+.specialization-card__link {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  padding-bottom: 5px;
+
+  border-bottom:
+    1px solid
+    rgba(
+      64,
+      56,
+      50,
+      0.5
+    );
+
+  font-size: 0.61rem;
+  font-weight: 500;
+
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+
+  color:
+    var(--color-text-dark);
+}
+
+/* =========================
+   FLECHA ESQUINA
+========================= */
+
+.specialization-card__arrow {
+  position: absolute;
+
+  z-index: 2;
+
+  top:
+    clamp(
+      32px,
+      3vw,
+      43px
+    );
+
+  right:
+    clamp(
+      30px,
+      3vw,
+      42px
+    );
+
+  font-size: 1rem;
+
+  color:
+    var(--color-accent-dark);
+
+  transition:
+    color
+    0.35s ease,
+
+    transform
+    0.4s
+    var(--ease-out);
+}
+
+.specialization-card:hover
+.specialization-card__arrow,
+.specialization-card:focus-visible
+.specialization-card__arrow {
+  color:
+    var(--color-taupe-dark);
+
+  transform:
+    translate(
+      5px,
+      -5px
+    );
+}
+
+/* =========================
+   DECORACIÓN SUAVE
+========================= */
+
+.specialization-card::after {
+  content: '';
+
+  position: absolute;
+
+  width: 200px;
+  height: 200px;
+
+  right: -110px;
+  bottom: -110px;
+
+  border:
+    1px solid
+    rgba(
+      132,
+      118,
+      107,
+      0.1
+    );
+
+  border-radius: 50%;
+
+  z-index: 1;
+
+  transition:
+    transform
+    0.65s
+    var(--ease-out),
+
+    opacity
+    0.4s ease;
+}
+
+.specialization-card:hover::after,
+.specialization-card:focus-visible::after {
+  transform:
+    scale(1.35);
+
+  opacity: 0.8;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.specializations__footer {
+  margin-top:
+    clamp(
+      55px,
+      7vw,
+      90px
+    );
+
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-end;
+
+  gap: 45px;
+}
+
+.specializations__footer p {
+  max-width: 580px;
+
+  margin: 0;
+
+  font-family:
+    var(--font-serif);
+
+  font-size:
+    clamp(
+      1.45rem,
+      2.3vw,
+      2.4rem
+    );
+
+  line-height: 1.18;
+
+  letter-spacing: -0.025em;
+
+  color:
+    var(--color-text-dark);
+}
+
+.specializations__footer > a {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 20px;
+
+  flex-shrink: 0;
+
+  padding-bottom: 7px;
+
+  border-bottom:
+    1px solid
+    var(--color-text-dark);
+
+  font-size: 0.65rem;
+  font-weight: 500;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  color:
+    var(--color-text-dark);
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1000px) {
+  .specializations__header {
+    grid-template-columns: 1fr;
+
+    gap: 28px;
+  }
+
+  .specializations__eyebrow {
+    margin: 0;
+  }
+
+  .specializations__heading {
+    grid-template-columns: 1fr;
+
+    gap: 30px;
+  }
+
+  .specializations__heading > p {
+    max-width: 520px;
+
+    margin-left: auto;
+  }
+
   .specializations__grid {
     grid-template-columns: 1fr;
   }
 
   .specialization-card {
-    min-height: 390px;
+    min-height: 400px;
   }
 
-  .specialization-card__content h3 {
-    max-width: 650px;
+  .specialization-card h3 {
+    max-width: 600px;
   }
 
-  .specialization-card__description {
-    max-width: 620px;
+  .specialization-card__content {
+    padding-top: 70px;
   }
 }
 
-/* Móvil */
+/* =========================
+   MÓVIL
+========================= */
 
-@media (max-width: 640px) {
+@media (max-width: 680px) {
   .specializations {
     padding:
-      80px
+      95px
       20px;
   }
 
-  .specializations__title {
-    font-size:
-      clamp(
-        2.5rem,
-        11vw,
-        3.8rem
-      );
-
-    line-height: 1.02;
+  .specializations__header {
+    margin-bottom: 58px;
   }
 
-  .specializations__intro {
-    font-size: 0.97rem;
-    line-height: 1.7;
+  .specializations__heading h2 {
+    font-size:
+      clamp(
+        3rem,
+        14vw,
+        4.4rem
+      );
+  }
+
+  .specializations__grid {
+    gap: 18px;
   }
 
   .specialization-card {
-    min-height: 360px;
+    min-height: 410px;
 
     padding:
-      26px
-      22px;
+      28px
+      24px;
+
+    /*
+     * En móvil no tenemos hover,
+     * así que mostramos el contenido.
+     */
   }
 
-  .specialization-card__content h3 {
+  .specialization-card__icon {
+    width: 68px;
+    height: 68px;
+  }
+
+  .specialization-card__content {
+    padding-top: 55px;
+  }
+
+  .specialization-card h3 {
     font-size:
       clamp(
-        2.35rem,
+        2.25rem,
         11vw,
-        3.5rem
+        3.2rem
       );
-
-    line-height: 1;
   }
 
-  /*
-    En móvil el contenido se abre
-    al tocar la card.
-  */
+  .specialization-card__reveal {
+    max-height: 250px;
 
-  .specialization-card--active
-  .specialization-card__description {
-    max-height: 320px;
+    opacity: 1;
+
+    transform:
+      scale(1);
   }
 
-  .specialization-card__circle {
-    right: -210px;
+  .specialization-card__arrow {
+    top: 30px;
+    right: 24px;
+  }
+
+  .specializations__footer {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 32px;
   }
 }
 
-/* Dispositivos que no tienen hover */
+/* =========================
+   REDUCED MOTION
+========================= */
 
-@media (hover: none) {
-  .specialization-card:hover::before {
-    opacity: 0;
-  }
-
-  .specialization-card:hover
-  .specialization-card__description {
-    max-height: 0;
-    margin-top: 0;
-    opacity: 0;
-    transform: translateY(18px);
-  }
-
-  .specialization-card--active::before {
+@media (
+  prefers-reduced-motion: reduce
+) {
+  .specialization-card {
     opacity: 1;
+
+    transform: none;
+
+    transition: none;
   }
 
-  .specialization-card--active
-  .specialization-card__description {
-    max-height: 320px;
-    margin-top: 28px;
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Accesibilidad */
-
-@media (prefers-reduced-motion: reduce) {
-  .specialization-card,
   .specialization-card::before,
-  .specialization-card__content h3,
-  .specialization-card__description,
-  .specialization-card__circle {
+  .specialization-card::after,
+  .specialization-card__icon,
+  .specialization-card h3,
+  .specialization-card__reveal,
+  .specialization-card__arrow {
     transition: none;
   }
 }

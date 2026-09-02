@@ -290,50 +290,150 @@ const toggleArea = (id: string) => {
    LIST
 ========================= */
 
+/* =========================
+   LIST
+========================= */
+
 .other-areas__list {
-  border-top:
-    1px solid
-    var(--color-border);
+  display: grid;
+
+  gap:
+    clamp(
+      28px,
+      4vw,
+      52px
+    );
 }
 
 .other-area {
-  border-bottom:
+  position: relative;
+
+  overflow: hidden;
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.68
+    );
+
+  border:
     1px solid
-    var(--color-border);
+    rgba(
+      111,
+      97,
+      85,
+      0.14
+    );
+
+  box-shadow:
+    0 18px 50px
+    rgba(
+      69,
+      55,
+      44,
+      0.035
+    );
+
+  transition:
+    border-color
+    0.35s ease,
+    box-shadow
+    0.45s ease,
+    transform
+    0.45s
+    var(--ease-out);
 }
+
+.other-area::before {
+  content: '';
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 4px;
+  height: 100%;
+
+  background:
+    var(--color-accent);
+
+  opacity: 0;
+
+  transform:
+    scaleY(0.4);
+
+  transform-origin:
+    top;
+
+  transition:
+    opacity
+    0.35s ease,
+    transform
+    0.55s
+    var(--ease-out);
+}
+
+.other-area--active {
+  border-color:
+    rgba(
+      111,
+      97,
+      85,
+      0.24
+    );
+
+  box-shadow:
+    0 24px 65px
+    rgba(
+      69,
+      55,
+      44,
+      0.06
+    );
+
+  transform:
+    translateY(-3px);
+}
+
+.other-area--active::before {
+  opacity: 1;
+
+  transform:
+    scaleY(1);
+}
+
+/* =========================
+   TRIGGER
+========================= */
 
 .other-area__trigger {
   width: 100%;
- padding-left:
-    clamp(
-      20px,
-      2vw,
-      30px
-    );
 
-  padding-right:
-    clamp(
-      20px,
-      2vw,
-      30px
-    );
   display: grid;
 
   grid-template-columns:
+    auto
     minmax(0, 1fr)
-    54px;
-
-  gap: 30px;
+    auto;
 
   align-items: center;
 
+  gap:
+    clamp(
+      24px,
+      4vw,
+      55px
+    );
+
   padding:
     clamp(
-      34px,
-      5vw,
-      60px
-    )
-    0;
+      30px,
+      4vw,
+      50px
+    );
 
   border: 0;
 
@@ -347,42 +447,118 @@ const toggleArea = (id: string) => {
   cursor: pointer;
 }
 
-.other-area__title {
-  font-family:
-    var(--font-serif);
+/* número decorativo */
 
-  font-size:
-    clamp(
-      2.8rem,
-      5vw,
-      5.8rem
-    );
+.other-area__trigger::before {
+  content:
+    counter(area);
 
-  line-height: 0.98;
-
-  letter-spacing: -0.045em;
-}
-
-.other-area__plus {
-  width: 48px;
-  height: 48px;
+  counter-increment:
+    area;
 
   display: grid;
 
   place-items: center;
 
-  justify-self: end;
+  width: 46px;
+  height: 46px;
 
   border:
     1px solid
-    rgba(90, 84, 78, 0.18);
+    rgba(
+      111,
+      97,
+      85,
+      0.19
+    );
+
+  border-radius: 50%;
+
+  font-family:
+    var(--font-serif);
+
+  font-size: 0.95rem;
+
+  font-style: italic;
+
+  color:
+    var(--color-accent-dark);
+}
+
+.other-areas__list {
+  counter-reset:
+    area;
+}
+
+/* =========================
+   TITLE
+========================= */
+
+.other-area__title {
+  position: relative;
+
+  font-family:
+    var(--font-serif);
+
+  font-size:
+    clamp(
+      2.3rem,
+      4vw,
+      4.6rem
+    );
+
+  line-height: 1;
+
+  letter-spacing:
+    -0.04em;
+
+  color:
+    var(--color-text-dark);
+
+  transition:
+    color
+    0.35s ease,
+    transform
+    0.45s
+    var(--ease-out);
+}
+
+.other-area--active
+.other-area__title {
+  color:
+    var(--color-accent-dark);
+
+  transform:
+    translateX(5px);
+}
+
+/* =========================
+   PLUS
+========================= */
+
+.other-area__plus {
+  width: 46px;
+  height: 46px;
+
+  display: grid;
+
+  place-items: center;
+
+  border:
+    1px solid
+    rgba(
+      90,
+      84,
+      78,
+      0.18
+    );
 
   border-radius: 50%;
 
   font-family:
     var(--font-sans);
 
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 
   font-weight: 300;
 
@@ -391,10 +567,11 @@ const toggleArea = (id: string) => {
 
   transition:
     transform
-    0.4s
+    0.45s
     var(--ease-out),
-
     background
+    0.35s ease,
+    color
     0.35s ease;
 }
 
@@ -403,13 +580,11 @@ const toggleArea = (id: string) => {
   transform:
     rotate(45deg);
 
- background:
-    rgba(
-      238,
-      232,
-      225,
-      0.42
-    );
+  background:
+    var(--color-surface-beige);
+
+  color:
+    var(--color-text-dark);
 }
 
 /* =========================
@@ -419,7 +594,8 @@ const toggleArea = (id: string) => {
 .other-area__panel {
   display: grid;
 
-  grid-template-rows: 0fr;
+  grid-template-rows:
+    0fr;
 
   overflow: hidden;
 
@@ -431,7 +607,8 @@ const toggleArea = (id: string) => {
 
 .other-area--active
 .other-area__panel {
-  grid-template-rows: 1fr;
+  grid-template-rows:
+    1fr;
 }
 
 .other-area__panel-inner {
@@ -447,25 +624,65 @@ const toggleArea = (id: string) => {
     clamp(
       40px,
       8vw,
-      120px
+      110px
     );
 
   align-items: end;
 
   padding:
     0
-    0
     clamp(
-      40px,
+      32px,
       5vw,
-      62px
+      70px
     )
     clamp(
-      40px,
-      10vw,
-      150px
+      34px,
+      5vw,
+      58px
+    )
+    clamp(
+      100px,
+      11vw,
+      165px
     );
 }
+
+/* línea fina superior del contenido */
+
+.other-area__panel-inner::before {
+  content: '';
+
+  grid-column:
+    1 / -1;
+
+  width: 100%;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(
+        111,
+        97,
+        85,
+        0.22
+      ),
+      rgba(
+        111,
+        97,
+        85,
+        0
+      )
+    );
+
+  margin-bottom: 4px;
+}
+
+/* =========================
+   LIST ITEMS
+========================= */
 
 .other-area__panel ul {
   margin: 0;
@@ -481,21 +698,31 @@ const toggleArea = (id: string) => {
   max-width: 760px;
 
   padding:
-    12px
+    10px
     0
-    12px
-    22px;
+    10px
+    18px;
 
   border-bottom:
     1px solid
-    rgba(80, 75, 70, 0.1);
+    rgba(
+      80,
+      75,
+      70,
+      0.08
+    );
 
-  font-size: 0.95rem;
+  font-size: 0.92rem;
 
-  line-height: 1.6;
+  line-height: 1.65;
 
   color:
-    rgba(60, 57, 54, 0.72);
+    rgba(
+      60,
+      57,
+      54,
+      0.72
+    );
 }
 
 .other-area__panel li::before {
@@ -503,17 +730,21 @@ const toggleArea = (id: string) => {
 
   position: absolute;
 
-  top: 21px;
+  top: 18px;
   left: 0;
 
-  width: 5px;
-  height: 5px;
+  width: 4px;
+  height: 4px;
 
   border-radius: 50%;
 
   background:
     var(--color-accent-dark);
 }
+
+/* =========================
+   CONSULTAR
+========================= */
 
 .other-area__panel a {
   flex-shrink: 0;
@@ -540,6 +771,20 @@ const toggleArea = (id: string) => {
 
   color:
     var(--color-text-dark);
+
+  transition:
+    gap
+    0.35s
+    var(--ease-out),
+    color
+    0.35s ease;
+}
+
+.other-area__panel a:hover {
+  gap: 23px;
+
+  color:
+    var(--color-accent-dark);
 }
 
 /* =========================
@@ -551,6 +796,25 @@ const toggleArea = (id: string) => {
 ) and (
   pointer: fine
 ) {
+  .other-area:hover {
+    border-color:
+      rgba(
+        111,
+        97,
+        85,
+        0.22
+      );
+
+    box-shadow:
+      0 22px 60px
+      rgba(
+        69,
+        55,
+        44,
+        0.055
+      );
+  }
+
   .other-area__trigger:hover
   .other-area__title {
     color:
@@ -563,7 +827,6 @@ const toggleArea = (id: string) => {
       var(--color-background-soft);
   }
 }
-
 /* =========================
    FOOTER
 ========================= */
@@ -670,7 +933,6 @@ const toggleArea = (id: string) => {
 /* =========================
    MOBILE
 ========================= */
-
 @media (max-width: 720px) {
   .other-areas {
     padding:
@@ -679,7 +941,8 @@ const toggleArea = (id: string) => {
   }
 
   .other-areas__header {
-    margin-bottom: 60px;
+    margin-bottom:
+      55px;
   }
 
   .other-areas__heading h2 {
@@ -691,54 +954,70 @@ const toggleArea = (id: string) => {
       );
   }
 
+  .other-areas__list {
+    gap: 18px;
+  }
+
   .other-area__trigger {
     grid-template-columns:
+      auto
       minmax(0, 1fr)
-      42px;
+      40px;
 
-    gap: 20px;
+    gap: 18px;
 
     padding:
-      30px
-      0;
+      26px
+      22px;
+  }
+
+  .other-area__trigger::before {
+    width: 38px;
+    height: 38px;
+
+    font-size: 0.82rem;
   }
 
   .other-area__title {
     font-size:
       clamp(
-        2.4rem,
-        11vw,
-        3.5rem
+        2rem,
+        9.5vw,
+        3rem
       );
   }
 
   .other-area__plus {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
   }
 
   .other-area__panel-inner {
-    grid-template-columns: 1fr;
+    grid-template-columns:
+      1fr;
 
-    gap: 32px;
+    gap: 28px;
 
     padding:
       0
-      0
-      38px;
+      22px
+      30px
+      78px;
   }
 
   .other-areas__footer {
-    flex-direction: column;
+    flex-direction:
+      column;
 
-    align-items: flex-start;
+    align-items:
+      flex-start;
 
     gap: 34px;
 
-    margin-top: 70px;
+    margin-top:
+      70px;
   }
 }
-
 /* =========================
    REDUCED MOTION
 ========================= */

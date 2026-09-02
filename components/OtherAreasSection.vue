@@ -299,10 +299,11 @@ const toggleArea = (id: string) => {
 
   gap:
     clamp(
-      28px,
-      4vw,
-      52px
+      18px,
+      2.2vw,
+      30px
     );
+counter-reset: area;
 }
 
 .other-area {
@@ -354,11 +355,11 @@ const toggleArea = (id: string) => {
   top: 0;
   left: 0;
 
-  width: 4px;
+  width: 3px;
   height: 100%;
 
   background:
-    var(--color-accent);
+    var(--color-accent-dark);
 
   opacity: 0;
 
@@ -386,16 +387,14 @@ const toggleArea = (id: string) => {
     );
 
   box-shadow:
-    0 24px 65px
+    0 22px 58px
     rgba(
       69,
       55,
       44,
-      0.06
+      0.055
     );
 
-  transform:
-    translateY(-3px);
 }
 
 .other-area--active::before {
@@ -408,7 +407,6 @@ const toggleArea = (id: string) => {
 /* =========================
    TRIGGER
 ========================= */
-
 .other-area__trigger {
   width: 100%;
 
@@ -423,30 +421,27 @@ const toggleArea = (id: string) => {
 
   gap:
     clamp(
-      24px,
-      4vw,
-      55px
+      22px,
+      3.5vw,
+      44px
     );
 
   padding:
     clamp(
-      30px,
-      4vw,
-      50px
+      26px,
+      3.2vw,
+      40px
     );
 
   border: 0;
-
   background: transparent;
 
-  color:
-    var(--color-text-dark);
+  color: var(--color-text-dark);
 
   text-align: left;
 
   cursor: pointer;
 }
-
 /* número decorativo */
 
 .other-area__trigger::before {
@@ -485,10 +480,6 @@ const toggleArea = (id: string) => {
     var(--color-accent-dark);
 }
 
-.other-areas__list {
-  counter-reset:
-    area;
-}
 
 /* =========================
    TITLE
@@ -502,15 +493,15 @@ const toggleArea = (id: string) => {
 
   font-size:
     clamp(
-      2.3rem,
-      4vw,
-      4.6rem
+      2.2rem,
+      3.5vw,
+      4rem
     );
 
-  line-height: 1;
+  line-height: 0.98;
 
   letter-spacing:
-    -0.04em;
+    -0.035em;
 
   color:
     var(--color-text-dark);
@@ -537,42 +528,28 @@ const toggleArea = (id: string) => {
 ========================= */
 
 .other-area__plus {
-  width: 46px;
-  height: 46px;
+  width: 40px;
+  height: 40px;
 
   display: grid;
-
   place-items: center;
 
   border:
     1px solid
-    rgba(
-      90,
-      84,
-      78,
-      0.18
-    );
+    rgba(90, 84, 78, 0.18);
 
   border-radius: 50%;
 
-  font-family:
-    var(--font-sans);
-
-  font-size: 1.1rem;
-
+  font-family: var(--font-sans);
+  font-size: 1rem;
   font-weight: 300;
 
-  color:
-    var(--color-text-dark);
+  color: var(--color-text-dark);
 
   transition:
-    transform
-    0.45s
-    var(--ease-out),
-    background
-    0.35s ease,
-    color
-    0.35s ease;
+    transform 0.45s var(--ease-out),
+    background 0.35s ease,
+    border-color 0.35s ease;
 }
 
 .other-area--active
@@ -583,8 +560,8 @@ const toggleArea = (id: string) => {
   background:
     var(--color-surface-beige);
 
-  color:
-    var(--color-text-dark);
+  border-color:
+    rgba(116, 103, 93, 0.28);
 }
 
 /* =========================
@@ -622,30 +599,18 @@ const toggleArea = (id: string) => {
 
   gap:
     clamp(
-      40px,
-      8vw,
-      110px
+      36px,
+      6vw,
+      80px
     );
 
   align-items: end;
 
   padding:
     0
-    clamp(
-      32px,
-      5vw,
-      70px
-    )
-    clamp(
-      34px,
-      5vw,
-      58px
-    )
-    clamp(
-      100px,
-      11vw,
-      165px
-    );
+    clamp(30px, 4vw, 54px)
+    clamp(30px, 4vw, 46px)
+    clamp(82px, 8vw, 120px);
 }
 
 /* línea fina superior del contenido */
@@ -695,34 +660,24 @@ const toggleArea = (id: string) => {
 .other-area__panel li {
   position: relative;
 
-  max-width: 760px;
+  max-width: 720px;
 
   padding:
-    10px
+    9px
     0
-    10px
-    18px;
+    9px
+    16px;
 
   border-bottom:
     1px solid
-    rgba(
-      80,
-      75,
-      70,
-      0.08
-    );
+    rgba(80, 75, 70, 0.07);
 
-  font-size: 0.92rem;
+  font-size: 0.88rem;
 
-  line-height: 1.65;
+  line-height: 1.55;
 
   color:
-    rgba(
-      60,
-      57,
-      54,
-      0.72
-    );
+    rgba(60, 57, 54, 0.7);
 }
 
 .other-area__panel li::before {
@@ -730,17 +685,19 @@ const toggleArea = (id: string) => {
 
   position: absolute;
 
-  top: 18px;
-  left: 0;
+  top: 16px;
+  left: 1px;
 
-  width: 4px;
-  height: 4px;
+  width: 3px;
+  height: 3px;
 
   border-radius: 50%;
 
   background:
     var(--color-accent-dark);
 }
+
+
 
 /* =========================
    CONSULTAR
@@ -834,9 +791,9 @@ const toggleArea = (id: string) => {
 .other-areas__footer {
   margin-top:
     clamp(
-      75px,
-      9vw,
-      120px
+      55px,
+      6vw,
+      80px
     );
 
   display: flex;
@@ -849,7 +806,7 @@ const toggleArea = (id: string) => {
 }
 
 .other-areas__footer p {
-  max-width: 660px;
+  max-width: 610px;
 
   margin: 0;
 
@@ -858,14 +815,14 @@ const toggleArea = (id: string) => {
 
   font-size:
     clamp(
-      1.5rem,
-      2.6vw,
-      2.7rem
+      1.35rem,
+      2vw,
+      2.1rem
     );
 
-  line-height: 1.15;
+  line-height: 1.18;
 
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
 
   color:
     var(--color-text-dark);
@@ -936,73 +893,73 @@ const toggleArea = (id: string) => {
 @media (max-width: 720px) {
   .other-areas {
     padding:
-      95px
+      88px
       20px;
   }
 
   .other-areas__header {
     margin-bottom:
-      55px;
+      48px;
   }
 
   .other-areas__heading h2 {
     font-size:
       clamp(
-        3rem,
-        14vw,
-        4.4rem
+        2.8rem,
+        13vw,
+        4.1rem
       );
   }
 
   .other-areas__list {
-    gap: 18px;
+    gap: 14px;
   }
 
   .other-area__trigger {
     grid-template-columns:
-      auto
+      36px
       minmax(0, 1fr)
-      40px;
+      36px;
 
-    gap: 18px;
+    gap: 15px;
 
     padding:
-      26px
-      22px;
+      23px
+      18px;
   }
 
   .other-area__trigger::before {
-    width: 38px;
-    height: 38px;
+    width: 34px;
+    height: 34px;
 
-    font-size: 0.82rem;
+    font-size: 0.76rem;
   }
 
   .other-area__title {
     font-size:
       clamp(
-        2rem,
-        9.5vw,
-        3rem
+        1.85rem,
+        8.5vw,
+        2.7rem
       );
   }
 
   .other-area__plus {
-    width: 38px;
-    height: 38px;
+    width: 34px;
+    height: 34px;
   }
 
   .other-area__panel-inner {
     grid-template-columns:
       1fr;
 
-    gap: 28px;
+    gap: 26px;
 
     padding:
       0
-      22px
-      30px
-      78px;
+      18px
+      28px
+      68px;
   }
 
   .other-areas__footer {
@@ -1012,10 +969,10 @@ const toggleArea = (id: string) => {
     align-items:
       flex-start;
 
-    gap: 34px;
+    gap: 28px;
 
     margin-top:
-      70px;
+      55px;
   }
 }
 /* =========================

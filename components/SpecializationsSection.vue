@@ -486,12 +486,12 @@ onBeforeUnmount(() => {
 
   position: relative;
 
-  min-height:
-    clamp(
-      470px,
-      38vw,
-      570px
-    );
+ min-height:
+  clamp(
+    430px,
+    32vw,
+    500px
+  );
 
   display: flex;
   flex-direction: column;
@@ -529,10 +529,11 @@ onBeforeUnmount(() => {
 
   outline: none;
 
-  opacity: 0;
+opacity: 0;
 
-  transform:
-    scale(0.76);
+transform:
+  translateY(28px)
+  scale(0.97);
 
   transform-origin:
     center center;
@@ -558,6 +559,7 @@ onBeforeUnmount(() => {
   opacity: 1;
 
   transform:
+    translateY(0)
     scale(1);
 }
 
@@ -585,7 +587,7 @@ onBeforeUnmount(() => {
   opacity: 0;
 
   transform:
-    scale(0.08);
+    scale(0.15);
 
   transform-origin:
     center center;
@@ -630,57 +632,27 @@ onBeforeUnmount(() => {
 /* =========================
    ICON
 ========================= */
-
 .specialization-card__icon {
   position: relative;
-
   z-index: 2;
-place-self: anchor-center;
-  width:
-    clamp(
-      72px,
-      7vw,
-      92px
-    );
-
-  height:
-    clamp(
-      72px,
-      7vw,
-      92px
-    );
+  width: clamp(68px, 5.5vw, 82px);
+  height: clamp(68px, 5.5vw, 82px);
 
   display: grid;
-
   place-items: center;
 
-  border:
-    1px solid
-    rgba(
-      132,
-      118,
-      107,
-      0.26
-    );
-
+  border: 1px solid rgba(132, 118, 107, 0.24);
   border-radius: 50%;
 
-  color:
-    var(--color-accent-dark);
+  color: var(--color-accent-dark);
+
+  background: rgba(255, 255, 255, 0.28);
 
   transition:
-    color
-    0.4s ease,
-
-    border-color
-    0.4s ease,
-
-    background
-    0.4s ease,
-
-    transform
-    0.5s
-    var(--ease-out);
+    color 0.4s ease,
+    border-color 0.4s ease,
+    background 0.4s ease,
+    transform 0.5s var(--ease-out);
 }
 
 .specialization-card__icon::after {
@@ -689,21 +661,15 @@ place-self: anchor-center;
   position: absolute;
 
   top: 50%;
-  left: calc(100% + 20px);
+  left: calc(100% + 18px);
 
-  width:
-    clamp(
-      80px,
-      9vw,
-      145px
-    );
-
+  width: clamp(55px, 6vw, 100px);
   height: 1px;
 
   background:
     linear-gradient(
       90deg,
-      rgba(132, 118, 107, 0.28),
+      rgba(132, 118, 107, 0.2),
       rgba(132, 118, 107, 0)
     );
 
@@ -758,50 +724,39 @@ place-self: anchor-center;
 
   padding-top:
     clamp(
-      60px,
-      8vw,
-      110px
+      45px,
+      5vw,
+      75px
     );
 }
 
 .specialization-card h3 {
-  max-width: 390px;
+  max-width: 340px;
 
-  margin:
-    0
-    0
-    24px;
+  margin: 0 0 20px;
 
   font-size:
     clamp(
-      2.45rem,
-      3.3vw,
-      4rem
+      2.35rem,
+      2.8vw,
+      3.45rem
     );
 
   line-height: 0.98;
+  letter-spacing: -0.035em;
 
-  letter-spacing: -0.04em;
-
-  color:
-    var(--color-text-dark);
+  color: var(--color-text-dark);
 
   transition:
-    color
-    0.4s ease,
-
-    transform
-    0.5s
-    var(--ease-out);
+    color 0.4s ease,
+    transform 0.5s var(--ease-out);
 }
 
 .specialization-card:hover h3,
 .specialization-card:focus-visible h3 {
-  color:
-    #403832;
+  color: #403832;
 
-  transform:
-    scale(1.015);
+  transform: translateY(-5px);
 }
 
 /* =========================
@@ -810,42 +765,26 @@ place-self: anchor-center;
 
 .specialization-card__reveal {
   max-height: 0;
-
   overflow: hidden;
 
   opacity: 0;
 
-  transform:
-    scale(0.96);
-
-  transform-origin:
-    left center;
+  transform: translateY(14px);
 
   transition:
-    max-height
-    0.55s
-    var(--ease-out),
-
-    opacity
-    0.35s ease,
-
-    transform
-    0.55s
-    var(--ease-out);
+    max-height 0.55s var(--ease-out),
+    opacity 0.35s ease,
+    transform 0.55s var(--ease-out);
 }
 
-.specialization-card:hover
-.specialization-card__reveal,
-.specialization-card:focus-visible
-.specialization-card__reveal {
+.specialization-card:hover .specialization-card__reveal,
+.specialization-card:focus-visible .specialization-card__reveal {
   max-height: 250px;
 
   opacity: 1;
 
-  transform:
-    scale(1);
+  transform: translateY(0);
 }
-
 .specialization-card__reveal p {
   max-width: 390px;
 
@@ -953,34 +892,37 @@ place-self: anchor-center;
    DECORACIÓN DE FONDO
 ========================= */
 
+/* =========================
+   DECORACIÓN EDITORIAL
+========================= */
+
 .specialization-card::after {
   content: '';
 
   position: absolute;
 
-  width: 330px;
-  height: 330px;
+  width: clamp(220px, 19vw, 310px);
+  aspect-ratio: 1;
 
-  top: 50%;
   left: 50%;
+  top: 43%;
 
   transform:
     translate(-50%, -50%)
-    rotate(45deg);
+    scale(1);
 
   border:
     1px solid
-    rgba(132, 118, 107, 0.11);
+    rgba(132, 118, 107, 0.085);
 
   border-radius: 50%;
 
   z-index: 1;
-
   pointer-events: none;
 
   transition:
-    opacity 0.35s ease,
-    transform 0.7s var(--ease-out);
+    opacity 0.45s ease,
+    transform 0.75s var(--ease-out);
 }
 
 .specialization-card:hover::after,
@@ -989,21 +931,10 @@ place-self: anchor-center;
 
   transform:
     translate(-50%, -50%)
-    rotate(45deg)
-    scale(1.2);
+    scale(1.18);
 }
-.specialization-card:hover::after,
-.specialization-card:focus-visible::after {
-  transform: scale(1.35);
-  opacity: 0.8;
-}
-.specialization-card:hover::after,
-.specialization-card:focus-visible::after {
-  transform:
-    scale(1.35);
 
-  opacity: 0.8;
-}
+
 
 /* =========================
    FOOTER

@@ -353,81 +353,39 @@ const deactivateDesktop = () => {
 .family-card {
   position: relative;
 
-  min-height:
-    clamp(
-      360px,
-      31vw,
-      470px
-    );
+  min-height: clamp(260px, 23vw, 330px);
 
   display: flex;
   flex-direction: column;
-
   justify-content: space-between;
 
-  padding:
-    clamp(
-      32px,
-      3.5vw,
-      48px
-    );
+  padding: clamp(30px, 3.2vw, 44px);
 
   overflow: hidden;
 
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.72
-    );
+  background: rgba(255, 255, 255, 0.76);
 
-  border:
-    1px solid
-    rgba(
-      111,
-      97,
-      85,
-      0.14
-    );
+  border: 1px solid rgba(111, 97, 85, 0.14);
 
   border-radius: 2px;
 
   cursor: pointer;
-
   outline: none;
-
   isolation: isolate;
 
   transition:
+    min-height 0.65s var(--ease-out),
     transform 0.5s var(--ease-out),
     box-shadow 0.5s ease,
     border-color 0.4s ease;
 }
-
-.family-card:hover,
-.family-card:focus-visible,
-.family-card--active {
-  transform:
-    translateY(-6px);
-
-  border-color:
-    rgba(
-      111,
-      97,
-      85,
-      0.26
-    );
-
-  box-shadow:
-    0 28px 70px
-    rgba(
-      66,
-      52,
-      42,
-      0.08
-    );
+.family-card:hover::before,
+.family-card:focus-visible::before,
+.family-card--active::before {
+  opacity: 1;
+  transform: scale(1);
 }
+
 .family-card::before {
   content: '';
 
@@ -493,126 +451,83 @@ const deactivateDesktop = () => {
   gap: 25px;
 }
 
-.family-card__label {
-  font-size: 0.58rem;
-
-  font-weight: 500;
-
-  letter-spacing: 0.15em;
-
-  text-transform: uppercase;
-
-  color:
-    var(--color-accent-dark);
-}
-
 .family-card__plus {
-  width: 38px;
-
-  height: 38px;
+  width: 34px;
+  height: 34px;
 
   display: grid;
-
   place-items: center;
 
-  border:
-    1px solid
-    rgba(90, 85, 80, 0.22);
-
+  border: 1px solid rgba(90, 85, 80, 0.2);
   border-radius: 50%;
 
-  font-family:
-    var(--font-sans);
-
-  font-size: 1.1rem;
-
+  font-family: var(--font-sans);
+  font-size: 1rem;
   font-weight: 300;
 
-  color:
-    var(--color-text-dark);
-     border-color:
-    rgba(
-      116,
-      103,
-      93,
-      0.3
-    );
+  color: var(--color-text-dark);
 
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.3
-    );
+  background: rgba(255, 255, 255, 0.25);
 
   transition:
-    transform
-    0.45s
-    var(--ease-out),
-
-    background
-    0.35s ease;
+    transform 0.45s var(--ease-out),
+    background 0.35s ease,
+    border-color 0.35s ease;
 }
 
-.family-card:hover
-.family-card__plus,
-.family-card--active
-.family-card__plus {
-  transform:
-    rotate(45deg);
-
-  background:
-    rgba(255, 255, 255, 0.4);
+.family-card:hover .family-card__plus,
+.family-card:focus-visible .family-card__plus,
+.family-card--active .family-card__plus {
+  transform: rotate(45deg);
+  background: rgba(255, 255, 255, 0.48);
+  border-color: rgba(116, 103, 93, 0.3);
 }
+
 
 /* =========================
    CONTENT
 ========================= */
 
 .family-card__content {
+  position: relative;
+  z-index: 2;
+
   margin-top: auto;
 
   padding-top:
     clamp(
-      65px,
-      8vw,
-      130px
+      38px,
+      5vw,
+      70px
     );
 }
-
 .family-card h3 {
-  max-width: 470px;
+  max-width: 440px;
 
-  margin:
-    0
-    0
-    30px;
+  margin: 0 0 24px;
 
   font-size:
     clamp(
-      2.8rem,
-      4.1vw,
-      4.8rem
+      2.5rem,
+      3.5vw,
+      4rem
     );
 
-  line-height: 0.95;
+  line-height: 0.97;
 
-  letter-spacing: -0.045em;
+  letter-spacing: -0.04em;
 
-  color:
-    var(--color-text-dark);
+  color: var(--color-text-dark);
 
   transition:
-    transform
-    0.5s
-    var(--ease-out);
+    transform 0.5s var(--ease-out),
+    color 0.35s ease;
 }
 
 .family-card:hover h3,
+.family-card:focus-visible h3,
 .family-card--active h3 {
-  transform:
-    translateY(-8px);
+  transform: translateY(-5px);
 }
 
 /* =========================
@@ -730,64 +645,6 @@ const deactivateDesktop = () => {
     var(--color-text-dark);
 }
 
-/* =========================
-   INDEX
-========================= */
-
-.family-card__index {
-  position: absolute;
-
-  right:
-    clamp(
-      20px,
-      3vw,
-      42px
-    );
-
-  bottom:
-    clamp(
-      18px,
-      3vw,
-      35px
-    );
-
-  z-index: -1;
-
-  font-family:
-    var(--font-serif);
-
-  font-size:
-    clamp(
-      6rem,
-      11vw,
-      10rem
-    );
-
-  line-height: 0.7;
-
-  color:
-    rgba(120, 110, 100, 0.06);
-
-  pointer-events: none;
-
-  transition:
-    transform
-    0.5s
-    var(--ease-out),
-
-    opacity
-    0.5s ease;
-}
-
-.family-card:hover
-.family-card__index,
-.family-card--active
-.family-card__index {
-  transform:
-    translateY(10px);
-
-  opacity: 0.45;
-}
 
 /* =========================
    FOOTER
@@ -933,25 +790,32 @@ const deactivateDesktop = () => {
   }
 
   .family-card {
-    min-height: 360px;
+  min-height: 245px;
 
-    padding:
-      28px
-      24px;
-  }
+  padding:
+    26px
+    22px;
+}
 
-  .family-card__content {
-    padding-top: 65px;
-  }
+.family-card:hover,
+.family-card:focus-visible,
+.family-card--active {
+  min-height: 410px;
+  transform: none;
+}
 
-  .family-card h3 {
-    font-size:
-      clamp(
-        2.4rem,
-        11vw,
-        3.5rem
-      );
-  }
+.family-card__content {
+  padding-top: 42px;
+}
+
+.family-card h3 {
+  font-size:
+    clamp(
+      2.25rem,
+      10vw,
+      3.15rem
+    );
+}
 
   .family-card__index {
     font-size: 7rem;

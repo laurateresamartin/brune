@@ -683,6 +683,36 @@ place-self: anchor-center;
     var(--ease-out);
 }
 
+.specialization-card__icon::after {
+  content: '';
+
+  position: absolute;
+
+  top: 50%;
+  left: calc(100% + 20px);
+
+  width:
+    clamp(
+      80px,
+      9vw,
+      145px
+    );
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(132, 118, 107, 0.28),
+      rgba(132, 118, 107, 0)
+    );
+
+  transform-origin: left center;
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.6s var(--ease-out);
+}
 .specialization-card__icon svg {
   width: 52%;
   height: 52%;
@@ -919,9 +949,8 @@ place-self: anchor-center;
       -5px
     );
 }
-
 /* =========================
-   DECORACIÓN SUAVE
+   DECORACIÓN DE FONDO
 ========================= */
 
 .specialization-card::after {
@@ -929,34 +958,45 @@ place-self: anchor-center;
 
   position: absolute;
 
-  width: 200px;
-  height: 200px;
+  width: 330px;
+  height: 330px;
 
-  right: -110px;
-  bottom: -110px;
+  top: 50%;
+  left: 50%;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(45deg);
 
   border:
     1px solid
-    rgba(
-      132,
-      118,
-      107,
-      0.1
-    );
+    rgba(132, 118, 107, 0.11);
 
   border-radius: 50%;
 
   z-index: 1;
 
-  transition:
-    transform
-    0.65s
-    var(--ease-out),
+  pointer-events: none;
 
-    opacity
-    0.4s ease;
+  transition:
+    opacity 0.35s ease,
+    transform 0.7s var(--ease-out);
 }
 
+.specialization-card:hover::after,
+.specialization-card:focus-visible::after {
+  opacity: 0;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(45deg)
+    scale(1.2);
+}
+.specialization-card:hover::after,
+.specialization-card:focus-visible::after {
+  transform: scale(1.35);
+  opacity: 0.8;
+}
 .specialization-card:hover::after,
 .specialization-card:focus-visible::after {
   transform:

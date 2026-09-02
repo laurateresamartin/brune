@@ -5,12 +5,16 @@
 *::after {
   box-sizing: border-box;
 }
-
 html {
   scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
   scroll-padding-top: 90px;
 }
 
+main > section {
+  scroll-snap-align: start;
+  scroll-margin-top: 90px;
+}
 body {
   margin: 0;
 
@@ -81,4 +85,14 @@ textarea {
 img {
   display: block;
   max-width: 100%;
+}
+
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 76px;
+  }
+
+  main > section {
+    scroll-margin-top: 76px;
+  }
 }

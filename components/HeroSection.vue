@@ -225,7 +225,14 @@
    LOGO
 ========================= */
 .hero__logo-wrapper {
-  width: 100%;
+  position: relative;
+
+  width: 100vw;
+
+  margin-left:
+    calc(
+      50% - 50vw
+    );
 
   display: flex;
   align-items: center;
@@ -233,18 +240,26 @@
 
   padding:
     clamp(
-      18px,
-      2.2vw,
-      12px
+      20px,
+      2.5vw,
+      34px
     )
-    0
-    clamp(
-      12px,
-      1.5vw,
-      22px
+    var(--page-padding);
+
+  background: #ffffff;
+
+}
+.hero__logo {
+  display: block;
+
+  width:
+    min(
+      64vw,
+      700px
     );
 
-  transform-origin:
+  height: auto;
+ transform-origin:
     center center;
 
   animation:
@@ -252,18 +267,6 @@
     2.6s
     var(--ease-out)
     both;
-}
-.hero__logo {
-  display: block;
-
-  width:
-    min(
-      72vw,
-      780px
-    );
-
-  height: auto;
-
   object-fit: contain;
 }
 
@@ -593,6 +596,26 @@
       20px
       22px;
   }
+  .hero__logo-wrapper {
+  width: 100vw;
+
+  margin-left:
+    calc(
+      50% - 50vw
+    );
+
+  padding:
+    18px
+    20px;
+}
+
+.hero__logo {
+  width:
+    min(
+      84vw,
+      480px
+    );
+}
 
   .hero__inner {
     min-height:

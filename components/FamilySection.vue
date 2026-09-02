@@ -44,9 +44,9 @@
           @mouseleave="deactivateDesktop"
         >
           <div class="family-card__top">
-            <span class="family-card__label">
-              Área de actuación
-            </span>
+           <span class="family-card__label">
+  {{ area.short }}
+</span>
 
             <span
               class="family-card__plus"
@@ -86,12 +86,7 @@
             </div>
           </div>
 
-          <span
-            class="family-card__index"
-            aria-hidden="true"
-          >
-            {{ area.short }}
-          </span>
+          
         </article>
       </div>
 
@@ -334,22 +329,23 @@ const deactivateDesktop = () => {
 /* =========================
    GRID
 ========================= */
-
 .family__grid {
   display: grid;
 
   grid-template-columns:
     repeat(2, minmax(0, 1fr));
 
-  gap: 1px;
+  gap:
+    clamp(
+      28px,
+      4vw,
+      56px
+    );
 
-  background:
-    var(--color-border);
+  background: transparent;
 
-  border:
-    1px solid var(--color-border);
+  border: none;
 }
-
 /* =========================
    CARD
 ========================= */
@@ -359,22 +355,21 @@ const deactivateDesktop = () => {
 
   min-height:
     clamp(
-      430px,
-      34vw,
-      560px
+      360px,
+      31vw,
+      470px
     );
 
   display: flex;
-
   flex-direction: column;
 
   justify-content: space-between;
 
   padding:
     clamp(
-      30px,
-      3.8vw,
-      52px
+      32px,
+      3.5vw,
+      48px
     );
 
   overflow: hidden;
@@ -384,10 +379,11 @@ const deactivateDesktop = () => {
       255,
       255,
       255,
-      0.42
+      0.72
     );
 
-  border-color:
+  border:
+    1px solid
     rgba(
       111,
       97,
@@ -395,13 +391,43 @@ const deactivateDesktop = () => {
       0.14
     );
 
+  border-radius: 2px;
+
   cursor: pointer;
 
   outline: none;
 
   isolation: isolate;
+
+  transition:
+    transform 0.5s var(--ease-out),
+    box-shadow 0.5s ease,
+    border-color 0.4s ease;
 }
 
+.family-card:hover,
+.family-card:focus-visible,
+.family-card--active {
+  transform:
+    translateY(-6px);
+
+  border-color:
+    rgba(
+      111,
+      97,
+      85,
+      0.26
+    );
+
+  box-shadow:
+    0 28px 70px
+    rgba(
+      66,
+      52,
+      42,
+      0.08
+    );
+}
 .family-card::before {
   content: '';
 
@@ -414,20 +440,34 @@ const deactivateDesktop = () => {
   background:
     linear-gradient(
       145deg,
-      var(--color-background-soft),
-      #ddd5cd
+      #eee6de,
+      #e4d8cd
     );
 
+  opacity: 0;
+
   transform:
-    scaleY(0);
+    scale(0.88);
 
   transform-origin:
-    bottom center;
+    center center;
 
   transition:
     transform
-    0.58s
-    var(--ease-out);
+    0.65s
+    var(--ease-out),
+
+    opacity
+    0.35s ease;
+}
+
+.family-card:hover::before,
+.family-card:focus-visible::before,
+.family-card--active::before {
+  opacity: 1;
+
+  transform:
+    scale(1);
 }
 
 .family-card:hover::before,
@@ -791,6 +831,19 @@ const deactivateDesktop = () => {
 
   color:
     var(--color-text-dark);
+}
+.family-card__label {
+  font-family:
+    var(--font-serif);
+
+  font-size: 1.05rem;
+
+  font-style: italic;
+
+  color:
+    var(--color-accent-dark);
+
+  opacity: 0.7;
 }
 
 .family__footer > a {

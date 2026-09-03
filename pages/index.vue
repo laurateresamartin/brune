@@ -17,7 +17,7 @@ const siteUrl =
   'https://www.bruneabogaciaymediacion.es'
 
 const title =
-  'Abogada de Familia en León | Bruné Abogacía y Mediación'
+  'Bruné Abogacía y Mediación'
 
 const description =
   'Bufete especializado en Derecho de Familia y Menores, Mediación Familiar y Violencia de Género en León, con actuación en todo el territorio nacional.'

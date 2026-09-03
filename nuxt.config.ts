@@ -6,7 +6,17 @@ export default defineNuxtConfig({
   css: [
     '~/assets/main.css'
   ],
-
+  app: {
+    head: {
+      title: 'Bruné Abogacía y Mediación',
+      link: [
+        {
+          rel: 'icon',
+          type: 'image/png',
+          href: '/logo-small-transparent.png'
+        }
+      ]
+  }},
   modules: [
     '@nuxt/fonts'
   ],

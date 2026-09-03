@@ -71,7 +71,7 @@
           </div>
 
           <!-- MAPA -->
-
+          
           <div class="contact__map">
             <iframe
               title="Ubicación de Bruné Abogacía y Mediación"
@@ -96,7 +96,7 @@
 
           <form
             class="contact__form"
-            @submit.prevent="submitForm"
+            @submit.prevent="sendToWhatsApp"
           >
             <div class="contact__field">
               <label for="name">
@@ -178,28 +178,6 @@
               </span>
             </label>
 
-            <!-- CAPTCHA -->
-
-            <div class="contact__captcha">
-              <p>
-                Por favor, verifica que eres una
-                persona antes de enviar.
-              </p>
-
-              <div
-                ref="captchaElement"
-                class="contact__captcha-widget"
-              />
-
-              <p
-                v-if="captchaError"
-                class="contact__error"
-                role="alert"
-              >
-                Completa la verificación antes
-                de enviar el formulario.
-              </p>
-            </div>
 
             <button
               type="submit"
@@ -213,6 +191,9 @@
                 ↗
               </span>
             </button>
+            <p class="contact__whatsapp-note">
+              Al continuar, se abrirá WhatsApp con tu consulta preparada.
+            </p>
           </form>
 
           <p class="contact__notice">
@@ -234,34 +215,7 @@ import {
   ref
 } from 'vue'
 
-declare global {
-  interface Window {
-    grecaptcha?: {
-      ready: (
-        callback: () => void
-      ) => void
 
-      render: (
-        element: HTMLElement,
-        options: {
-          sitekey: string
-          callback: (token: string) => void
-          'expired-callback': () => void
-          'error-callback'?: () => void
-        }
-      ) => number
-    }
-  }
-}
-
-const captchaElement =
-  ref<HTMLElement | null>(null)
-
-const captchaToken =
-  ref('')
-
-const captchaError =
-  ref(false)
 
 const form = reactive({
   name: '',
@@ -271,132 +225,37 @@ const form = reactive({
   privacy: false
 })
 
-const renderCaptcha = async () => {
-  await nextTick()
+const sendToWhatsApp = () => {
+  const phone = '34647506871'
 
-  if (
-    !captchaElement.value ||
-    !window.grecaptcha
-  ) {
-    return
-  }
+  const whatsappMessage = `
+    Hola, contacto desde la web de Bruné Abogacía y Mediación.
 
-  // Evita renderizar el captcha dos veces
-  if (
-    captchaElement.value
-      .querySelector('iframe')
-  ) {
-    return
-  }
+    Nombre: ${form.name}
+    Email: ${form.email}
+    Asunto: ${form.subject}
 
-  window.grecaptcha.ready(() => {
-    if (
-      !captchaElement.value ||
-      !window.grecaptcha
-    ) {
-      return
-    }
+    Consulta:
+    ${form.message}
+      `.trim()
 
-    window.grecaptcha.render(
-      captchaElement.value,
-      {
-        sitekey:
-          '6LdAR4srAAAAAII-1fpPnGQVhU2KAlahfByQxtIJ',
+  const whatsappUrl =
+    `https://wa.me/${phone}?text=${encodeURIComponent(whatsappMessage)}`
 
-        callback: (token: string) => {
-          captchaToken.value = token
-          captchaError.value = false
-        },
-
-        'expired-callback': () => {
-          captchaToken.value = ''
-        },
-
-        'error-callback': () => {
-          captchaToken.value = ''
-          captchaError.value = true
-        }
-      }
-    )
-  })
-}
-
-onMounted(() => {
-  if (window.grecaptcha) {
-    renderCaptcha()
-    return
-  }
-
-  const existingScript =
-    document.querySelector<HTMLScriptElement>(
-      'script[data-brune-recaptcha]'
-    )
-
-  if (existingScript) {
-    // Puede ocurrir al navegar entre páginas:
-    // el script ya existe y el evento load
-    // ya ocurrió.
-    if (window.grecaptcha) {
-      renderCaptcha()
-    } else {
-      existingScript.addEventListener(
-        'load',
-        renderCaptcha,
-        { once: true }
-      )
-    }
-
-    return
-  }
-
-  const script =
-    document.createElement('script')
-
-  script.src =
-    'https://www.google.com/recaptcha/api.js?render=explicit&hl=es'
-
-  script.async = true
-  script.defer = true
-
-  script.dataset.bruneRecaptcha =
-    'true'
-
-  script.addEventListener(
-    'load',
-    renderCaptcha,
-    { once: true }
+  window.open(
+    whatsappUrl,
+    '_blank',
+    'noopener,noreferrer'
   )
 
-  document.head.appendChild(script)
-})
-
-const submitForm = () => {
-  if (!captchaToken.value) {
-    captchaError.value = true
-    return
-  }
-
-  /*
-   * En el siguiente paso conectaremos:
-   *
-   * await $fetch('/api/contact', {
-   *   method: 'POST',
-   *   body: {
-   *     ...form,
-   *     captchaToken: captchaToken.value
-   *   }
-   * })
-   */
-
-  console.log(
-    'Formulario preparado para enviar',
-    {
-      ...form,
-      captchaToken:
-        captchaToken.value
-    }
-  )
+    form.name = ''
+    form.email = ''
+    form.subject = ''
+    form.message = ''
+    form.privacy = false
 }
+
+
 </script>
 
 <style scoped>
@@ -556,6 +415,55 @@ const submitForm = () => {
   color:
     var(--color-accent-dark);
 }
+/* =========================
+   IMAGEN
+========================= */
+
+.contact__image {
+  position: relative;
+
+  width: 100%;
+  height:
+    clamp(
+      300px,
+      34vw,
+      440px
+    );
+
+  margin-top: 42px;
+
+  overflow: hidden;
+}
+
+.contact__image img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  filter:
+    saturate(0.78)
+    contrast(0.94)
+    brightness(1.03);
+
+  transform: scale(1.01);
+
+  transition:
+    transform 1.1s var(--ease-out),
+    filter 0.7s ease;
+}
+
+.contact__image:hover img {
+  transform: scale(1.045);
+
+  filter:
+    saturate(0.88)
+    contrast(0.96)
+    brightness(1.02);
+}
 
 .contact__details {
   border-top:
@@ -632,9 +540,9 @@ const submitForm = () => {
 
 .contact__map {
   width: 100%;
-  height: 330px;
+  height: 290px;
 
-  margin-top: 42px;
+  margin-top: 14px;
 
   overflow: hidden;
 
@@ -780,7 +688,16 @@ const submitForm = () => {
 
   resize: vertical;
 }
+.contact__whatsapp-note {
+  margin: 14px 0 0;
 
+  font-size: 0.72rem;
+  line-height: 1.6;
+
+  color: var(--color-text);
+
+  opacity: 0.7;
+}
 .contact__field input::placeholder,
 .contact__field textarea::placeholder {
   color:
@@ -839,41 +756,7 @@ const submitForm = () => {
     var(--color-text-dark);
 }
 
-/* =========================
-   CAPTCHA
-========================= */
 
-.contact__captcha {
-  padding:
-    24px
-    0
-    4px;
-
-  border-top:
-    1px solid var(--color-border);
-}
-
-.contact__captcha > p:first-child {
-  margin:
-    0
-    0
-    18px;
-
-  font-size: 0.77rem;
-
-  line-height: 1.6;
-
-  color:
-    rgba(60, 57, 54, 0.62);
-}
-
-.contact__captcha-widget {
-  min-height: 78px;
-  display: flex;
-  align-items: center;
-
-  overflow: hidden;
-}
 
 .contact__error {
   margin:
@@ -1078,8 +961,5 @@ span:last-child {
     margin-bottom: 42px;
   }
 
-  .contact__captcha-widget {
-    overflow-x: auto;
-  }
 }
 </style>

@@ -217,7 +217,7 @@ const toggleArea = (id: string) => {
     var(--page-padding);
 
   background:
-    var(--color-surface);
+    #f2f0ed;
 }
 
 .other-areas__inner {
@@ -363,7 +363,7 @@ const toggleArea = (id: string) => {
 
   overflow: hidden;
 
-  background: #f3f1ee;
+  background: #faf9f7;
 
   transition:
     background 0.45s ease,

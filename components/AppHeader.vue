@@ -92,58 +92,12 @@
             </div>
         </div>
 
-        <div
-  class="header__dropdown"
-  :class="{
-    'header__dropdown--open': isOtherAreasOpen
-  }"
->
-  <button
-    type="button"
-    class="header__dropdown-trigger"
-    aria-haspopup="true"
-    :aria-expanded="isOtherAreasOpen"
-    @click="toggleOtherAreas"
-  >
-    <span>Otras Áreas</span>
-
-    <svg
-      class="header__dropdown-icon"
-      viewBox="0 0 10 6"
-      fill="none"
-      aria-hidden="true"
-    >
-      <path
-        d="M1 1L5 5L9 1"
-        stroke="currentColor"
-        stroke-width="1"
-      />
-    </svg>
-  </button>
-
-  <div class="header__dropdown-menu">
-    <NuxtLink
-      to="/#civil"
-      @click="closeMenu"
-    >
-      Derecho Civil
-  </NuxtLink>
-
-    <NuxtLink
-      to="/#extranjeria"
-      @click="closeMenu"
-    >
-      Extranjería y Nacionalidad
-  </NuxtLink>
-
-    <NuxtLink
-      to="/#penal"
-      @click="closeMenu"
-    >
-      Derecho Penal
-  </NuxtLink>
-  </div>
-        </div>
+        <NuxtLink
+        to="/#otras-areas"
+        @click="closeMenu"
+      >
+        Otras Áreas
+      </NuxtLink>
 
         <NuxtLink
           to="/#contacto"
@@ -154,13 +108,15 @@
       </NuxtLink>
       </nav>
 
-      <NuxtLink
-        to="/#contacto"
+      <a
+        href="https://calendly.com/bruneabogaciaymediacion"
         class="header__cta"
+        target="_blank"
+        rel="noopener noreferrer"
       >
         <span>Reserva tu cita</span>
         <span aria-hidden="true">↗</span>
-    </NuxtLink>
+      </a>
 
       <button
         type="button"
@@ -187,28 +143,20 @@ import {
 
 const isMenuOpen = ref(false)
 const isScrolled = ref(false)
-const isOtherAreasOpen = ref(false)
 const isSpecializationOpen = ref(false)    
 
 const toggleSpecialization = () => {
   isSpecializationOpen.value =
     !isSpecializationOpen.value
 
-  isOtherAreasOpen.value = false
 }
-const toggleOtherAreas = () => {
-  isOtherAreasOpen.value =
-    !isOtherAreasOpen.value
 
-  isSpecializationOpen.value = false
-}
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
 }
 const closeMenu = () => {
   isMenuOpen.value = false
   isSpecializationOpen.value = false
-  isOtherAreasOpen.value = false
 }
 
 const handleScroll = () => {

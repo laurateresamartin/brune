@@ -4,6 +4,20 @@
     class="hero"
   >
     <div
+    class="hero__background"
+    aria-hidden="true"
+      >
+      <img
+        src="/images/ana-despacho.jpg"
+        alt=""
+      >
+    </div>
+
+    <div
+      class="hero__overlay"
+      aria-hidden="true"
+    />
+    <div
       class="hero__decoration"
       aria-hidden="true"
     >
@@ -49,14 +63,16 @@
             reales de cada familia, con sede en León
             y actuación en todo el territorio nacional.
           </p>
-
-          <a
-            href="#contacto"
-            class="hero__cta"
+  <a
+            href="https://calendly.com/bruneabogaciaymediacion"
+            class="header__cta"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <span>Reserva tu cita</span>
             <span aria-hidden="true">↗</span>
           </a>
+        
         </div>
       </div>
 
@@ -95,7 +111,55 @@
   background:
     #f4efe9;
 }
+/* =========================
+   FONDO FOTOGRÁFICO
+========================= */
 
+.hero__background {
+  position: absolute;
+  inset: 0;
+
+  z-index: 0;
+  opacity: 0.75;
+  overflow: hidden;
+}
+
+.hero__background img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center 42%;
+
+  filter:
+    saturate(0.55)
+    contrast(0.85)
+    brightness(1.08);
+
+  transform: scale(1.025);
+}
+
+/*
+  Capa clara sobre la fotografía.
+  Es la responsable de que la imagen se intuya
+  sin competir con el contenido.
+*/
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(248, 245, 241, .94) 0%,
+      rgba(248, 245, 241, .90) 48%,
+      rgba(244, 239, 233, .82) 100%
+    );
+}
 .hero__inner {
   position: relative;
 
@@ -119,6 +183,7 @@
 
 
 .hero__decoration {
+  display: none;
   position: absolute;
 
   inset: 0;
@@ -288,22 +353,21 @@
 
   padding:
     clamp(
-      20px,
-      2.5vw,
-      34px
+      26px,
+      3.5vw,
+      48px
     )
     var(--page-padding);
 
-  background: #ffffff;
+  background: transparent;
 
 }
 .hero__logo {
   display: block;
-
   width:
     min(
-      64vw,
-      700px
+      58vw,
+      620px
     );
 
   height: auto;
@@ -442,13 +506,40 @@
   line-height: 1.75;
 
   color:
-    rgba(70, 68, 66, 0.76);
+    rgba(52, 47, 43, 0.82);
 }
+.hero__background img {
+  width: 100%;
+  height: 100%;
 
+  object-fit: cover;
+  object-position: 58% center;
+
+  filter:
+    saturate(0.48)
+    contrast(0.82)
+    brightness(1.1);
+
+  transform: scale(1.03);
+}
 /* =========================
    CTA
 ========================= */
+@media (max-width: 640px) {
+  .hero__background img {
+    object-position: 58% center;
 
+    filter:
+      saturate(0.42)
+      contrast(0.82)
+      brightness(1.12);
+  }
+
+  .hero__overlay {
+    background:
+      rgba(248, 245, 241, 0.88);
+  }
+}
 .hero__cta {
   min-height: 56px;
 
@@ -549,6 +640,62 @@
 
   color:
     var(--color-accent-dark);
+}
+.header__cta {
+  min-height: 42px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  padding:
+    0
+    21px;
+
+  border:
+    1px solid var(--color-text-dark);
+
+  font-size: 0.65rem;
+  font-weight: 500;
+
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+   background:
+    var(--color-dark);
+
+  border-color:
+    var(--color-dark);
+ 
+  color:
+    var(--color-white);
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.header__cta:hover {
+  background:
+    rgba(255, 255, 255, 0.42);
+
+  border-color:
+    rgba(76, 67, 60, 0.55);
+
+  color:
+    var(--color-text-dark);
+}
+
+.header__cta span:last-child {
+  transition:
+    transform 0.3s var(--ease-out);
+}
+
+.header__cta:hover
+span:last-child {
+  transform:
+    translate(3px, -3px);
 }
 
 .hero__scroll-number {

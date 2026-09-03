@@ -17,6 +17,41 @@
       </div>
 
       <div class="about__content">
+        <div class="about__visual">
+          <div class="about__image">
+            <!--
+              Sustituiremos este bloque
+              cuando tengamos la foto real.
+            -->
+            <div class="about__placeholder">
+                <img
+                  src="/images/Ana.jpg"
+                  alt="Ana Páramo Moratinos, letrada de Bruné Abogacía y Mediación"
+                  loading="lazy"
+                >
+              <!-- <span>
+                Próximamente fotografía
+                de Ana Páramo Moratinos
+              </span> -->
+            </div>
+          </div>
+
+          <div class="about__caption">
+            <div>
+              <strong>
+                Ana Páramo Moratinos
+              </strong>
+
+              <span>
+                Letrada
+              </span>
+            </div>
+
+            <div class="about__location">
+              León · España
+            </div>
+          </div>
+        </div>
         <div class="about__copy">
           <p class="about__lead">
             Bufete especializado en Derecho de Familia
@@ -55,43 +90,7 @@
           </a>
         </div>
 
-        <div class="about__visual">
-          <div class="about__image">
-            <!--
-              Sustituiremos este bloque
-              cuando tengamos la foto real.
-            -->
-            <div class="about__placeholder">
-                <!-- <img
-  src="/images/ana-paramo.webp"
-  alt="Ana Páramo Moratinos, letrada de Bruné Abogacía y Mediación"
-  width="900"
-  height="1125"
-  loading="lazy"
-> -->
-              <span>
-                Próximamente fotografía
-                de Ana Páramo Moratinos
-              </span>
-            </div>
-          </div>
-
-          <div class="about__caption">
-            <div>
-              <strong>
-                Ana Páramo Moratinos
-              </strong>
-
-              <span>
-                Letrada
-              </span>
-            </div>
-
-            <div class="about__location">
-              León · España
-            </div>
-          </div>
-        </div>
+        
       </div>
 
       <div class="about__footer">

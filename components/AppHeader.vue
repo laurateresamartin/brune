@@ -2,9 +2,11 @@
   <header
     class="header"
     :class="{
-      'header--scrolled': isScrolled,
-      'header--menu-open': isMenuOpen,
-      'header--past-hero': isPastHero
+    'header--scrolled': isScrolled,
+    'header--menu-open': isMenuOpen,
+    'header--hero': isHome && !isPastHero,
+    'header--default': !isHome || isPastHero
+      
     }"
   >
     <div class="header__inner">
@@ -146,7 +148,9 @@ import {
 const isMenuOpen = ref(false)
 const isScrolled = ref(false)
 const isSpecializationOpen = ref(false)    
+const route = useRoute()
 
+const isHome = computed(() => route.path === '/')
 const toggleSpecialization = () => {
   isSpecializationOpen.value =
     !isSpecializationOpen.value
@@ -173,6 +177,14 @@ watch(isMenuOpen, (open) => {
       ? 'hidden'
       : ''
 })
+watch(
+  () => route.path,
+  () => {
+    nextTick(() => {
+      handleScroll()
+    })
+  }
+)
 
 onMounted(() => {
   handleScroll()
@@ -191,17 +203,26 @@ onMounted(() => {
 const isPastHero = ref(false)
 
 const handleScroll = () => {
-  const hero = document.querySelector<HTMLElement>('#inicio')
+  isScrolled.value = window.scrollY > 20
 
-  if (!hero) return
+  if (route.path !== '/') {
+    isPastHero.value = true
+    return
+  }
+
+  const hero =
+    document.querySelector<HTMLElement>('#inicio')
+
+  if (!hero) {
+    isPastHero.value = true
+    return
+  }
 
   const heroBottom =
-    hero.offsetTop +
-    hero.offsetHeight
+    hero.offsetTop + hero.offsetHeight
 
   isPastHero.value =
-    window.scrollY >
-    heroBottom - 100
+    window.scrollY > heroBottom - 100
 }
 onBeforeUnmount(() => {
   window.removeEventListener(
@@ -231,28 +252,24 @@ onBeforeUnmount(() => {
   padding:
     7px
     var(--page-padding);
- background: rgba(255, 255, 255, .97);
-
+ 
   transition:
     background-color .45s ease,
     border-color .45s ease,
     box-shadow .45s ease;
-  border-bottom:
-    1px solid
-    rgba(91, 78, 67, 0.16);
-
- 
 }
-.header--past-hero {
-  background: rgba(232, 224, 215, .96);
+
+
+/* Resto de la web */
+.header--default {
+  background: rgba(222, 219, 215, .97);
 
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 
-  border-bottom:
-    1px solid
-    rgba(72, 63, 56, .10);
+  border-bottom: 1px solid rgba(72, 63, 56, .10);
 }
+
 
 .header--scrolled {
   padding-top: 5px;
@@ -263,14 +280,7 @@ onBeforeUnmount(() => {
   box-shadow:
     0 7px 24px
     rgba(57, 48, 41, 0.05);
-  background: rgba(232, 224, 215, .96);
-
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-
-  border-bottom:
-    1px solid
-    rgba(72, 63, 56, .10);
+ 
 }
 .header::after {
   content: '';
@@ -285,21 +295,6 @@ onBeforeUnmount(() => {
 
   background:
     rgba(116, 103, 93, 0.16);
-}
-.header--scrolled {
-  padding-top: 5px;
-  padding-bottom: 5px;
-
-  background:
-    rgba(238, 232, 225, 0.98);
-
-  border-bottom:
-    1px solid
-    rgba(116, 103, 93, 0.22);
-
-  box-shadow:
-    0 8px 28px
-    rgba(70, 58, 48, 0.045);
 }
 
 .header__inner {
@@ -787,6 +782,19 @@ span:last-child {
   transition:
     top 0.3s var(--ease-out),
     transform 0.3s var(--ease-out);
+}
+.header--hero {
+  background: rgba(251, 250, 248, .98);
+  border-bottom-color: transparent;
+}
+
+.header--default {
+  background: rgba(222, 219, 215, .97);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border-bottom: 1px solid rgba(72, 63, 56, .10);
 }
 
 .header__menu-button span:first-child {

@@ -20,25 +20,25 @@
             </p>
 
             <nav>
-              <a href="#inicio">
+              <NuxtLink to="/#inicio">
                 Inicio
-              </a>
+              </NuxtLink>
 
-              <a href="#despacho">
+              <NuxtLink to="/#despacho">
                 El Despacho
-              </a>
+              </NuxtLink>
 
-              <a href="#especializacion">
+              <NuxtLink to="/#especializacion">
                 Especialización
-              </a>
+              </NuxtLink>
 
-              <a href="#otras-areas">
+              <NuxtLink to="/#otras-areas">
                 Otras Áreas
-              </a>
+              </NuxtLink>
 
-              <a href="#contacto">
+              <NuxtLink to="/#contacto">
                 Contacto
-              </a>
+              </NuxtLink>
             </nav>
           </div>
 
@@ -84,13 +84,13 @@
           </NuxtLink>
         </div>
 
-        <a
-          href="#inicio"
+        <NuxtLink
+          to="/#inicio"
           class="footer__back"
         >
           Volver arriba
           <span aria-hidden="true">↑</span>
-        </a>
+      </NuxtLink>
       </div>
     </div>
   </footer>

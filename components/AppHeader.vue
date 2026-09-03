@@ -3,7 +3,8 @@
     class="header"
     :class="{
       'header--scrolled': isScrolled,
-      'header--menu-open': isMenuOpen
+      'header--menu-open': isMenuOpen,
+      'header--past-hero': isPastHero
     }"
   >
     <div class="header__inner">
@@ -113,6 +114,7 @@
         class="header__cta"
         target="_blank"
         rel="noopener noreferrer"
+          
       >
         <span>Reserva tu cita</span>
         <span aria-hidden="true">↗</span>
@@ -159,10 +161,6 @@ const closeMenu = () => {
   isSpecializationOpen.value = false
 }
 
-const handleScroll = () => {
-  isScrolled.value = window.scrollY > 20
-}
-
 const handleEscape = (event: KeyboardEvent) => {
   if (event.key === 'Escape') {
     closeMenu()
@@ -190,7 +188,21 @@ onMounted(() => {
     handleEscape
   )
 })
+const isPastHero = ref(false)
 
+const handleScroll = () => {
+  const hero = document.querySelector<HTMLElement>('#inicio')
+
+  if (!hero) return
+
+  const heroBottom =
+    hero.offsetTop +
+    hero.offsetHeight
+
+  isPastHero.value =
+    window.scrollY >
+    heroBottom - 100
+}
 onBeforeUnmount(() => {
   window.removeEventListener(
     'scroll',
@@ -219,34 +231,46 @@ onBeforeUnmount(() => {
   padding:
     7px
     var(--page-padding);
+ background: rgba(255, 255, 255, .97);
 
-  background:
-    #e4dbd2;
-
+  transition:
+    background-color .45s ease,
+    border-color .45s ease,
+    box-shadow .45s ease;
   border-bottom:
     1px solid
     rgba(91, 78, 67, 0.16);
 
-  transition:
-    background 0.35s ease,
-    border-color 0.35s ease,
-    padding 0.35s var(--ease-out);
+ 
+}
+.header--past-hero {
+  background: rgba(232, 224, 215, .96);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border-bottom:
+    1px solid
+    rgba(72, 63, 56, .10);
 }
 
 .header--scrolled {
   padding-top: 5px;
   padding-bottom: 5px;
 
-  background:
-    #e4dbd2;
-
-  border-bottom:
-    1px solid
-    rgba(91, 78, 67, 0.24);
+ 
 
   box-shadow:
     0 7px 24px
     rgba(57, 48, 41, 0.05);
+  background: rgba(232, 224, 215, .96);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border-bottom:
+    1px solid
+    rgba(72, 63, 56, .10);
 }
 .header::after {
   content: '';
@@ -435,13 +459,15 @@ onBeforeUnmount(() => {
 
   letter-spacing: 0.09em;
   text-transform: uppercase;
- background:
-    rgba(255, 255, 255, 0.42);
+ 
+     background:
+    var(--color-text-dark);
 
   border-color:
-    rgba(76, 67, 60, 0.55);
+    var(--color-dark);
+
   color:
-    var(--color-text-dark);
+    var(--color-white);
 
   transition:
     background 0.3s ease,
@@ -449,14 +475,13 @@ onBeforeUnmount(() => {
 }
 
 .header__cta:hover {
-  background:
-    var(--color-dark);
+ background:
+    rgba(255, 255, 255, 0.42);
 
   border-color:
-    var(--color-dark);
-
+    rgba(76, 67, 60, 0.55);
   color:
-    var(--color-white);
+    var(--color-text-dark);
 }
 
 .header__cta span:last-child {

@@ -331,7 +331,7 @@ const sendToWhatsApp = () => {
     clamp(
       3.7rem,
       6.5vw,
-      7.4rem
+      4.4rem
     );
 
   line-height: 0.91;

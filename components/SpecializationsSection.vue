@@ -426,7 +426,7 @@ onBeforeUnmount(() => {
     clamp(
       3.5rem,
       5.8vw,
-      6.8rem
+      4.8rem
     );
 
   line-height: 0.93;

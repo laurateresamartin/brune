@@ -458,7 +458,7 @@
     clamp(
       3.7rem,
       6vw,
-      6.8rem
+      4.8rem
     );
 
   line-height: 0.94;

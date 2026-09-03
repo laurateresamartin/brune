@@ -182,7 +182,7 @@
     clamp(
       3.5rem,
       6vw,
-      7rem
+      5rem
     );
 
   line-height: 0.92;
@@ -251,7 +251,7 @@
     clamp(
       1.8rem,
       2.8vw,
-      3rem
+      2.5rem
     );
 
   line-height: 1.14;
@@ -461,9 +461,9 @@ span:last-child {
 .about__footer {
   margin-top:
     clamp(
-      80px,
+      50px,
       10vw,
-      145px
+      1px
     );
 
   padding-top: 20px;

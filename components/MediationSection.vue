@@ -70,15 +70,15 @@
             </p>
           </div>
 
-          <a href="#contacto">
+          <NuxtLink to="/#contacto">
             <span>
-              Consultar
+              Solicita una consulta
             </span>
 
             <span aria-hidden="true">
               ↗
             </span>
-          </a>
+        </ NuxtLink>
         </article>
       </div>
 
@@ -88,7 +88,7 @@
           solución a través del diálogo.
         </p>
 
-        <a href="#contacto">
+        <NuxtLink to="/#contacto">
           <span>
             Solicita una consulta
           </span>
@@ -96,7 +96,7 @@
           <span aria-hidden="true">
             ↗
           </span>
-        </a>
+        </ NuxtLink>
       </div>
     </div>
   </section>
@@ -176,7 +176,7 @@ onBeforeUnmount(() => {
   overflow: hidden;
 
   background:
-    #e8d8c9;
+    white;
 }
 
 .mediation__inner {
@@ -437,13 +437,7 @@ onBeforeUnmount(() => {
       0.15
     );
 
-  background:
-    rgba(
-      255,
-      252,
-      248,
-      0.48
-    );
+ background: #f5f4f3;
 border-color:
     rgba(
       110,
@@ -481,12 +475,9 @@ border-color:
 
 .mediation-card:hover {
   background:
-    rgba(
-      255,
-      252,
-      248,
-      0.72
-    );
+  
+      #e0dfdf
+    
 }
 
 /* =========================

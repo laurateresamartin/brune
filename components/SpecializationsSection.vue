@@ -29,10 +29,10 @@
       <!-- TARJETAS -->
 
       <div class="specializations__grid">
-        <a
+        <NuxtLink
           v-for="(area, index) in areas"
           :key="area.id"
-          :href="area.href"
+          :to="area.href"
           class="specialization-card"
           :class="{
             'specialization-card--visible': isVisible
@@ -222,7 +222,7 @@
           >
             ↗
           </span>
-        </a>
+        </NuxtLink>
       </div>
 
       <!-- FOOTER -->
@@ -233,7 +233,7 @@
           jurídica adaptada a sus circunstancias.
         </p>
 
-        <a href="#contacto">
+        <NuxtLink to="/#contacto">
           <span>
             Solicita una consulta
           </span>
@@ -241,7 +241,7 @@
           <span aria-hidden="true">
             ↗
           </span>
-        </a>
+        </ NuxtLink>
       </div>
     </div>
   </section>
@@ -273,7 +273,7 @@ const areas = [
       'Asesoramiento y asistencia jurídica en procedimientos familiares, protección de menores, medidas de familia, rupturas y situaciones de especial sensibilidad.',
 
     href:
-      '#familia'
+      '/derecho-familia'
   },
   {
     id: 'mediacion',
@@ -287,7 +287,7 @@ const areas = [
       'Una vía orientada al diálogo y a la búsqueda de acuerdos equilibrados, duraderos y adaptados a las necesidades reales de cada familia.',
 
     href:
-      '#mediacion'
+      '/mediacion-familiar'
   },
   {
     id: 'violencia',
@@ -301,7 +301,7 @@ const areas = [
       'Asesoramiento jurídico inmediato, confidencial y especializado, con acompañamiento durante todas las fases del procedimiento.',
 
     href:
-      '#violencia-genero'
+      '/violencia-genero'
   }
 ]
 
@@ -1112,8 +1112,7 @@ transform:
 
     opacity: 1;
 
-    transform:
-      scale(1);
+   transform: translateY(0);
   }
 
   .specialization-card__arrow {

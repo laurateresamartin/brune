@@ -237,12 +237,17 @@ import {
 declare global {
   interface Window {
     grecaptcha?: {
+      ready: (
+        callback: () => void
+      ) => void
+
       render: (
         element: HTMLElement,
         options: {
           sitekey: string
           callback: (token: string) => void
           'expired-callback': () => void
+          'error-callback'?: () => void
         }
       ) => number
     }
@@ -276,22 +281,44 @@ const renderCaptcha = async () => {
     return
   }
 
-  window.grecaptcha.render(
-    captchaElement.value,
-    {
-      sitekey:
-        '6LdAR4srAAAAAII-1fpPnGQVhU2KAlahfByQxtIJ',
+  // Evita renderizar el captcha dos veces
+  if (
+    captchaElement.value
+      .querySelector('iframe')
+  ) {
+    return
+  }
 
-      callback: (token: string) => {
-        captchaToken.value = token
-        captchaError.value = false
-      },
-
-      'expired-callback': () => {
-        captchaToken.value = ''
-      }
+  window.grecaptcha.ready(() => {
+    if (
+      !captchaElement.value ||
+      !window.grecaptcha
+    ) {
+      return
     }
-  )
+
+    window.grecaptcha.render(
+      captchaElement.value,
+      {
+        sitekey:
+          '6LdAR4srAAAAAII-1fpPnGQVhU2KAlahfByQxtIJ',
+
+        callback: (token: string) => {
+          captchaToken.value = token
+          captchaError.value = false
+        },
+
+        'expired-callback': () => {
+          captchaToken.value = ''
+        },
+
+        'error-callback': () => {
+          captchaToken.value = ''
+          captchaError.value = true
+        }
+      }
+    )
+  })
 }
 
 onMounted(() => {
@@ -301,16 +328,23 @@ onMounted(() => {
   }
 
   const existingScript =
-    document.querySelector(
+    document.querySelector<HTMLScriptElement>(
       'script[data-brune-recaptcha]'
     )
 
   if (existingScript) {
-    existingScript.addEventListener(
-      'load',
-      renderCaptcha,
-      { once: true }
-    )
+    // Puede ocurrir al navegar entre páginas:
+    // el script ya existe y el evento load
+    // ya ocurrió.
+    if (window.grecaptcha) {
+      renderCaptcha()
+    } else {
+      existingScript.addEventListener(
+        'load',
+        renderCaptcha,
+        { once: true }
+      )
+    }
 
     return
   }
@@ -319,12 +353,13 @@ onMounted(() => {
     document.createElement('script')
 
   script.src =
-    'https://www.google.com/recaptcha/api.js?hl=es'
+    'https://www.google.com/recaptcha/api.js?render=explicit&hl=es'
 
   script.async = true
   script.defer = true
 
-  script.dataset.bruneRecaptcha = 'true'
+  script.dataset.bruneRecaptcha =
+    'true'
 
   script.addEventListener(
     'load',
@@ -834,6 +869,10 @@ const submitForm = () => {
 
 .contact__captcha-widget {
   min-height: 78px;
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
 }
 
 .contact__error {

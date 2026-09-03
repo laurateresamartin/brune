@@ -7,8 +7,8 @@
     }"
   >
     <div class="header__inner">
-      <a
-        href="#inicio"
+     <NuxtLink
+        to="/#inicio"
         class="header__brand"
         aria-label="Bruné Abogacía y Mediación - Inicio"
         @click="closeMenu"
@@ -18,35 +18,81 @@
           alt="Bruné Abogacía y Mediación"
           class="header__logo"
         >
-      </a>
+    </NuxtLink>
 
       <nav
         class="header__nav"
         :class="{ 'header__nav--open': isMenuOpen }"
         aria-label="Navegación principal"
       >
-        <a
-          href="#despacho"
+        <NuxtLink
+          to="/#despacho"
           @click="closeMenu"
         >
           El Despacho
-        </a>
+        </NuxtLink>
 
-        <a
-          href="#por-que-elegirnos"
+        <NuxtLink
+          to="/#por-que-elegirnos"
           @click="closeMenu"
         >
           ¿Por qué elegirnos?
-        </a>
+        </NuxtLink>
 
-        <a
-          href="#especializacion"
-          @click="closeMenu"
-        >
-          Especialización
-        </a>
+        <div
+            class="header__dropdown"
+            :class="{
+              'header__dropdown--open': isSpecializationOpen
+            }"
+          >
+            <button
+              type="button"
+              class="header__dropdown-trigger"
+              aria-haspopup="true"
+              :aria-expanded="isSpecializationOpen"
+              @click="toggleSpecialization"
+            >
+              <span>Especialización</span>
 
-     <div
+              <svg
+                class="header__dropdown-icon"
+                viewBox="0 0 10 6"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M1 1L5 5L9 1"
+                  stroke="currentColor"
+                  stroke-width="1"
+                />
+              </svg>
+            </button>
+
+            <div class="header__dropdown-menu">
+              <NuxtLink
+                to="/derecho-familia"
+                @click="closeMenu"
+              >
+                Derecho de Familia y Menores
+              </NuxtLink>
+
+              <NuxtLink
+                to="/mediacion-familiar"
+                @click="closeMenu"
+              >
+                Mediación Familiar
+              </NuxtLink>
+
+              <NuxtLink
+                to="/violencia-genero"
+                @click="closeMenu"
+              >
+                Violencia de Género
+              </NuxtLink>
+            </div>
+        </div>
+
+        <div
   class="header__dropdown"
   :class="{
     'header__dropdown--open': isOtherAreasOpen
@@ -76,45 +122,45 @@
   </button>
 
   <div class="header__dropdown-menu">
-    <a
-      href="#civil"
+    <NuxtLink
+      to="/#civil"
       @click="closeMenu"
     >
       Derecho Civil
-    </a>
+  </NuxtLink>
 
-    <a
-      href="#extranjeria"
+    <NuxtLink
+      to="/#extranjeria"
       @click="closeMenu"
     >
       Extranjería y Nacionalidad
-    </a>
+  </NuxtLink>
 
-    <a
-      href="#penal"
+    <NuxtLink
+      to="/#penal"
       @click="closeMenu"
     >
       Derecho Penal
-    </a>
+  </NuxtLink>
   </div>
-</div>
+        </div>
 
-        <a
-          href="#contacto"
+        <NuxtLink
+          to="/#contacto"
           class="header__mobile-contact"
           @click="closeMenu"
         >
           Contacto
-        </a>
+      </NuxtLink>
       </nav>
 
-      <a
-        href="#contacto"
+      <NuxtLink
+        to="/#contacto"
         class="header__cta"
       >
         <span>Reserva tu cita</span>
         <span aria-hidden="true">↗</span>
-      </a>
+    </NuxtLink>
 
       <button
         type="button"
@@ -142,15 +188,26 @@ import {
 const isMenuOpen = ref(false)
 const isScrolled = ref(false)
 const isOtherAreasOpen = ref(false)
+const isSpecializationOpen = ref(false)    
+
+const toggleSpecialization = () => {
+  isSpecializationOpen.value =
+    !isSpecializationOpen.value
+
+  isOtherAreasOpen.value = false
+}
 const toggleOtherAreas = () => {
   isOtherAreasOpen.value =
     !isOtherAreasOpen.value
+
+  isSpecializationOpen.value = false
 }
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
 }
 const closeMenu = () => {
   isMenuOpen.value = false
+  isSpecializationOpen.value = false
   isOtherAreasOpen.value = false
 }
 
@@ -585,7 +642,22 @@ span:last-child {
   background:
     var(--color-background-soft);
 }
+.header__dropdown--open
+.header__dropdown-menu {
+  opacity: 1;
+  visibility: visible;
 
+  transform:
+    translate(-50%, 0);
+
+  pointer-events: auto;
+}
+
+.header__dropdown--open
+.header__dropdown-icon {
+  transform:
+    rotate(180deg);
+}
 @media (hover: hover) and (pointer: fine) {
   .header__dropdown:hover
   .header__dropdown-menu,
@@ -781,6 +853,74 @@ span:last-child {
 ========================= */
 
 @media (max-width: 1100px) {
+  .header__dropdown {
+  width: 100%;
+  display: block;
+}
+
+.header__dropdown-menu {
+  position: static;
+
+  width: 100%;
+  min-width: 0;
+
+  padding: 0;
+
+  border: 0;
+  box-shadow: none;
+
+  background: transparent;
+
+  opacity: 1;
+  visibility: visible;
+
+  transform: none;
+
+  pointer-events: auto;
+
+  max-height: 0;
+  overflow: hidden;
+
+  transition:
+    max-height 0.45s var(--ease-out);
+}
+
+.header__dropdown--open
+.header__dropdown-menu {
+  max-height: 260px;
+}
+
+.header__dropdown-menu a {
+  padding:
+    12px
+    0
+    12px
+    20px;
+
+  border-bottom:
+    1px solid
+    var(--color-border);
+
+  font-family:
+    var(--font-sans);
+
+  font-size:
+    0.72rem;
+
+  font-weight: 500;
+
+  letter-spacing:
+    0.07em;
+
+  text-transform:
+    uppercase;
+}
+
+.header__dropdown-menu a:hover {
+  padding-left: 26px;
+
+  background: transparent;
+}
   .header__inner {
     grid-template-columns:
       minmax(150px, 220px)

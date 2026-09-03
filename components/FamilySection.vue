@@ -97,7 +97,7 @@
           de cada familia.
         </p>
 
-        <a href="#contacto">
+        <NuxtLink to="/#contacto">
           <span>
             Solicita una consulta
           </span>
@@ -105,7 +105,7 @@
           <span aria-hidden="true">
             ↗
           </span>
-        </a>
+        </ NuxtLink>
       </div>
     </div>
   </section>
@@ -212,7 +212,7 @@ const deactivateDesktop = () => {
     var(--page-padding);
 
   background:
-    var(--color-surface-warm);
+    white;
 }
 
 .family__inner {
@@ -363,7 +363,7 @@ const deactivateDesktop = () => {
 
   overflow: hidden;
 
-  background: rgba(255, 255, 255, 0.76);
+  background: #f5f4f3;
 
   border: 1px solid rgba(111, 97, 85, 0.14);
 
@@ -379,12 +379,7 @@ const deactivateDesktop = () => {
     box-shadow 0.5s ease,
     border-color 0.4s ease;
 }
-.family-card:hover::before,
-.family-card:focus-visible::before,
-.family-card--active::before {
-  opacity: 1;
-  transform: scale(1);
-}
+
 
 .family-card::before {
   content: '';
@@ -399,7 +394,7 @@ const deactivateDesktop = () => {
     linear-gradient(
       145deg,
       #eee6de,
-      #e4d8cd
+      #e9e0d7
     );
 
   opacity: 0;
@@ -419,6 +414,34 @@ const deactivateDesktop = () => {
     0.35s ease;
 }
 
+.family-card::before {
+  content: '';
+
+  position: absolute;
+  inset: 0;
+
+  z-index: -1;
+
+  background:
+    linear-gradient(
+      145deg,
+      #e2e2e0 0%,
+      #eee7df 100%
+    );
+
+  opacity: 0;
+
+  transform:
+    scale(0.94);
+
+  transform-origin:
+    center center;
+
+  transition:
+    opacity 0.4s ease,
+    transform 0.65s var(--ease-out);
+}
+
 .family-card:hover::before,
 .family-card:focus-visible::before,
 .family-card--active::before {
@@ -427,16 +450,6 @@ const deactivateDesktop = () => {
   transform:
     scale(1);
 }
-
-.family-card:hover::before,
-.family-card:focus-visible::before,
-.family-card--active::before {
-  transform:
-    scaleY(1);
-    background:
-    var(--color-surface-beige);
-}
-
 /* =========================
    TOP
 ========================= */

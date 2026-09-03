@@ -103,10 +103,12 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, watch , nextTick} from 'vue'
+
+const route = useRoute()
 
 const activeArea =
-  ref<string | null>('civil')
+  ref<string | null>(null)
 
 const areas = [
   {
@@ -152,6 +154,66 @@ const areas = [
     ]
   }
 ]
+const scrollToArea = async (
+  id: string
+) => {
+  await nextTick()
+
+  setTimeout(() => {
+    const element =
+      document.getElementById(id)
+
+    if (!element) {
+      return
+    }
+
+    const header =
+      document.querySelector<HTMLElement>(
+        '.header'
+      )
+
+    const headerHeight =
+      header?.offsetHeight ?? 0
+
+    const top =
+      element.getBoundingClientRect().top +
+      window.scrollY -
+      headerHeight -
+      20
+
+    window.scrollTo({
+      top,
+      behavior: 'smooth'
+    })
+  }, 580)
+}
+const openAreaFromHash = async () => {
+  const hash =
+    route.hash.replace('#', '')
+
+  const validArea =
+    areas.some(
+      area => area.id === hash
+    )
+
+  if (!validArea) {
+    return
+  }
+
+  activeArea.value = hash
+
+  await scrollToArea(hash)
+}
+onMounted(() => {
+  openAreaFromHash()
+})
+
+watch(
+  () => route.hash,
+  () => {
+    openAreaFromHash()
+  }
+)
 
 const toggleArea = (id: string) => {
   activeArea.value =
@@ -345,6 +407,8 @@ counter-reset: area;
     transform
     0.45s
     var(--ease-out);
+
+    scroll-margin-top: 110px;
 }
 
 .other-area::before {

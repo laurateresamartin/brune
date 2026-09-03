@@ -1,19 +1,33 @@
 :root {
-  /* =========================
-     FONDOS
-  ========================= */
+--color-background: #fbfaf8;
 
-  --color-background: #fbfaf8;
-  --color-background-soft: #eee8e1;
+  /* Fondos claros */
+  --color-ivory: #f8f5f1;
+  --color-beige-light: #eee7df;
+  --color-beige: #e3d8ce;
 
+  /* Nuevo gris del PDF */
+  --color-gray-light: #e2e2e0;
+  --color-gray-soft: #d7d6d3;
+
+  /* Superficies */
   --color-surface: #ffffff;
+  --color-surface-warm: #f3efea;
 
-  --color-surface-warm: #f4f0eb;
-  --color-surface-beige: #e6ddd4;
+  /* Texto */
+  --color-text: #68625d;
+  --color-text-dark: #342f2b;
 
-  /* =========================
-     TEXTO
-  ========================= */
+  /* Taupe */
+  --color-accent: #a99b8f;
+  --color-accent-light: #d8cec4;
+  --color-accent-dark: #84766b;
+
+  /* Oscuro */
+  --color-dark: #302c29;
+  --color-dark-soft: #3a3531;
+
+  --color-border: rgba(72, 63, 56, 0.15);
 
   --color-text: #68625d;
   --color-text-dark: #342f2b;
@@ -41,7 +55,7 @@
   ========================= */
 
   --color-border:
-    rgba(72, 63, 56, 0.15);
+    rgba(72, 63, 56, 0.15)
 
   --color-border-light:
     rgba(72, 63, 56, 0.09);

@@ -101,15 +101,15 @@
           Protección · Acompañamiento
         </p>
 
-        <a href="#contacto">
-          <span>
-            Contactar
-          </span>
+        <NuxtLink to="/#contacto">
+            <span>
+              Contactar
+            </span>
 
-          <span aria-hidden="true">
-            ↗
-          </span>
-        </a>
+            <span aria-hidden="true">
+              ↗
+            </span>
+        </ NuxtLink>
       </div>
     </div>
   </section>
@@ -216,11 +216,9 @@ onBeforeUnmount(() => {
 
   overflow: hidden;
 
-  background:
-    #302c29;
+  background: #fbfaf8;
 
-  color:
-    rgba(244, 237, 231, 0.58);
+  color: var(--color-text);
 }
 
 .violence::before {
@@ -236,7 +234,7 @@ onBeforeUnmount(() => {
 
   border:
     1px solid
-    rgba(255, 255, 255, 0.045);
+    rgba(116, 103, 93, 0.08);
 
   border-radius: 50%;
 
@@ -254,9 +252,9 @@ onBeforeUnmount(() => {
   width: 340px;
   height: 340px;
 
-  border:
+   border:
     1px solid
-    rgba(255, 255, 255, 0.035);
+    rgba(116, 103, 93, 0.06);
 
   border-radius: 50%;
 
@@ -317,8 +315,7 @@ onBeforeUnmount(() => {
 
   text-transform: uppercase;
 
-  color:
-    rgba(255, 255, 255, 0.48);
+  color: var(--color-accent-dark);
 }
 
 .violence__heading {
@@ -353,7 +350,7 @@ onBeforeUnmount(() => {
   letter-spacing: -0.05em;
 
   color:
-    var(--color-white);
+    var(--color-text-dark);
 }
 
 .violence__heading h2 span {
@@ -362,7 +359,7 @@ onBeforeUnmount(() => {
   font-style: italic;
 
   color:
-    rgba(255, 255, 255, 0.56);
+    var(--color-accent-dark);
 }
 
 .violence__heading > p {
@@ -374,8 +371,7 @@ onBeforeUnmount(() => {
 
   line-height: 1.8;
 
-  color:
-    rgba(255, 255, 255, 0.55);
+  color: var(--color-text);
 }
 
 /* =========================
@@ -436,7 +432,7 @@ onBeforeUnmount(() => {
   letter-spacing: -0.04em;
 
   color:
-    var(--color-white);
+    var(--color-text-dark);
 }
 
 .violence__intro-text {
@@ -451,8 +447,7 @@ onBeforeUnmount(() => {
 
   line-height: 1.8;
 
-  color:
-    rgba(255, 255, 255, 0.52);
+  color: var(--color-text);
 }
 
 .violence__cta {
@@ -468,7 +463,9 @@ onBeforeUnmount(() => {
 
   border-bottom:
     1px solid
-    rgba(255, 255, 255, 0.55);
+    rgba(52, 47, 43, 0.45);
+
+  color: var(--color-text-dark);
 
   font-size: 0.63rem;
 
@@ -478,8 +475,7 @@ onBeforeUnmount(() => {
 
   text-transform: uppercase;
 
-  color:
-    var(--color-white);
+
 }
 
 .violence__cta
@@ -501,9 +497,10 @@ span:last-child {
 ========================= */
 
 .violence__services {
-  border-top:
-    1px solid
-    rgba(255, 255, 255, 0.12);
+   display: grid;
+
+  gap: 12px;
+ 
 }
 
 .violence-service {
@@ -528,16 +525,14 @@ span:last-child {
   align-items: start;
 
   padding:
-    clamp(
-      32px,
-      4vw,
-      48px
-    )
-    0;
+    clamp(32px, 4vw, 48px)
+    clamp(28px, 3.5vw, 46px);
 
-  border-bottom:
+  background: #e7e5e2;
+
+  border:
     1px solid
-    rgba(255, 255, 255, 0.12);
+    rgba(111, 97, 85, 0.12);
 
   opacity: 0;
 
@@ -545,19 +540,10 @@ span:last-child {
     translateY(22px);
 
   transition:
-    opacity
-    0.75s
-    var(--ease-out)
-    var(--delay),
-
-    transform
-    0.75s
-    var(--ease-out)
-    var(--delay),
-
-    padding-left
-    0.4s
-    var(--ease-out);
+    opacity 0.75s var(--ease-out) var(--delay),
+    transform 0.75s var(--ease-out) var(--delay),
+    background 0.45s ease,
+    padding-left 0.4s var(--ease-out);
 }
 
 .violence-service--visible {
@@ -568,7 +554,10 @@ span:last-child {
 }
 
 .violence-service:hover {
-  padding-left: 12px;
+  padding-left:
+    clamp(36px, 4vw, 56px);
+
+  background: #d8d4cf;
 }
 
 /* =========================
@@ -587,23 +576,19 @@ span:last-child {
 
   border:
     1px solid
-    rgba(255, 255, 255, 0.5);
+    var(--color-accent-dark);
 
   border-radius: 50%;
 
   transition:
-    background
-    0.35s ease,
-
-    transform
-    0.35s
-    var(--ease-out);
+    background 0.35s ease,
+    transform 0.35s var(--ease-out);
 }
 
 .violence-service:hover
 .violence-service__marker span {
   background:
-    var(--color-white);
+    var(--color-accent-dark);
 
   transform:
     scale(1.35);
@@ -643,7 +628,7 @@ span:last-child {
   letter-spacing: -0.03em;
 
   color:
-    var(--color-white);
+    var(--color-text-dark);
 }
 
 .violence-service p {
@@ -655,8 +640,7 @@ span:last-child {
 
   line-height: 1.8;
 
-  color:
-    rgba(255, 255, 255, 0.52);
+  color: var(--color-text);
 }
 
 /* =========================
@@ -669,8 +653,7 @@ span:last-child {
   padding-top: 5px;
 
   color:
-    rgba(255, 255, 255, 0.35);
-
+    rgba(52, 47, 43, 0.35);
   transition:
     color 0.3s ease,
     transform
@@ -681,7 +664,7 @@ span:last-child {
 .violence-service:hover
 .violence-service__arrow {
   color:
-    var(--color-white);
+    var(--color-text-dark);
 
   transform:
     translate(4px, -4px);
@@ -708,9 +691,9 @@ span:last-child {
 
   gap: 40px;
 
-  border-top:
+ border-top:
     1px solid
-    rgba(255, 255, 255, 0.12);
+    var(--color-border);
 }
 
 .violence__footer p {
@@ -728,8 +711,7 @@ span:last-child {
 
   line-height: 1.2;
 
-  color:
-    rgba(255, 255, 255, 0.58);
+  color: var(--color-text);
 }
 
 .violence__footer a {
@@ -743,9 +725,7 @@ span:last-child {
 
   padding-bottom: 7px;
 
-  border-bottom:
-    1px solid
-    rgba(255, 255, 255, 0.5);
+  
 
   font-size: 0.62rem;
 
@@ -755,8 +735,12 @@ span:last-child {
 
   text-transform: uppercase;
 
+  border-bottom:
+    1px solid
+    rgba(52, 47, 43, 0.45);
+
   color:
-    var(--color-white);
+    var(--color-text-dark);
 }
 
 /* =========================

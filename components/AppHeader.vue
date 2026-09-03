@@ -33,7 +33,7 @@
         </NuxtLink>
 
         <NuxtLink
-          to="/#por-que-elegirnos"
+          to="/por-que-elegirnos"
           @click="closeMenu"
         >
           ¿Por qué elegirnos?

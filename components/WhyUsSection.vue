@@ -71,12 +71,6 @@
             </p>
           </div>
 
-          <span
-            class="why__arrow"
-            aria-hidden="true"
-          >
-            ↗
-          </span>
         </article>
       </div>
 
@@ -86,10 +80,15 @@
           propia, no una solución genérica.
         </p>
 
-        <a href="#contacto">
-          <span>Cuéntanos tu caso</span>
-          <span aria-hidden="true">↗</span>
-        </a>
+         <NuxtLink to="/#contacto">
+          <span>
+           Cuéntanos tu caso
+          </span>
+
+          <span aria-hidden="true">
+            ↗
+          </span>
+        </ NuxtLink>
       </div>
     </div>
   </section>
@@ -195,7 +194,7 @@ onBeforeUnmount(() => {
   overflow: hidden;
 
  background:
-    #f3eee8;
+    white;
 }
 
 .why__inner {
@@ -318,96 +317,71 @@ onBeforeUnmount(() => {
 ========================= */
 
 .why__list {
-  border-top:
-    1px solid var(--color-border);
-}
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 
+  gap: clamp(14px, 1.8vw, 24px);
+}
 .why__item {
   --delay: 0ms;
 
   position: relative;
 
   min-height:
-    clamp(
-      150px,
-      15vw,
-      205px
-    );
+    clamp(360px, 34vw, 480px);
 
-  display: grid;
+  display: flex;
+  flex-direction: column;
 
-  grid-template-columns:
-    120px
-    minmax(0, 1fr)
-    50px;
+  padding:
+    clamp(34px, 4vw, 58px);
 
-  gap:
-    clamp(
-      25px,
-      5vw,
-      75px
-    );
+  overflow: hidden;
 
-  align-items: center;
+  background: #e8e6e3;
 
-
-  border-bottom:
-    1px solid var(--color-border);
+  border:
+    1px solid
+    rgba(90, 80, 72, 0.1);
 
   opacity: 0;
 
   transform:
     translateY(24px);
 
- padding:
-    clamp(34px, 4vw, 52px)
-    clamp(20px, 2vw, 28px);
-
   transition:
-    background 0.35s ease,
-    transform 0.4s var(--ease-out);
+    opacity 0.75s var(--ease-out) var(--delay),
+    transform 0.6s var(--ease-out),
+    background 0.5s ease,
+    box-shadow 0.5s ease;
 }
 
 .why__item--visible {
   opacity: 1;
-
-  transform:
-    translateY(0);
+  transform: translateY(0);
 }
 
-.why__item::before {
-  content: '';
-
-  position: absolute;
-
-  inset: 0;
-
-  z-index: 0;
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.55
-    );
+.why__item:hover {
+  background: #dcd8d3;
 
   transform:
-    scaleY(0);
+    translateY(-6px);
 
-  transform-origin:
-    bottom center;
-
-  transition:
-    transform 0.45s
-    var(--ease-out);
+  box-shadow:
+    0 22px 50px
+    rgba(52, 47, 43, 0.07);
 }
 
-.why__item:hover::before {
-  transform:
-    scaleY(1);
+
+.why__item:nth-child(2),
+.why__item:nth-child(3) {
+  background: #f1ede8;
 }
 
+.why__item:nth-child(2):hover,
+.why__item:nth-child(3):hover {
+  background: #ddd6d0;
+}
 .why__item:hover {
   padding-left: 18px;
    background:
@@ -437,44 +411,33 @@ onBeforeUnmount(() => {
 ========================= */
 
 .why__symbol {
-  width: 88px;
-  height: 88px;
+  width: 74px;
+  height: 74px;
 
   display: grid;
-
   place-items: center;
+
+  margin-bottom:
+    clamp(55px, 7vw, 95px);
 
   border:
     1px solid
-    rgba(
-      120,
-      110,
-      101,
-      0.2
-    );
+    rgba(116, 103, 93, 0.28);
 
   border-radius: 50%;
 
   transition:
-    transform 0.45s
-    var(--ease-out),
-
-    background 0.45s ease;
+    transform 0.55s var(--ease-out),
+    background 0.4s ease;
 }
 
-.why__item:hover
-.why__symbol {
+.why__item:hover .why__symbol {
   transform:
-    rotate(7deg)
-    scale(1.04);
+    rotate(8deg)
+    scale(1.05);
 
   background:
-    rgba(
-      255,
-      255,
-      255,
-      0.55
-    );
+    rgba(255, 255, 255, 0.42);
 }
 
 .why__shape {
@@ -551,41 +514,26 @@ onBeforeUnmount(() => {
 ========================= */
 
 .why__item-copy {
-  display: grid;
+  display: flex;
+  flex-direction: column;
 
-  grid-template-columns:
-    minmax(220px, 0.65fr)
-    minmax(0, 1fr);
-
-  gap:
-    clamp(
-      30px,
-      6vw,
-      90px
-    );
-
-  align-items: center;
+  max-width: 540px;
 }
 
 .why__item-copy h3 {
-  margin: 0;
+  max-width: 420px;
+
+  margin: 0 0 24px;
 
   font-size:
-    clamp(
-      1.75rem,
-      2.7vw,
-      3rem
-    );
+    clamp(2rem, 3vw, 3.35rem);
 
-  line-height: 1;
+  line-height: 0.98;
 
-  letter-spacing:
-    -0.03em;
+  letter-spacing: -0.04em;
 
-  color:
-    var(--color-text-dark);
+  color: var(--color-text-dark);
 }
-
 .why__item-copy p {
   max-width: 650px;
 
@@ -774,7 +722,25 @@ span:last-child {
 /* =========================
    MÓVIL
 ========================= */
+@media (max-width: 800px) {
+  .why__list {
+    grid-template-columns: 1fr;
+  }
 
+  .why__item {
+    min-height: auto;
+
+    padding:
+      34px 28px 80px;
+  }
+
+  .why__symbol {
+    width: 64px;
+    height: 64px;
+
+    margin-bottom: 48px;
+  }
+}
 @media (max-width: 680px) {
   .why {
     padding:

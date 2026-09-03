@@ -65,21 +65,13 @@
           <span>León</span>
           <span>Ámbito nacional</span>
         </div>
-
-        <a
-          href="#despacho"
-          class="hero__scroll"
-          aria-label="Descubrir el despacho"
+        <NuxtLink
+          to="/por-que-elegirnos"
+          class="hero__why-link"
         >
-          <span class="hero__scroll-number">01</span>
-          <span class="hero__scroll-text">Descubre</span>
-          <span
-            class="hero__scroll-arrow"
-            aria-hidden="true"
-          >
-            ↓
-          </span>
-        </a>
+          <span>Conoce nuestra forma de trabajar</span>
+          <span aria-hidden="true">↗</span>
+        </NuxtLink>
       </div>
     </div>
   </section>
@@ -124,9 +116,7 @@
   flex-direction: column;
 }
 
-/* =========================
-   DECORACIÓN
-========================= */
+
 
 .hero__decoration {
   position: absolute;
@@ -191,9 +181,6 @@
   bottom: -20%;
 }
 
-/* =========================
-   TOP
-========================= */
 
 .hero__top {
   display: flex;
@@ -207,7 +194,68 @@
   border-bottom:
     1px solid var(--color-border);
 }
+.hero__why-link {
+  position: relative;
 
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 8px 0;
+
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  color: var(--color-text-dark);
+  text-decoration: none;
+
+  transition:
+    gap 0.4s var(--ease-out),
+    color 0.3s ease;
+}
+
+.hero__why-link::after {
+  content: '';
+
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+
+  width: 100%;
+  height: 1px;
+
+  background: var(--color-accent-dark);
+
+  transform: scaleX(0.28);
+  transform-origin: left;
+
+  transition:
+    transform 0.5s var(--ease-out);
+}
+
+.hero__why-link span:last-child {
+  font-size: 0.9rem;
+
+  transition:
+    transform 0.4s var(--ease-out);
+}
+
+.hero__why-link:hover {
+  gap: 19px;
+
+  color: var(--color-accent-dark);
+}
+
+.hero__why-link:hover::after {
+  transform: scaleX(1);
+}
+
+.hero__why-link:hover span:last-child {
+  transform: translate(3px, -3px);
+}
 .hero__top p {
   margin: 0;
 
@@ -457,18 +505,15 @@
 
 .hero__footer {
   display: flex;
-
-  justify-content: space-between;
   align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
 
-  gap: 30px;
+  margin-top: clamp(45px, 6vw, 80px);
+  padding-top: 22px;
 
-  padding-top: 18px;
-
-  border-top:
-    1px solid var(--color-border);
+  border-top: 1px solid var(--color-border);
 }
-
 .hero__location {
   display: flex;
 
@@ -705,7 +750,19 @@
 /* =========================
    MÓVILES BAJOS
 ========================= */
+@media (max-width: 700px) {
+  .hero__footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 26px;
 
+    margin-top: 45px;
+  }
+
+  .hero__why-link {
+    font-size: 0.68rem;
+  }
+}
 @media
   (max-width: 640px)
   and (max-height: 720px) {

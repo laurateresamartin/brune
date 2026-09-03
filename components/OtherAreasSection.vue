@@ -29,30 +29,13 @@
             :id="area.id"
             :key="area.id"
             class="other-area"
-            :class="{
-                'other-area--active':
-                activeArea === area.id
-            }"
+           
             >
-          <button
-            type="button"
-            class="other-area__trigger"
-            :aria-expanded="activeArea === area.id"
-            :aria-controls="`panel-${area.id}`"
-            @click="toggleArea(area.id)"
-          >
-            <span class="other-area__title">
-              {{ area.title }}
-            </span>
-
-            <span
-              class="other-area__plus"
-              aria-hidden="true"
-            >
-              +
-            </span>
-          </button>
-
+        <div class="other-area__trigger">
+          <span class="other-area__title">
+            {{ area.title }}
+          </span>
+        </div>
           <div
             :id="`panel-${area.id}`"
             class="other-area__panel"
@@ -355,188 +338,131 @@ const toggleArea = (id: string) => {
 /* =========================
    LIST
 ========================= */
-
 .other-areas__list {
   display: grid;
 
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
   gap:
     clamp(
-      18px,
-      2.2vw,
-      30px
+      16px,
+      2vw,
+      28px
     );
-counter-reset: area;
+
+  align-items: start;
+
+  counter-reset: area;
 }
 
 .other-area {
   position: relative;
 
+  min-height: 400px;
+
   overflow: hidden;
 
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.68
-    );
-
-  border:
-    1px solid
-    rgba(
-      111,
-      97,
-      85,
-      0.14
-    );
-
-  box-shadow:
-    0 18px 50px
-    rgba(
-      69,
-      55,
-      44,
-      0.035
-    );
+  background: #f3f1ee;
 
   transition:
-    border-color
-    0.35s ease,
-    box-shadow
-    0.45s ease,
-    transform
-    0.45s
-    var(--ease-out);
+    background 0.45s ease,
+    transform 0.5s var(--ease-out),
+    box-shadow 0.5s ease;
+}
 
-    scroll-margin-top: 110px;
+.other-area:hover {
+  background: #dedad5;
+
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 20px 45px
+    rgba(52, 47, 43, 0.06);
 }
 
 .other-area::before {
   content: '';
 
   position: absolute;
-
-  top: 0;
-  left: 0;
-
-  width: 3px;
-  height: 100%;
+  inset: 0;
 
   background:
-    var(--color-accent-dark);
+    linear-gradient(
+      145deg,
+      #e7e5e2,
+      #dad6d1
+    );
 
   opacity: 0;
 
   transform:
-    scaleY(0.4);
+    scale(0.15);
 
   transform-origin:
-    top;
+    center center;
 
   transition:
-    opacity
-    0.35s ease,
-    transform
-    0.55s
-    var(--ease-out);
+    transform 0.7s var(--ease-out),
+    opacity 0.18s ease;
+
+  pointer-events: none;
 }
 
-.other-area--active {
-  border-color:
-    rgba(
-      111,
-      97,
-      85,
-      0.24
-    );
-
-  box-shadow:
-    0 22px 58px
-    rgba(
-      69,
-      55,
-      44,
-      0.055
-    );
-
-}
-
+.other-area:hover::before,
 .other-area--active::before {
   opacity: 1;
 
   transform:
-    scaleY(1);
+    scale(1);
 }
+.other-area__trigger,
+.other-area__panel {
+  position: relative;
+  z-index: 2;
+}
+
+
 
 /* =========================
    TRIGGER
 ========================= */
 .other-area__trigger {
-  width: 100%;
+  min-height: 400px;
 
-  display: grid;
-
-  grid-template-columns:
-    auto
-    minmax(0, 1fr)
-    auto;
-
-  align-items: center;
-
-  gap:
-    clamp(
-      22px,
-      3.5vw,
-      44px
-    );
+  display: flex;
+  flex-direction: column;
 
   padding:
-    clamp(
-      26px,
-      3.2vw,
-      40px
-    );
+    clamp(30px, 3vw, 42px);
 
-  border: 0;
-  background: transparent;
-
-  color: var(--color-text-dark);
-
-  text-align: left;
-
-  cursor: pointer;
+  transition:
+    min-height 0.6s var(--ease-out);
 }
-/* número decorativo */
 
+.other-area:hover
+.other-area__trigger {
+  min-height: 230px;
+}
 .other-area__trigger::before {
   content:
-    counter(area);
+    '0' counter(area);
 
-  counter-increment:
-    area;
+  counter-increment: area;
 
-  display: grid;
+  display: block;
 
-  place-items: center;
-
-  width: 46px;
-  height: 46px;
-
-  border:
-    1px solid
-    rgba(
-      111,
-      97,
-      85,
-      0.19
+  margin-bottom:
+    clamp(
+      70px,
+      8vw,
+      110px
     );
-
-  border-radius: 50%;
 
   font-family:
     var(--font-serif);
 
-  font-size: 0.95rem;
+  font-size: 1rem;
 
   font-style: italic;
 
@@ -550,41 +476,36 @@ counter-reset: area;
 ========================= */
 
 .other-area__title {
-  position: relative;
+  margin-top: auto;
 
-  font-family:
-    var(--font-serif);
+  font-family: var(--font-serif);
 
   font-size:
-    clamp(
-      2.2rem,
-      3.5vw,
-      4rem
-    );
+    clamp(2.4rem, 3vw, 3.5rem);
 
-  line-height: 0.98;
+  line-height: 0.96;
 
-  letter-spacing:
-    -0.035em;
+  color: var(--color-text-dark);
+
+  transition:
+    transform 0.5s var(--ease-out);
+}
+
+.other-area:hover
+.other-area__title {
+  transform: translateY(-10px);
+}
+
+
+.other-area:hover
+.other-area__title,
+.other-area--active
+.other-area__title {
+  transform:
+    translateY(-4px);
 
   color:
     var(--color-text-dark);
-
-  transition:
-    color
-    0.35s ease,
-    transform
-    0.45s
-    var(--ease-out);
-}
-
-.other-area--active
-.other-area__title {
-  color:
-    var(--color-accent-dark);
-
-  transform:
-    translateX(5px);
 }
 
 /* =========================
@@ -592,30 +513,51 @@ counter-reset: area;
 ========================= */
 
 .other-area__plus {
-  width: 40px;
-  height: 40px;
+  position: absolute;
+
+  right:
+    clamp(
+      26px,
+      3vw,
+      40px
+    );
+
+  bottom:
+    clamp(
+      26px,
+      3vw,
+      38px
+    );
+
+  width: 42px;
+  height: 42px;
 
   display: grid;
   place-items: center;
 
   border:
     1px solid
-    rgba(90, 84, 78, 0.18);
+    rgba(
+      90,
+      84,
+      78,
+      0.25
+    );
 
   border-radius: 50%;
 
-  font-family: var(--font-sans);
-  font-size: 1rem;
-  font-weight: 300;
+  font-family:
+    var(--font-sans);
 
-  color: var(--color-text-dark);
+  font-size: 1rem;
+
+  color:
+    var(--color-text-dark);
 
   transition:
     transform 0.45s var(--ease-out),
-    background 0.35s ease,
-    border-color 0.35s ease;
+    background 0.35s ease;
 }
-
 .other-area--active
 .other-area__plus {
   transform:
@@ -634,81 +576,55 @@ counter-reset: area;
 
 .other-area__panel {
   display: grid;
+  grid-template-rows: 0fr;
 
-  grid-template-rows:
-    0fr;
-
-  overflow: hidden;
+  opacity: 0;
 
   transition:
-    grid-template-rows
-    0.55s
-    var(--ease-out);
+    grid-template-rows 0.6s var(--ease-out),
+    opacity 0.35s ease;
 }
 
-.other-area--active
-.other-area__panel {
-  grid-template-rows:
-    1fr;
+.other-area:hover .other-area__panel {
+  grid-template-rows: 1fr;
+  opacity: 1;
 }
 
 .other-area__panel-inner {
   min-height: 0;
+  overflow: hidden;
 
-  display: grid;
-
-  grid-template-columns:
-    minmax(0, 1fr)
-    auto;
-
-  gap:
-    clamp(
-      36px,
-      6vw,
-      80px
-    );
-
-  align-items: end;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 
   padding:
     0
-    clamp(30px, 4vw, 54px)
-    clamp(30px, 4vw, 46px)
-    clamp(82px, 8vw, 120px);
+    clamp(30px, 3vw, 42px)
+    clamp(34px, 4vw, 46px);
 }
+
+
+
 
 /* línea fina superior del contenido */
 
 .other-area__panel-inner::before {
   content: '';
 
-  grid-column:
-    1 / -1;
-
   width: 100%;
-
   height: 1px;
 
   background:
-    linear-gradient(
-      90deg,
-      rgba(
-        111,
-        97,
-        85,
-        0.22
-      ),
-      rgba(
-        111,
-        97,
-        85,
-        0
-      )
+    rgba(
+      90,
+      80,
+      72,
+      0.14
     );
 
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
-
 /* =========================
    LIST ITEMS
 ========================= */
@@ -811,7 +727,41 @@ counter-reset: area;
 /* =========================
    HOVER
 ========================= */
+@media (max-width: 850px) {
+  .other-areas__list {
+    grid-template-columns: 1fr;
+  }
 
+  .other-area {
+    min-height: 320px;
+  }
+
+  .other-area__trigger {
+    min-height: 320px;
+  }
+}
+@media (max-width: 850px) {
+  .other-areas__list {
+    grid-template-columns: 1fr;
+  }
+
+  .other-area__panel {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  .other-area__trigger {
+    min-height: auto;
+  }
+
+  .other-area__title {
+    margin-top: 80px;
+  }
+
+  .other-area__arrow {
+    display: none;
+  }
+}
 @media (
   hover: hover
 ) and (
@@ -836,11 +786,7 @@ counter-reset: area;
       );
   }
 
-  .other-area__trigger:hover
-  .other-area__title {
-    color:
-      var(--color-accent-dark);
-  }
+
 
   .other-area__trigger:hover
   .other-area__plus {

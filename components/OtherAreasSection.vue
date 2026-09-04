@@ -370,6 +370,14 @@ const toggleArea = (id: string) => {
       0.54
     );
 
+  border:
+    1px solid
+    rgba(
+      132,
+      118,
+      107,
+      0.19
+    );
   transition:
     background 0.45s ease,
     transform 0.5s var(--ease-out),

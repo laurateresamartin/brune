@@ -4,7 +4,6 @@
 
     <main>
       <HeroSection />
-      <AboutSection />
       <SpecializationsSection />
       <OtherAreasSection />
       <ContactSection />

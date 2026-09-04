@@ -4,8 +4,7 @@
     :class="{
     'header--scrolled': isScrolled,
     'header--menu-open': isMenuOpen,
-    'header--hero': isHome && !isPastHero,
-    'header--default': !isHome || isPastHero
+    'header--default': true
       
     }"
   >
@@ -28,12 +27,6 @@
         :class="{ 'header__nav--open': isMenuOpen }"
         aria-label="Navegación principal"
       >
-        <NuxtLink
-          to="/#despacho"
-          @click="closeMenu"
-        >
-          El Despacho
-        </NuxtLink>
 
         <NuxtLink
           to="/por-que-elegirnos"
@@ -209,24 +202,6 @@ const isPastHero = ref(false)
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 20
 
-  if (route.path !== '/') {
-    isPastHero.value = true
-    return
-  }
-
-  const hero =
-    document.querySelector<HTMLElement>('#inicio')
-
-  if (!hero) {
-    isPastHero.value = true
-    return
-  }
-
-  const heroBottom =
-    hero.offsetTop + hero.offsetHeight
-
-  isPastHero.value =
-    window.scrollY > heroBottom - 100
 }
 onBeforeUnmount(() => {
   window.removeEventListener(
@@ -787,10 +762,7 @@ span:last-child {
     top 0.3s var(--ease-out),
     transform 0.3s var(--ease-out);
 }
-.header--hero {
-  background: rgba(251, 250, 248, .98);
-  border-bottom-color: transparent;
-}
+
 
 .header--default {
   background: rgba(222, 219, 215, .97);

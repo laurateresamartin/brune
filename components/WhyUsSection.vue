@@ -23,6 +23,19 @@
           </p>
         </div>
       </div>
+      <div class="why__portrait">
+      <div class="why__portrait-image">
+        <img
+          src="/images/ana-despacho.jpg"
+          alt="Ana Páramo Moratinos, letrada de Bruné Abogacía y Mediación"
+        >
+      </div>
+
+      <div class="why__portrait-info">
+        <span>Ana Páramo Moratinos</span>
+        <span>Letrada · Bruné Abogacía y Mediación</span>
+      </div>
+    </div>
 
       <div class="why__list">
         <article
@@ -311,7 +324,88 @@ onBeforeUnmount(() => {
       0.72
     );
 }
+/* =========================
+   RETRATO
+========================= */
 
+.why__portrait {
+  width: min(100%, 980px);
+
+  margin:
+    0
+    auto
+    clamp(75px, 9vw, 130px);
+}
+
+.why__portrait-image {
+  position: relative;
+
+  width: 100%;
+
+  height:
+    clamp(480px, 55vw, 720px);
+
+  padding: 14px;
+
+  background: #eee7df;
+}
+
+.why__portrait-image::before {
+  content: '';
+
+  position: absolute;
+
+  width: clamp(180px, 25vw, 340px);
+  aspect-ratio: 1;
+
+  right: -8%;
+  top: -10%;
+
+  border:
+    1px solid
+    rgba(132, 118, 107, .16);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.why__portrait-image img {
+  position: relative;
+  z-index: 1;
+
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+}
+
+.why__portrait-info {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 30px;
+
+  padding-top: 16px;
+}
+
+.why__portrait-info span {
+  font-size: .62rem;
+
+  letter-spacing: .12em;
+  text-transform: uppercase;
+
+  color: var(--color-accent-dark);
+}
+
+.why__portrait-info span:first-child {
+  color: var(--color-text-dark);
+}
 /* =========================
    LISTA
 ========================= */
@@ -739,6 +833,32 @@ span:last-child {
     height: 64px;
 
     margin-bottom: 48px;
+  }
+}
+@media (max-width: 680px) {
+  .why__portrait {
+    margin-bottom: 70px;
+  }
+
+  .why__portrait-image {
+    height: auto;
+    aspect-ratio: 4 / 5;
+
+    padding: 10px;
+  }
+
+  .why__portrait-image::before {
+    right: -20%;
+    top: -6%;
+  }
+
+  .why__portrait-info {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 6px;
+
+    padding-top: 13px;
   }
 }
 @media (max-width: 680px) {

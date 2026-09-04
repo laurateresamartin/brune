@@ -55,8 +55,12 @@
               :aria-expanded="isSpecializationOpen"
               @click="toggleSpecialization"
             >
-              <span>Especialización</span>
-
+              <NuxtLink
+                to="/#especializacion"
+                @click="closeMenu"
+              >
+                Especialización
+              </NuxtLink>
               <svg
                 class="header__dropdown-icon"
                 viewBox="0 0 10 6"

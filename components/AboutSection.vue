@@ -94,11 +94,6 @@
       </div>
 
       <div class="about__footer">
-        <p>
-          Asesoramiento jurídico sólido,
-          personalizado y de calidad.
-        </p>
-
         <span aria-hidden="true">
           Bruné
         </span>

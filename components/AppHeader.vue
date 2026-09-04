@@ -27,7 +27,12 @@
         :class="{ 'header__nav--open': isMenuOpen }"
         aria-label="Navegación principal"
       >
-
+  <NuxtLink
+        to="/#inicio"
+        @click="closeMenu"
+      >
+        Inicio
+      </NuxtLink>
         <NuxtLink
           to="/por-que-elegirnos"
           @click="closeMenu"

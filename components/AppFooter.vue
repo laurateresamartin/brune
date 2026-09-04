@@ -23,11 +23,11 @@
               <NuxtLink to="/#inicio">
                 Inicio
               </NuxtLink>
-
-              <NuxtLink to="/#despacho">
-                El Despacho
+                <NuxtLink
+                  to="/por-que-elegirnos"
+                >
+                  ¿Por qué elegirnos?
               </NuxtLink>
-
               <NuxtLink to="/#especializacion">
                 Especialización
               </NuxtLink>

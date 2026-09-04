@@ -217,7 +217,7 @@ const toggleArea = (id: string) => {
     var(--page-padding);
 
   background:
-    #f2f0ed;
+    #fbfaf8;
 }
 
 .other-areas__inner {
@@ -363,7 +363,12 @@ const toggleArea = (id: string) => {
 
   overflow: hidden;
 
-  background: #faf9f7;
+  background: rgba(
+      255,
+      255,
+      255,
+      0.54
+    );
 
   transition:
     background 0.45s ease,
@@ -372,13 +377,13 @@ const toggleArea = (id: string) => {
 }
 
 .other-area:hover {
-  background: #dedad5;
+  background: #e4d8cc;
 
   transform: translateY(-4px);
 
   box-shadow:
     0 20px 45px
-    rgba(52, 47, 43, 0.06);
+    rgba(77, 61, 49, 0.07);
 }
 
 .other-area::before {
@@ -387,13 +392,12 @@ const toggleArea = (id: string) => {
   position: absolute;
   inset: 0;
 
-  background:
+ background:
     linear-gradient(
       145deg,
-      #e7e5e2,
-      #dad6d1
+      #eee6dd,
+      #e4d8cc
     );
-
   opacity: 0;
 
   transform:

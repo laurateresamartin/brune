@@ -266,8 +266,9 @@ const sendToWhatsApp = () => {
     50px
     var(--page-padding);
 
-  background:
-    var(--color-background-soft);
+   background:
+    #f2f0ed;
+
 }
 
 .contact__inner {

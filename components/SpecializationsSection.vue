@@ -347,7 +347,9 @@ onBeforeUnmount(() => {
     var(--page-padding);
 
   background:
-    #fbfaf8;
+    #f2f0ed;
+
+    
 }
 
 .specializations__inner {
@@ -514,13 +516,7 @@ onBeforeUnmount(() => {
       0.19
     );
 
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.54
-    );
+  background:#faf9f7;
 
   color:
     var(--color-text-dark);
@@ -578,10 +574,10 @@ transform:
   inset: 0;
 
   background:
-    linear-gradient(
+   linear-gradient(
       145deg,
-      #eee6dd,
-      #e4d8cc
+      #e7e5e2,
+      #dad6d1
     );
 
   opacity: 0;

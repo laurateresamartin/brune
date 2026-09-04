@@ -144,7 +144,10 @@ const areas = [
       'Alimentos y Visitas',
       'Convenios Reguladores',
       'Modificación de Medidas',
-      'Incumplimiento de Sentencias'
+      'Incumplimiento de Sentencias',
+      'Filiación y Adopción',
+      'Jurisdicción Voluntaria',
+      'Medidas de Apoyo',
     ]
   },
   {
@@ -155,9 +158,6 @@ const areas = [
       'Menores',
 
     items: [
-      'Filiación y Adopción',
-      'Jurisdicción Voluntaria',
-      'Medidas de Apoyo',
       'Procesos de Oposición a Resoluciones Administrativas en Materia de Protección de Menores'
     ]
   },

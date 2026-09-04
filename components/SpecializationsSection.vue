@@ -343,7 +343,7 @@ onBeforeUnmount(() => {
   position: relative;
 
   padding:
-    var(--section-space)
+    40px
     var(--page-padding);
 
   background:

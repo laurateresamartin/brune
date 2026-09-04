@@ -213,7 +213,7 @@ const toggleArea = (id: string) => {
     background
     0.35s ease;
   padding:
-    var(--section-space)
+    100px
     var(--page-padding);
 
   background:

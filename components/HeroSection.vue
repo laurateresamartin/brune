@@ -528,7 +528,7 @@
   align-items: start;
 
   margin-top:
-    clamp(100px, 12vw, 30px);
+    clamp(20px, 12vw, 30px);
 
   padding-top:
     clamp(55px, 7vw, 90px);
@@ -672,7 +672,7 @@
   gap: 40px;
 
   margin-top:
-    clamp(70px, 8vw, 110px);
+    clamp(40px, 8vw, 10px);
 
   padding-top: 22px;
 

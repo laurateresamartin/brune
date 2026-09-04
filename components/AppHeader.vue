@@ -103,6 +103,13 @@
       >
         Otras Áreas
       </NuxtLink>
+       <NuxtLink
+          to="/#contacto"
+          @click="closeMenu"
+        >
+          Contacto
+        </NuxtLink>
+
 
         <NuxtLink
           to="/#contacto"

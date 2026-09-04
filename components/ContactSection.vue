@@ -263,7 +263,7 @@ const sendToWhatsApp = () => {
   position: relative;
 
   padding:
-    var(--section-space)
+    50px
     var(--page-padding);
 
   background:

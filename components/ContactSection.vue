@@ -190,13 +190,25 @@
                   : 'Enviar consulta'
                 }}
               </span>
-
               <span
-                v-if="!isSending"
+               v-if="!isSending"
+                class="link-arrow"
                 aria-hidden="true"
               >
-                ↗
+                <svg
+                  viewBox="0 0 20 20"
+                  fill="none"
+                >
+                  <path
+                    d="M5 15L15 5M8 5H15V12"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="square"
+                    stroke-linejoin="miter"
+                  />
+                </svg>
               </span>
+            
             </button>
             <p
               v-if="submitStatus === 'success'"
@@ -294,6 +306,23 @@ const sendForm = async () => {
 
   background:
     #fbfaf8;
+}
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 13px;
+  height: 13px;
+
+  flex-shrink: 0;
+}
+
+.link-arrow svg {
+  display: block;
+
+  width: 100%;
+  height: 100%;
 }
 
 .contact__inner {

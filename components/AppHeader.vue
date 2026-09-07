@@ -45,30 +45,36 @@
             'header__dropdown--open': isSpecializationOpen
           }"
         >
-          <button
-            type="button"
-            class="header__dropdown-trigger"
-            aria-haspopup="true"
-            :aria-expanded="isSpecializationOpen"
-            @click="toggleSpecialization"
-          >
-            <span>
-              Especialización
-            </span>
+          <div class="header__dropdown-trigger">
+  <NuxtLink
+    to="/#especializacion"
+    class="header__dropdown-main-link"
+    @click="closeMenu"
+  >
+    Especialización
+  </NuxtLink>
 
-            <svg
-              class="header__dropdown-icon"
-              viewBox="0 0 10 6"
-              fill="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M1 1L5 5L9 1"
-                stroke="currentColor"
-                stroke-width="1"
-              />
-            </svg>
-          </button>
+  <button
+    type="button"
+    class="header__dropdown-toggle"
+    aria-label="Mostrar áreas de especialización"
+    :aria-expanded="isSpecializationOpen"
+    @click="toggleSpecialization"
+  >
+    <svg
+      class="header__dropdown-icon"
+      viewBox="0 0 10 6"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M1 1L5 5L9 1"
+        stroke="currentColor"
+        stroke-width="1"
+      />
+    </svg>
+  </button>
+          </div>
 
           <div class="header__dropdown-menu">
             <NuxtLink
@@ -117,7 +123,23 @@
           
       >
         <span>Reserva tu cita</span>
-        <span aria-hidden="true">↗</span>
+        <span
+          class="link-arrow"
+          aria-hidden="true"
+        >
+          <svg
+            viewBox="0 0 20 20"
+            fill="none"
+          >
+            <path
+              d="M5 15L15 5M8 5H15V12"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="square"
+              stroke-linejoin="miter"
+            />
+          </svg>
+        </span>
       </a>
 
       <button
@@ -262,6 +284,9 @@ onBeforeUnmount(() => {
     rgba(57, 48, 41, 0.05);
  
 }
+.specializations {
+  scroll-margin-top: 90px;
+}
 .header::after {
   content: '';
 
@@ -276,7 +301,23 @@ onBeforeUnmount(() => {
   background:
     rgba(116, 103, 93, 0.16);
 }
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
+  width: 13px;
+  height: 13px;
+
+  flex-shrink: 0;
+}
+
+.link-arrow svg {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+}
 .header__inner {
   width:
     min(
@@ -310,6 +351,26 @@ onBeforeUnmount(() => {
   z-index: 20;
   width: 100%;
    padding: 25px 0;
+}
+.header__dropdown-main-link {
+  flex: 1;
+  color: inherit;
+  text-decoration: none;
+}
+
+.header__dropdown-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 8px;
+  margin: -8px;
+
+  border: 0;
+  background: transparent;
+
+  color: inherit;
+  cursor: pointer;
 }
 
 .header__logo {
@@ -816,6 +877,25 @@ span:last-child {
       1fr
       auto;
   }
+  .header__dropdown-main-link {
+  flex: 1;
+
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+
+  color: inherit;
+}
+
+.header__dropdown-toggle {
+  width: 46px;
+  height: 46px;
+
+  flex: 0 0 46px;
+
+  margin: 0;
+  padding: 0;
+}
 
   .header__cta {
     display: none;

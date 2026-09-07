@@ -57,7 +57,8 @@
               </a>
 
               <span>
-                León
+                Avda. Gran Vía de San Marcos,
+                N.º 42, 1ºB, 24002 León
               </span>
 
             </nav>

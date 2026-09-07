@@ -44,30 +44,60 @@
                   {{ item }}
                 </li>
               </ul>
-
-              <a href="#contacto">
+  <NuxtLink to="/#contacto">
+         
+            
                 <span>
                   Consultar
                 </span>
 
-                <span aria-hidden="true">
-                  ↗
+               <span
+                  class="link-arrow"
+                  aria-hidden="true"
+                >
+                  <svg
+                    viewBox="0 0 20 20"
+                    fill="none"
+                  >
+                    <path
+                      d="M5 15L15 5M8 5H15V12"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="square"
+                      stroke-linejoin="miter"
+                    />
+                  </svg>
                 </span>
-              </a>
+              </NuxtLink>
+            
             </div>
           </div>
         </article>
       </div>
 
       <div class="other-areas__footer">
-        <a href="#contacto">
+        <NuxtLink to="/#contacto">
           <span>
             Contactar
           </span>
-          <span aria-hidden="true">
-            ↗
+          <span
+            class="link-arrow"
+            aria-hidden="true"
+          >
+            <svg
+              viewBox="0 0 20 20"
+              fill="none"
+            >
+              <path
+                d="M5 15L15 5M8 5H15V12"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="square"
+                stroke-linejoin="miter"
+              />
+            </svg>
           </span>
-        </a>
+        </NuxtLink>
       </div>
     </div>
   </section>
@@ -302,7 +332,23 @@ const toggleArea = (id: string) => {
   color:
     var(--color-accent-dark);
 }
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
+  width: 13px;
+  height: 13px;
+
+  flex-shrink: 0;
+}
+
+.link-arrow svg {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+}
 .other-areas__heading > p {
   margin: 0;
 

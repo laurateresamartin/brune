@@ -41,19 +41,29 @@
               la confidencialidad, la sensibilidad
               y una implicación profesional absoluta.
             </p>
-
-            <a
-              href="#contacto"
-              class="violence__cta"
-            >
-              <span>
-                Solicita asesoramiento
-              </span>
-
-              <span aria-hidden="true">
-                ↗
-              </span>
-            </a>
+<NuxtLink to="/#contacto"  class="violence__cta">
+                <span>
+                    Solicita asesoramiento
+                </span>
+               <span
+                  class="link-arrow"
+                  aria-hidden="true"
+                >
+                  <svg
+                    viewBox="0 0 20 20"
+                    fill="none"
+                  >
+                    <path
+                      d="M5 15L15 5M8 5H15V12"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="square"
+                      stroke-linejoin="miter"
+                    />
+                  </svg>
+                </span>
+              </NuxtLink>
+         
           </div>
         </aside>
 
@@ -85,12 +95,23 @@
               </p>
             </div>
 
-            <span
-              class="violence-service__arrow"
-              aria-hidden="true"
-            >
-              ↗
-            </span>
+           <span
+                class="link-arrow"
+                aria-hidden="true"
+              >
+                <svg
+                  viewBox="0 0 20 20"
+                  fill="none"
+                >
+                  <path
+                    d="M5 15L15 5M8 5H15V12"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="square"
+                    stroke-linejoin="miter"
+                  />
+                </svg>
+              </span>
           </article>
         </div>
       </div>
@@ -106,9 +127,23 @@
               Contactar
             </span>
 
-            <span aria-hidden="true">
-              ↗
-            </span>
+           <span
+                class="link-arrow"
+                aria-hidden="true"
+              >
+                <svg
+                  viewBox="0 0 20 20"
+                  fill="none"
+                >
+                  <path
+                    d="M5 15L15 5M8 5H15V12"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="square"
+                    stroke-linejoin="miter"
+                  />
+                </svg>
+              </span>
         </ NuxtLink>
       </div>
     </div>
@@ -317,7 +352,23 @@ onBeforeUnmount(() => {
 
   color: var(--color-accent-dark);
 }
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
+  width: 13px;
+  height: 13px;
+
+  flex-shrink: 0;
+}
+
+.link-arrow svg {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+}
 .violence__heading {
   display: grid;
 

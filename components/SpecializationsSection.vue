@@ -230,7 +230,7 @@
       <div class="specializations__footer">
         <p>
           Cada asunto requiere una estrategia
-          jurídica adaptada a sus circunstancias.
+          jurídica adaptada a tus circunstancias.
         </p>
 
         <NuxtLink to="/#contacto">
@@ -264,13 +264,12 @@ const areas = [
   {
     id: 'familia',
 
-    icon: 'family',
+    icon: 'violence',
 
     title:
       'Derecho de Familia y Menores',
 
-    text:
-      'Asesoramiento y asistencia jurídica en procedimientos familiares, protección de menores, medidas de familia, rupturas y situaciones de especial sensibilidad.',
+    text:'Asesoramiento y asistencia jurídica en procedimientos familiares: divorcios, custodias, medidas paterno filiales, alimentos, modificación de medidas y situaciones de especial sensibilidad.',
 
     href:
       '/derecho-familia'
@@ -278,7 +277,7 @@ const areas = [
   {
     id: 'mediacion',
 
-    icon: 'mediation',
+    icon:'family',
 
     title:
       'Mediación Familiar',
@@ -292,13 +291,13 @@ const areas = [
   {
     id: 'violencia',
 
-    icon: 'violence',
+    icon:  'mediation',
 
     title:
       'Violencia de Género',
 
     text:
-      'Asesoramiento jurídico inmediato, confidencial y especializado, con acompañamiento durante todas las fases del procedimiento.',
+      'Asesoramiento jurídico inmediato y especializado, con acompañamiento durante todas las fases del procedimiento.',
 
     href:
       '/violencia-genero'

@@ -24,12 +24,12 @@
         </div>
       </div>
       <div class="why__portrait">
-      <div class="why__portrait-image">
+      <!-- <div class="why__portrait-image">
         <img
           src="/images/ana-despacho.jpg"
           alt="Ana Páramo Moratinos, letrada de Bruné Abogacía y Mediación"
         >
-      </div>
+      </div> -->
 
       <div class="why__portrait-info">
         <span>Ana Páramo Moratinos</span>

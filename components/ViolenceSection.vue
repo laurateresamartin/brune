@@ -14,7 +14,7 @@
           <h2>
             Asistencia jurídica
             <span>
-              especializada y confidencial.
+              especializada.
             </span>
           </h2>
 
@@ -134,7 +134,7 @@ const services = [
       'Asesoramiento jurídico inmediato',
 
     text:
-      'Atención jurídica confidencial y altamente especializada desde el primer momento.'
+      'Atención jurídica y altamente especializada desde el primer momento.'
   },
   {
     title:

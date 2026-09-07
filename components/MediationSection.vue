@@ -83,11 +83,6 @@
       </div>
 
       <div class="mediation__closing">
-        <p>
-          Hay conflictos que pueden encontrar
-          solución a través del diálogo.
-        </p>
-
         <NuxtLink to="/#contacto">
           <span>
             Solicita una consulta

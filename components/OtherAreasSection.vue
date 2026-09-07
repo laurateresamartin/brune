@@ -15,11 +15,6 @@
             <span>más allá del ámbito familiar.</span>
           </h2>
 
-          <p>
-            El despacho presta también asistencia
-            en otras materias jurídicas, con un enfoque
-            cercano, riguroso y adaptado a cada caso.
-          </p>
         </div>
       </div>
 
@@ -65,17 +60,10 @@
       </div>
 
       <div class="other-areas__footer">
-        <p>
-          Si tu consulta no encaja en estas áreas,
-          puedes contactar con el despacho para valorar
-          tu caso de forma personalizada.
-        </p>
-
         <a href="#contacto">
           <span>
             Contactar
           </span>
-
           <span aria-hidden="true">
             ↗
           </span>
@@ -119,7 +107,6 @@ const areas = [
       'Visados y permisos de residencia',
       'Nacionalidad española',
       'Expulsiones y recursos',
-      'Matrimonios entre personas de diferentes nacionalidades',
       'Homologaciones de títulos'
     ]
   },
@@ -131,9 +118,7 @@ const areas = [
 
     items: [
       'Asesoramiento legal en materia penal',
-      'Asistencia letrada',
-      'Defensa',
-      'Acusación'
+      'Asistencia letrada, Defensa y Acusación'
     ]
   }
 ]

@@ -96,7 +96,7 @@
 
           <form
             class="contact__form"
-            @submit.prevent="sendToWhatsApp"
+            @submit.prevent="sendForm"
           >
             <div class="contact__field">
               <label for="name">
@@ -179,20 +179,38 @@
             </label>
 
 
-            <button
+           <button
               type="submit"
               class="contact__submit"
+              :disabled="isSending"
             >
               <span>
-                Enviar consulta
+                {{ isSending
+                  ? 'Enviando...'
+                  : 'Enviar consulta'
+                }}
               </span>
 
-              <span aria-hidden="true">
+              <span
+                v-if="!isSending"
+                aria-hidden="true"
+              >
                 ↗
               </span>
             </button>
-            <p class="contact__whatsapp-note">
-              Al continuar, se abrirá WhatsApp con tu consulta preparada.
+            <p
+              v-if="submitStatus === 'success'"
+              class="contact__status contact__status--success"
+            >
+              Gracias. Tu consulta se ha enviado correctamente.
+            </p>
+
+            <p
+              v-if="submitStatus === 'error'"
+              class="contact__status contact__status--error"
+            >
+              No hemos podido enviar tu consulta.
+              Por favor, inténtalo de nuevo.
             </p>
           </form>
 
@@ -209,13 +227,9 @@
 
 <script setup lang="ts">
 import {
-  nextTick,
-  onMounted,
   reactive,
   ref
 } from 'vue'
-
-
 
 const form = reactive({
   name: '',
@@ -225,37 +239,49 @@ const form = reactive({
   privacy: false
 })
 
-const sendToWhatsApp = () => {
-  const phone = '34647506871'
+const isSending = ref(false)
 
-  const whatsappMessage = `
-    Hola, contacto desde la web de Bruné Abogacía y Mediación.
+const submitStatus = ref<
+  'idle' | 'success' | 'error'
+>('idle')
 
-    Nombre: ${form.name}
-    Email: ${form.email}
-    Asunto: ${form.subject}
+const sendForm = async () => {
+  if (isSending.value) {
+    return
+  }
 
-    Consulta:
-    ${form.message}
-      `.trim()
+  isSending.value = true
+  submitStatus.value = 'idle'
 
-  const whatsappUrl =
-    `https://wa.me/${phone}?text=${encodeURIComponent(whatsappMessage)}`
+  try {
+    await $fetch('/api/contacto', {
+      method: 'POST',
 
-  window.open(
-    whatsappUrl,
-    '_blank',
-    'noopener,noreferrer'
-  )
+      body: {
+        name: form.name,
+        email: form.email,
+        subject: form.subject,
+        message: form.message
+      }
+    })
+
+    submitStatus.value = 'success'
 
     form.name = ''
     form.email = ''
     form.subject = ''
     form.message = ''
     form.privacy = false
+  }
+  catch (error) {
+    console.error(error)
+
+    submitStatus.value = 'error'
+  }
+  finally {
+    isSending.value = false
+  }
 }
-
-
 </script>
 
 <style scoped>
@@ -266,9 +292,8 @@ const sendToWhatsApp = () => {
     50px
     var(--page-padding);
 
-   background:
-    #f2f0ed;
-
+  background:
+    #fbfaf8;
 }
 
 .contact__inner {
@@ -404,16 +429,51 @@ const sendToWhatsApp = () => {
 }
 
 .contact__appointment {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+
+  width: fit-content;
+
   margin:
-    0
+    8px
     0
     55px;
 
-  font-size: 0.8rem;
+  padding:
+    11px
+    17px;
 
-  letter-spacing: 0.05em;
+  background:
+    var(--color-beige-light);
+
+  border:
+    1px solid
+    rgba(132, 118, 107, 0.18);
+
+  font-size: 0.68rem;
+  font-weight: 600;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 
   color:
+    var(--color-text-dark);
+}
+
+.contact__appointment::before {
+  content: '';
+
+  width: 7px;
+  height: 7px;
+
+  flex: 0 0 7px;
+
+  border-radius: 50%;
+
+  background:
     var(--color-accent-dark);
 }
 /* =========================
@@ -468,7 +528,8 @@ const sendToWhatsApp = () => {
 
 .contact__details {
   border-top:
-    1px solid var(--color-border);
+    1px solid
+    rgba(72, 63, 56, 0.12);
 }
 
 .contact__detail {
@@ -485,7 +546,8 @@ const sendToWhatsApp = () => {
     0;
 
   border-bottom:
-    1px solid var(--color-border);
+    1px solid
+    rgba(72, 63, 56, 0.12);
 }
 
 .contact__label {
@@ -570,7 +632,6 @@ const sendToWhatsApp = () => {
 /* =========================
    FORM HEADER
 ========================= */
-
 .contact__form-wrapper {
   padding:
     clamp(
@@ -580,11 +641,15 @@ const sendToWhatsApp = () => {
     );
 
   background:
-    rgba(255, 255, 255, 0.52);
+    #ffffff;
 
   border:
     1px solid
     rgba(100, 92, 85, 0.12);
+
+  box-shadow:
+    0 18px 50px
+    rgba(66, 57, 50, 0.04);
 }
 
 .contact__form-heading {
@@ -945,13 +1010,20 @@ span:last-child {
   }
 
   .contact__map {
-    height: 300px;
+    width: 100%;
+    height: 290px;
 
-    min-height: 0;
+    margin-top: 14px;
 
-    margin-top: 38px;
+    overflow: hidden;
+
+    border:
+      1px solid
+      rgba(100, 92, 85, 0.12);
+
+    background:
+      #ffffff;
   }
-
   .contact__form-wrapper {
     padding:
       35px

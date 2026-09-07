@@ -91,12 +91,6 @@
       </div>
 
       <div class="family__footer">
-        <p>
-          Cada procedimiento requiere una valoración
-          jurídica específica y adaptada a la realidad
-          de cada familia.
-        </p>
-
         <NuxtLink to="/#contacto">
           <span>
             Solicita una consulta

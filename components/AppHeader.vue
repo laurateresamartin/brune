@@ -16,7 +16,7 @@
         @click="closeMenu"
       >
         <img
-          src="/images/logo-small-transparent.png"
+          src="/images/logo_definitivo.png"
           alt="Bruné Abogacía y Mediación"
           class="header__logo"
         >
@@ -39,66 +39,63 @@
         >
           ¿Por qué elegirnos?
         </NuxtLink>
-
         <div
-            class="header__dropdown"
-            :class="{
-              'header__dropdown--open': isSpecializationOpen
-            }"
+          class="header__dropdown"
+          :class="{
+            'header__dropdown--open': isSpecializationOpen
+          }"
+        >
+          <button
+            type="button"
+            class="header__dropdown-trigger"
+            aria-haspopup="true"
+            :aria-expanded="isSpecializationOpen"
+            @click="toggleSpecialization"
           >
-            <button
-              type="button"
-              class="header__dropdown-trigger"
-              aria-haspopup="true"
-              :aria-expanded="isSpecializationOpen"
-              @click="toggleSpecialization"
+            <span>
+              Especialización
+            </span>
+
+            <svg
+              class="header__dropdown-icon"
+              viewBox="0 0 10 6"
+              fill="none"
+              aria-hidden="true"
             >
-              <NuxtLink
-                to="/#especializacion"
-                @click="closeMenu"
-              >
-                Especialización
-              </NuxtLink>
-              <svg
-                class="header__dropdown-icon"
-                viewBox="0 0 10 6"
-                fill="none"
-                aria-hidden="true"
-              >
-                <path
-                  d="M1 1L5 5L9 1"
-                  stroke="currentColor"
-                  stroke-width="1"
-                />
-              </svg>
-            </button>
+              <path
+                d="M1 1L5 5L9 1"
+                stroke="currentColor"
+                stroke-width="1"
+              />
+            </svg>
+          </button>
 
-            <div class="header__dropdown-menu">
-              <NuxtLink
-                to="/derecho-familia"
-                @click="closeMenu"
-              >
-                Derecho de Familia y Menores
-              </NuxtLink>
+          <div class="header__dropdown-menu">
+            <NuxtLink
+              to="/derecho-familia"
+              @click="closeMenu"
+            >
+              Derecho de Familia y Menores
+            </NuxtLink>
 
-              <NuxtLink
-                to="/mediacion-familiar"
-                @click="closeMenu"
-              >
-                Mediación Familiar
-              </NuxtLink>
+            <NuxtLink
+              to="/mediacion-familiar"
+              @click="closeMenu"
+            >
+              Mediación Familiar
+            </NuxtLink>
 
-              <NuxtLink
-                to="/violencia-genero"
-                @click="closeMenu"
-              >
-                Violencia de Género
-              </NuxtLink>
-            </div>
+            <NuxtLink
+              to="/violencia-genero"
+              @click="closeMenu"
+            >
+              Violencia de Género
+            </NuxtLink>
+          </div>
         </div>
 
         <NuxtLink
-        to="/#otras-areas"
+        to="/otras-areas"
         @click="closeMenu"
       >
         Otras Áreas
@@ -110,14 +107,6 @@
           Contacto
         </NuxtLink>
 
-
-        <NuxtLink
-          to="/#contacto"
-          class="header__mobile-contact"
-          @click="closeMenu"
-        >
-          Contacto
-      </NuxtLink>
       </nav>
 
       <a
@@ -820,79 +809,10 @@ span:last-child {
 /* =========================
    TABLET / MENÚ
 ========================= */
-
 @media (max-width: 1100px) {
-  .header__dropdown {
-  width: 100%;
-  display: block;
-}
-
-.header__dropdown-menu {
-  position: static;
-
-  width: 100%;
-  min-width: 0;
-
-  padding: 0;
-
-  border: 0;
-  box-shadow: none;
-
-  background: transparent;
-
-  opacity: 1;
-  visibility: visible;
-
-  transform: none;
-
-  pointer-events: auto;
-
-  max-height: 0;
-  overflow: hidden;
-
-  transition:
-    max-height 0.45s var(--ease-out);
-}
-
-.header__dropdown--open
-.header__dropdown-menu {
-  max-height: 260px;
-}
-
-.header__dropdown-menu a {
-  padding:
-    12px
-    0
-    12px
-    20px;
-
-  border-bottom:
-    1px solid
-    var(--color-border);
-
-  font-family:
-    var(--font-sans);
-
-  font-size:
-    0.72rem;
-
-  font-weight: 500;
-
-  letter-spacing:
-    0.07em;
-
-  text-transform:
-    uppercase;
-}
-
-.header__dropdown-menu a:hover {
-  padding-left: 26px;
-
-  background: transparent;
-}
   .header__inner {
     grid-template-columns:
-      minmax(150px, 220px)
+      minmax(145px, 210px)
       1fr
       auto;
   }
@@ -903,14 +823,14 @@ span:last-child {
 
   .header__menu-button {
     display: block;
-
     grid-column: 3;
   }
 
   .header__nav {
     position: fixed;
 
-    inset: 0;
+    inset:
+      0;
 
     z-index: 10;
 
@@ -919,87 +839,215 @@ span:last-child {
     display: flex;
     flex-direction: column;
 
-    align-items: flex-start;
-    justify-content: center;
+    align-items: stretch;
+    justify-content: flex-start;
 
     gap: 0;
 
     padding:
       130px
-      var(--page-padding)
-      60px;
+      clamp(28px, 6vw, 70px)
+      55px;
 
     background:
-      rgba(244, 241, 236, 0.985);
+      rgba(222, 219, 215, 0.995);
 
     opacity: 0;
-
     visibility: hidden;
-
     pointer-events: none;
 
     transform:
-      translateY(-15px);
+      translateY(-10px);
 
     transition:
-      opacity 0.4s ease,
-      visibility 0.4s ease,
-      transform 0.4s var(--ease-out);
+      opacity 0.35s ease,
+      visibility 0.35s ease,
+      transform 0.35s var(--ease-out);
+
+    overflow-y: auto;
   }
 
   .header__nav--open {
     opacity: 1;
-
     visibility: visible;
-
     pointer-events: auto;
 
     transform:
       translateY(0);
   }
-.header__nav > a,
-.header__dropdown-trigger {
-  width: 100%;
 
-  padding: 17px 0;
+  .header__nav > a,
+  .header__dropdown-trigger {
+    width: 100%;
 
-  border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-  border-bottom:
-    1px solid
-    var(--color-border);
+    padding:
+      20px
+      0;
 
-  font-family:
-    var(--font-serif);
+    border: 0;
 
-  font-size:
-    clamp(
-      2rem,
-      6vw,
-      4.5rem
-    );
+    border-bottom:
+      1px solid
+      rgba(72, 63, 56, 0.14);
 
-  font-weight: 400;
-  line-height: 1;
+    background: transparent;
 
-  letter-spacing: -0.035em;
-  text-transform: none;
+    font-family:
+      var(--font-serif);
 
-  color:
-    var(--color-text-dark);
+    font-size:
+      clamp(
+        2rem,
+        5.6vw,
+        1.3rem
+      );
 
-  text-align: left;
-}
+    font-weight: 400;
+
+    line-height: 1;
+
+    letter-spacing:
+      -0.035em;
+
+    text-transform:
+      none;
+
+    color:
+      var(--color-text-dark);
+
+    text-align: left;
+  }
 
   .header__nav a::after {
     display: none;
   }
 
-  .header__mobile-contact {
+
+
+  .header__dropdown-trigger {
+    cursor: pointer;
+  }
+
+  .header__dropdown-trigger > a {
+    flex: 1;
+  }
+
+  .header__dropdown-icon {
+    width: 14px;
+    height: 8px;
+
+    margin-left: 20px;
+
+    flex-shrink: 0;
+  }
+
+.header__dropdown {
+    width: 100%;
     display: block;
   }
-}
 
+  .header__dropdown-menu {
+    position: static !important;
+
+    width: 100%;
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+
+    border: 0;
+    box-shadow: none;
+
+    background: transparent;
+
+    opacity: 1 !important;
+    visibility: visible !important;
+
+    transform: none !important;
+
+    pointer-events: auto;
+
+    max-height: 0;
+    overflow: hidden;
+
+    transition:
+      max-height 0.35s ease;
+  }
+
+  .header__dropdown--open
+  .header__dropdown-menu {
+    max-height: 240px;
+  }
+
+  .header__dropdown-menu::before {
+    display: none;
+  }
+
+  .header__dropdown-menu a {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    min-height: 46px;
+
+    padding:
+      12px
+      0
+      12px
+      22px;
+
+    border-bottom:
+      1px solid
+      rgba(72, 63, 56, 0.10);
+
+    background: transparent;
+
+    font-family:
+      var(--font-sans);
+
+    font-size: 0.72rem;
+    font-weight: 500;
+
+    line-height: 1.35;
+
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+
+    color:
+      var(--color-accent-dark);
+
+    opacity: 1;
+    visibility: visible;
+
+    white-space: normal;
+  }
+
+  .header__dropdown-menu a::before {
+    content: '';
+
+    position: absolute;
+
+    left: 0;
+    top: 50%;
+
+    width: 9px;
+    height: 1px;
+
+    background:
+      var(--color-accent-dark);
+  }
+
+  .header__dropdown-menu a::after {
+    display: none !important;
+  }
+}
 /* =========================
    MÓVIL
 ========================= */
@@ -1007,57 +1055,85 @@ span:last-child {
 @media (max-width: 640px) {
   .header {
     padding:
-      10px
-      20px;
+      8px
+      18px;
   }
 
   .header__inner {
-    min-height: 60px;
+    min-height: 58px;
 
     grid-template-columns:
-      minmax(130px, 190px)
+      minmax(120px, 170px)
       1fr
       auto;
   }
 
+  .header__brand {
+    padding:
+      16px
+      0;
+  }
+
+  .header__logo {
+    height: 43px;
+  }
+
   .header__menu-button {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
   }
 
   .header__menu-button span:first-child {
-    top: 17px;
+    top: 16px;
   }
 
   .header__menu-button span:last-child {
-    top: 24px;
+    top: 23px;
   }
 
   .header__menu-button.is-open
   span:first-child,
   .header__menu-button.is-open
   span:last-child {
-    top: 20px;
+    top: 19px;
   }
 
   .header__nav {
     padding:
-      115px
+      105px
       20px
-      45px;
+      35px;
   }
 
- .header__nav > a,
-.header__dropdown-trigger {
-  padding: 15px 0;
+  .header__nav > a,
+  .header__dropdown-trigger {
+    padding:
+      13px
+      0;
 
-  font-size:
-    clamp(
-      2rem,
-      11vw,
-      3.4rem
-    );
-}
+    font-size:
+      clamp(
+        1.45rem,
+        6.5vw,
+        1.9rem
+      );
+
+    line-height: 1.15;
+  }
+
+ .header__dropdown-menu a {
+    padding:
+      12px
+      0
+      12px
+      18px;
+
+    font-size:
+      0.68rem;
+
+    line-height:
+      1.4;
+  }
 }
 
 /* =========================

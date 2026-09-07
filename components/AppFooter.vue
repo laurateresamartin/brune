@@ -8,7 +8,7 @@
           aria-label="Bruné Abogacía y Mediación - Inicio"
         >
           <img
-            src="/images/brune-logo-transparent.png"
+            src="/images/logo_definitivo.png"
             alt="Bruné Abogacía y Mediación"
           >
         </a>
@@ -59,7 +59,76 @@
               <span>
                 León
               </span>
+
             </nav>
+            <div
+            class="footer__social"
+            aria-label="Redes sociales"
+          >
+            <!-- Instagram -->
+            <a
+              href="https://www.instagram.com/bruneabogaciaymediacion?stkn=bWVta3pkdHcxMDYy"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram de Bruné Abogacía y Mediación"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <rect
+                  x="3"
+                  y="3"
+                  width="18"
+                  height="18"
+                  rx="5"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="4"
+                />
+                <circle
+                  cx="17.5"
+                  cy="6.5"
+                  r="1"
+                  class="footer__social-dot"
+                />
+              </svg>
+            </a>
+
+            <!-- TikTok -->
+            <a
+              href="https://www.tiktok.com/@bruneabogaciaymediacion?_r=1&_t=ZN-99XYpHEN3sk"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="TikTok de Bruné Abogacía y Mediación"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="
+                    M15 4
+                    C15.4 6.4 16.8 7.8 19 8
+                    V11
+                    C17.5 10.9 16.2 10.4 15 9.5
+                    V15.2
+                    C15 18.4 12.8 20.5 9.8 20.5
+                    C6.8 20.5 4.5 18.3 4.5 15.5
+                    C4.5 12.5 6.9 10.3 10.5 10.3
+                    V13.3
+                    C8.5 13.3 7.5 14.2 7.5 15.5
+                    C7.5 16.7 8.4 17.5 9.7 17.5
+                    C11.2 17.5 12 16.5 12 15
+                    V4
+                    Z
+                  "
+                />
+              </svg>
+            </a>
+          </div>
           </div>
         </div>
       </div>
@@ -99,6 +168,8 @@
 <script setup lang="ts">
 const currentYear =
   new Date().getFullYear()
+
+
 </script>
 
 <style scoped>
@@ -109,10 +180,10 @@ const currentYear =
     35px;
 
   background:
-    #2f2e2d;
+    #514d49;
 
   color:
-    rgba(255, 255, 255, 0.72);
+    rgba(255, 255, 255, 0.78);
 }
 
 .footer__inner {
@@ -141,7 +212,7 @@ const currentYear =
 
 .footer__brand {
   width:
-    min(100%, 410px);
+    min(100%, 310px);
 }
 
 .footer__brand img {
@@ -184,6 +255,70 @@ const currentYear =
   display: grid;
 
   gap: 12px;
+}
+.footer__social {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 24px;
+}
+
+.footer__social a {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.22);
+
+  border-radius: 50%;
+
+  color:
+    rgba(255, 255, 255, 0.76);
+
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.3s var(--ease-out);
+}
+
+.footer__social svg {
+  width: 17px;
+  height: 17px;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+.footer__social a:last-child svg {
+  fill: currentColor;
+  stroke: none;
+}
+
+.footer__social-dot {
+  fill: currentColor;
+  stroke: none;
+}
+
+.footer__social a:hover {
+  background:
+    rgba(255, 255, 255, 0.12);
+
+  border-color:
+    rgba(255, 255, 255, 0.5);
+
+  color: #fff;
+
+  transform:
+    translateY(-3px);
 }
 
 .footer nav a,

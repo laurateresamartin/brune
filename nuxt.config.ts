@@ -6,6 +6,10 @@ export default defineNuxtConfig({
   css: [
     '~/assets/main.css'
   ],
+  runtimeConfig: {
+    resendApiKey:
+      process.env.RESEND_API_KEY
+  },
   app: {
     head: {
       title: 'Bruné Abogacía y Mediación',

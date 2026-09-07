@@ -5,7 +5,6 @@
     <main>
       <HeroSection />
       <SpecializationsSection />
-      <OtherAreasSection />
       <ContactSection />
     </main>
     <AppFooter />

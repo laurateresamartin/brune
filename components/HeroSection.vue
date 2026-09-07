@@ -114,11 +114,6 @@
               cada familia.
             </p>
 
-            <p>
-              Cada asunto se aborda desde la cercanía,
-              el rigor jurídico y una atención
-              verdaderamente personalizada.
-            </p>
           </div>
 
           <a

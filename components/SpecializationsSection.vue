@@ -280,7 +280,7 @@
               />
             </svg>
           </span>
-        </ NuxtLink>
+        </NuxtLink>
       </div>
     </div>
   </section>
@@ -436,9 +436,9 @@ onBeforeUnmount(() => {
 
   margin-bottom:
     clamp(
-      65px,
-      8vw,
-      115px
+      38px,
+      5vw,
+      70px
     );
 }
 
@@ -480,9 +480,9 @@ onBeforeUnmount(() => {
 
   font-size:
     clamp(
-      3.5rem,
-      5.8vw,
-      4.8rem
+      3rem,
+      4.8vw,
+      4.2rem
     );
 
   line-height: 0.93;
@@ -554,9 +554,9 @@ onBeforeUnmount(() => {
 
   padding:
     clamp(
-      30px,
-      3vw,
-      42px
+      24px,
+      2.4vw,
+      34px
     );
 
   overflow: hidden;
@@ -685,9 +685,13 @@ transform:
 .specialization-card__icon {
   position: relative;
   z-index: 2;
-  width: clamp(68px, 5.5vw, 82px);
-  height: clamp(68px, 5.5vw, 82px);
-
+  width: clamp(58px, 4.5vw, 70px);
+ height:
+    clamp(
+      58px,
+      4.5vw,
+      70px
+    );
   display: grid;
   place-items: center;
 
@@ -774,9 +778,9 @@ transform:
 
   padding-top:
     clamp(
-      45px,
-      5vw,
-      75px
+      28px,
+      3vw,
+      46px
     );
 }
 
@@ -787,9 +791,9 @@ transform:
 
   font-size:
     clamp(
-      2.35rem,
-      2.8vw,
-      3.45rem
+      2rem,
+      2.4vw,
+      2.9rem
     );
 
   line-height: 0.98;
@@ -993,9 +997,9 @@ transform:
 .specializations__footer {
   margin-top:
     clamp(
-      55px,
-      7vw,
-      90px
+      36px,
+      4vw,
+      58px
     );
 
   display: flex;
@@ -1105,12 +1109,12 @@ transform:
 @media (max-width: 680px) {
   .specializations {
     padding:
-      95px
+      72px
       20px;
   }
 
   .specializations__header {
-    margin-bottom: 58px;
+    margin-bottom: 42px;
   }
 
   .specializations__heading h2 {
@@ -1127,16 +1131,13 @@ transform:
   }
 
   .specialization-card {
-    min-height: 410px;
+    min-height: 360px;
 
     padding:
-      28px
-      24px;
+      26px
+      22px;
 
-    /*
-     * En móvil no tenemos hover,
-     * así que mostramos el contenido.
-     */
+ 
   }
 
   .specialization-card__icon {
@@ -1145,7 +1146,7 @@ transform:
   }
 
   .specialization-card__content {
-    padding-top: 55px;
+    padding-top: 42px;
   }
 
   .specialization-card h3 {

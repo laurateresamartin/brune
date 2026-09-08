@@ -84,6 +84,7 @@
             <img
               src="/images/Ana.jpg"
               alt="Ana Páramo Moratinos, letrada de Bruné Abogacía y Mediación"
+              fetchpriority="high"
             >
           </div>
 
@@ -199,7 +200,7 @@
   position: relative;
 
   padding:
-    92px
+    62px
     var(--page-padding)
     clamp(55px, 6vw, 90px);
 
@@ -313,15 +314,15 @@
   justify-content: center;
 
   padding:
-    clamp(25px, 3.5vw, 45px)
+    clamp(16px, 2vw, 26px)
     0
-    clamp(35px, 4vw, 55px);
+    clamp(18px, 2.2vw, 30px);
 }
 
 .hero__logo {
   display: block;
 
-  width: min(44vw, 500px);
+  width: min(30vw, 360px);
   height: auto;
 
   object-fit: contain;
@@ -375,7 +376,7 @@
 
 .hero__intro {
   padding:
-    clamp(15px, 3vw, 45px)
+    clamp(5px, 1.2vw, 18px)
     0;
 }
 
@@ -392,12 +393,12 @@
 }
 
 .hero h1 {
-  max-width: 780px;
+  max-width: 720px;
 
-  margin: 0 0 40px;
+  margin: 0 0 28px;
 
   font-size:
-    clamp(3.8rem, 6vw, 5.5rem);
+    clamp(3.25rem, 5vw, 4.7rem);
 
   line-height: 0.91;
   letter-spacing: -0.055em;
@@ -417,12 +418,12 @@
 .hero__description {
   max-width: 500px;
 
-  margin: 0 0 36px;
+  margin: 0 0 26px;
 
   font-size:
     clamp(0.98rem, 1.1vw, 1.08rem);
 
-  line-height: 1.8;
+  line-height: 1.7;
 
   color:
     rgba(52, 47, 43, 0.76);
@@ -485,11 +486,10 @@
 /* =========================
    FOTO ANA
 ========================= */
-
 .hero__visual {
   position: relative;
 
-  width: min(100%, 480px);
+  width: min(100%, 410px);
 
   justify-self: end;
 }

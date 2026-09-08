@@ -10,19 +10,41 @@ export default defineNuxtConfig({
     resendApiKey:
       process.env.RESEND_API_KEY
   },
-  app: {
-    head: {
-      title: 'Bruné Abogacía y Mediación',
-      link: [
-        {
-          rel: 'icon',
-          type: 'image/png',
-          href: '/logo-small-transparent.png'
-        }
-      ]
-  }},
+ app: {
+  head: {
+    htmlAttrs: {
+      lang: 'es'
+    },
+
+    title:
+      'Bruné Abogacía y Mediación',
+
+    meta: [
+      {
+        name: 'viewport',
+        content:
+          'width=device-width, initial-scale=1'
+      },
+
+      {
+        name: 'theme-color',
+        content: '#dedbd7'
+      }
+    ],
+
+    link: [
+      {
+        rel: 'icon',
+        type: 'image/png',
+        href: '/logo-small-transparent.png'
+      }
+    ]
+  }
+  },
   modules: [
-    '@nuxt/fonts'
+   '@nuxt/fonts',
+   '@nuxtjs/sitemap',
+   '@nuxtjs/robots'
   ],
   fonts: {
     families: [
@@ -49,5 +71,30 @@ export default defineNuxtConfig({
         ]
       }
     ]
-  }
+  },
+  site: {
+  url:
+    'https://www.bruneabogaciaymediacion.es',
+
+  name:
+    'Bruné Abogacía y Mediación'
+  },
+
+  sitemap: {
+    urls: [
+      '/',
+      '/por-que-elegirnos',
+      '/derecho-familia',
+      '/mediacion-familiar',
+      '/violencia-genero',
+      '/otras-areas',
+      '/aviso-legal',
+      '/politica-privacidad',
+      '/politica-cookies'
+    ]
+  },
+  robots: {
+    sitemap:
+      'https://www.bruneabogaciaymediacion.es/sitemap.xml'
+  },
 })

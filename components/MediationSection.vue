@@ -15,10 +15,14 @@
         </p>
 
         <div class="mediation__heading">
-          <h2>
+          <component
+            :is="headingLevel"
+          >
             El diálogo
-            <span>como primera opción.</span>
-          </h2>
+            <span>
+              como primera opción.
+            </span>
+          </component>
 
           <p>
             Durante el proceso de mediación ofrecemos
@@ -106,7 +110,7 @@
                     />
                   </svg>
                 </span>
-        </ NuxtLink>
+        </NuxtLink>
         </article>
       </div>
 
@@ -133,7 +137,7 @@
               />
             </svg>
           </span>
-        </ NuxtLink>
+        </NuxtLink>
       </div>
     </div>
   </section>
@@ -151,6 +155,15 @@ const sectionRef =
 
 const isVisible =
   ref(false)
+
+  withDefaults(
+  defineProps<{
+    headingLevel?: 'h1' | 'h2'
+  }>(),
+  {
+    headingLevel: 'h2'
+  }
+)
 
 const services = [
   {
@@ -353,11 +366,11 @@ onBeforeUnmount(() => {
 .mediation__heading h2 {
   margin: 0;
 
-  font-size:
+    font-size:
     clamp(
-      3.6rem,
-      6vw,
-      7rem
+      3rem,
+      4.7vw,
+      4.2rem
     );
 
   line-height: 0.92;
@@ -430,7 +443,7 @@ onBeforeUnmount(() => {
   font-size:
     clamp(
       1.9rem,
-      3.3vw,
+      2.3vw,
       3.5rem
     );
 

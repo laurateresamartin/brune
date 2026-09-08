@@ -10,10 +10,10 @@
         </p>
 
         <div class="other-areas__heading">
-          <h2>
+          <component :is="headingLevel">
             Asesoramiento jurídico
             <span>más allá del ámbito familiar.</span>
-          </h2>
+          </component>
 
         </div>
       </div>
@@ -110,6 +110,15 @@ const route = useRoute()
 
 const activeArea =
   ref<string | null>(null)
+
+withDefaults(
+  defineProps<{
+    headingLevel?: 'h1' | 'h2'
+  }>(),
+  {
+    headingLevel: 'h2'
+  }
+)
 
 const areas = [
   {
@@ -224,18 +233,20 @@ const toggleArea = (id: string) => {
 <style scoped>
 .other-areas {
   position: relative;
- transition:
-    background
-    0.35s ease;
+
   padding:
-    100px
+    142px
     var(--page-padding);
 
-  background:
-    #fbfaf8;
+  background: #fbfaf8;
+
+  transition:
+    background 0.35s ease;
 }
 
 .other-areas__inner {
+  padding-top: 0;
+
   width:
     min(
       100%,
@@ -256,18 +267,18 @@ const toggleArea = (id: string) => {
     minmax(130px, 0.35fr)
     minmax(0, 1.65fr);
 
-  gap:
-    clamp(
-      35px,
-      6vw,
-      100px
-    );
+ gap:
+  clamp(
+    28px,
+    4vw,
+    65px
+  );
 
-  margin-bottom:
+margin-bottom:
     clamp(
-      70px,
-      9vw,
-      125px
+      38px,
+      4.5vw,
+      62px
     );
 }
 
@@ -311,13 +322,12 @@ const toggleArea = (id: string) => {
 
   font-size:
     clamp(
-      3.5rem,
-      5.8vw,
-      4.8rem
+      3rem,
+      4.7vw,
+      4.2rem
     );
 
   line-height: 0.93;
-
   letter-spacing: -0.05em;
 
   color:
@@ -390,7 +400,7 @@ const toggleArea = (id: string) => {
 .other-area {
   position: relative;
 
-  min-height: 400px;
+  min-height: 330px;
 
   overflow: hidden;
 
@@ -471,13 +481,17 @@ const toggleArea = (id: string) => {
    TRIGGER
 ========================= */
 .other-area__trigger {
-  min-height: 400px;
+  min-height: 330px;
 
   display: flex;
   flex-direction: column;
 
   padding:
-    clamp(30px, 3vw, 42px);
+    clamp(
+      24px,
+      2.5vw,
+      34px
+    );
 
   transition:
     min-height 0.6s var(--ease-out);
@@ -485,7 +499,7 @@ const toggleArea = (id: string) => {
 
 .other-area:hover
 .other-area__trigger {
-  min-height: 230px;
+  min-height: 195px;
 }
 .other-area__trigger::before {
   content:
@@ -495,11 +509,11 @@ const toggleArea = (id: string) => {
 
   display: block;
 
-  margin-bottom:
+   margin-bottom:
     clamp(
-      70px,
-      8vw,
-      110px
+      38px,
+      4vw,
+      60px
     );
 
   font-family:
@@ -521,14 +535,20 @@ const toggleArea = (id: string) => {
 .other-area__title {
   margin-top: auto;
 
-  font-family: var(--font-serif);
+  font-family:
+    var(--font-serif);
 
   font-size:
-    clamp(2.4rem, 3vw, 3.5rem);
+    clamp(
+      2.1rem,
+      2.6vw,
+      3rem
+    );
 
   line-height: 0.96;
 
-  color: var(--color-text-dark);
+  color:
+    var(--color-text-dark);
 
   transition:
     transform 0.5s var(--ease-out);
@@ -634,17 +654,18 @@ const toggleArea = (id: string) => {
 }
 
 .other-area__panel-inner {
-  min-height: 0;
+ min-height: 0;
   overflow: hidden;
 
   display: flex;
   flex-direction: column;
-  gap: 28px;
+
+  gap: 20px;
 
   padding:
     0
-    clamp(30px, 3vw, 42px)
-    clamp(34px, 4vw, 46px);
+    clamp(24px, 2.5vw, 34px)
+    clamp(26px, 3vw, 34px);
 }
 
 
@@ -685,19 +706,19 @@ const toggleArea = (id: string) => {
 
   max-width: 720px;
 
-  padding:
-    9px
-    0
-    9px
-    16px;
-
+  
   border-bottom:
     1px solid
     rgba(80, 75, 70, 0.07);
 
-  font-size: 0.88rem;
+   padding:
+    7px
+    0
+    7px
+    16px;
 
-  line-height: 1.55;
+  font-size: 0.86rem;
+  line-height: 1.5;
 
   color:
     rgba(60, 57, 54, 0.7);
@@ -844,18 +865,16 @@ const toggleArea = (id: string) => {
 .other-areas__footer {
   margin-top:
     clamp(
-      55px,
-      6vw,
-      80px
+      34px,
+      4vw,
+      52px
     );
 
   display: flex;
-
   align-items: flex-end;
-
   justify-content: space-between;
 
-  gap: 45px;
+  gap: 35px;
 }
 
 .other-areas__footer p {
@@ -944,23 +963,23 @@ const toggleArea = (id: string) => {
    MOBILE
 ========================= */
 @media (max-width: 720px) {
-  .other-areas {
+ .other-areas {
     padding:
-      88px
+      68px
       20px;
   }
 
   .other-areas__header {
     margin-bottom:
-      48px;
+      36px;
   }
 
   .other-areas__heading h2 {
-    font-size:
+   font-size:
       clamp(
-        2.8rem,
-        13vw,
-        4.1rem
+        2.65rem,
+        12vw,
+        3.7rem
       );
   }
 
@@ -1022,10 +1041,10 @@ const toggleArea = (id: string) => {
     align-items:
       flex-start;
 
-    gap: 28px;
+    gap: 24px;
 
     margin-top:
-      55px;
+      38px;
   }
 }
 /* =========================

@@ -10,12 +10,14 @@
         </p>
 
         <div class="family__heading">
-          <h2>
+          <component
+            :is="headingLevel"
+          >
             La familia cambia.
             <span>
               El acompañamiento permanece.
             </span>
-          </h2>
+          </component>
 
           <p>
             La separación no es el final de una familia,
@@ -194,7 +196,14 @@ const areas = [
     ]
   }
 ]
-
+withDefaults(
+  defineProps<{
+    headingLevel?: 'h1' | 'h2'
+  }>(),
+  {
+    headingLevel: 'h2'
+  }
+)
 const toggleCard = (id: string) => {
   activeCard.value =
     activeCard.value === id
@@ -325,12 +334,11 @@ const deactivateDesktop = () => {
 
 .family__heading h2 {
   margin: 0;
-
   font-size:
     clamp(
-      3.5rem,
-      5.8vw,
-      6.8rem
+      3rem,
+      4.7vw,
+      4.2rem
     );
 
   line-height: 0.93;

@@ -2,8 +2,8 @@
   <footer class="footer">
     <div class="footer__inner">
       <div class="footer__top">
-        <a
-          href="#inicio"
+        <NuxtLink
+          to="/#inicio"
           class="footer__brand"
           aria-label="Bruné Abogacía y Mediación - Inicio"
         >
@@ -11,7 +11,7 @@
             src="/images/logo_definitivo.png"
             alt="Bruné Abogacía y Mediación"
           >
-        </a>
+        </NuxtLink>
 
         <div class="footer__navigation">
           <div>

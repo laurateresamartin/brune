@@ -11,10 +11,14 @@
         </p>
 
         <div class="why__heading">
-          <h2>
+         <component
+            :is="headingLevel"
+          >
             Rigor jurídico.
-            <span>Cercanía personal.</span>
-          </h2>
+            <span>
+              Cercanía personal.
+            </span>
+          </component>
 
           <p>
             Una forma de ejercer la abogacía basada
@@ -23,17 +27,7 @@
           </p>
         </div>
       </div>
-      <div class="why__portrait">
-      <!-- <div class="why__portrait-image">
-        <img
-          src="/images/ana-despacho.jpg"
-          alt="Ana Páramo Moratinos, letrada de Bruné Abogacía y Mediación"
-        >
-      </div> -->
-
      
-    </div>
-
       <div class="why__list">
         <article
           v-for="(item, index) in items"
@@ -112,7 +106,7 @@
                 />
               </svg>
             </span>
-        </ NuxtLink>
+        </NuxtLink>
       </div>
     </div>
   </section>
@@ -130,6 +124,15 @@ const sectionRef =
 
 const isVisible =
   ref(false)
+
+ withDefaults(
+  defineProps<{
+    headingLevel?: 'h1' | 'h2'
+  }>(),
+  {
+    headingLevel: 'h2'
+  }
+)
 
 const items = [
   {
@@ -251,9 +254,9 @@ onBeforeUnmount(() => {
 
   margin-bottom:
     clamp(
-      65px,
-      8vw,
-      115px
+      38px,
+      5vw,
+      68px
     );
 }
 .link-arrow {
@@ -312,9 +315,9 @@ onBeforeUnmount(() => {
 
   font-size:
     clamp(
-      3.5rem,
-      5.8vw,
-      6.7rem
+      3rem,
+      4.8vw,
+      4.8rem
     );
 
   line-height: 0.93;
@@ -449,14 +452,24 @@ onBeforeUnmount(() => {
 
   position: relative;
 
-  min-height:
-    clamp(360px, 34vw, 480px);
+    min-height:
+    clamp(
+      300px,
+      27vw,
+      380px
+    );
+
+  padding:
+    clamp(
+      28px,
+      3vw,
+      42px
+    );
 
   display: flex;
   flex-direction: column;
 
-  padding:
-    clamp(34px, 4vw, 58px);
+  
 
   overflow: hidden;
 
@@ -504,14 +517,7 @@ onBeforeUnmount(() => {
 .why__item:nth-child(3):hover {
   background: #ddd6d0;
 }
-.why__item:hover {
-  padding-left: 18px;
-   background:
-    rgba(255, 255, 255, 0.48);
 
-  transform:
-    translateX(6px);
-}
 .why-us__symbol::before,
 .why-us__symbol::after {
   border-color:
@@ -533,14 +539,18 @@ onBeforeUnmount(() => {
 ========================= */
 
 .why__symbol {
-  width: 74px;
-  height: 74px;
+  width: 62px;
+  height: 62px;
 
   display: grid;
   place-items: center;
 
-  margin-bottom:
-    clamp(55px, 7vw, 95px);
+   margin-bottom:
+    clamp(
+      32px,
+      4vw,
+      52px
+    );
 
   border:
     1px solid
@@ -645,16 +655,21 @@ onBeforeUnmount(() => {
 .why__item-copy h3 {
   max-width: 420px;
 
-  margin: 0 0 24px;
+  margin: 0 0 18px;
 
   font-size:
-    clamp(2rem, 3vw, 3.35rem);
+    clamp(
+      1.8rem,
+      2.4vw,
+      2.7rem
+    );
 
   line-height: 0.98;
 
   letter-spacing: -0.04em;
 
-  color: var(--color-text-dark);
+  color:
+    var(--color-text-dark);
 }
 .why__item-copy p {
   max-width: 650px;
@@ -710,11 +725,11 @@ onBeforeUnmount(() => {
 ========================= */
 
 .why__footer {
-  margin-top:
+   margin-top:
     clamp(
-      60px,
-      8vw,
-      100px
+      38px,
+      5vw,
+      60px
     );
 
   display: flex;

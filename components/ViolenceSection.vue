@@ -11,12 +11,14 @@
         </p>
 
         <div class="violence__heading">
-          <h2>
-            Asistencia jurídica
-            <span>
-              especializada.
-            </span>
-          </h2>
+        <component
+          :is="headingLevel"
+        >
+          Asistencia jurídica
+          <span>
+            especializada.
+          </span>
+        </component>
 
           <p>
             Una atención jurídica rigurosa,
@@ -144,7 +146,7 @@
                   />
                 </svg>
               </span>
-        </ NuxtLink>
+        </NuxtLink>
       </div>
     </div>
   </section>
@@ -162,6 +164,15 @@ const sectionRef =
 
 const isVisible =
   ref(false)
+
+withDefaults(
+  defineProps<{
+    headingLevel?: 'h1' | 'h2'
+  }>(),
+  {
+    headingLevel: 'h2'
+  }
+)
 
 const services = [
   {
@@ -389,12 +400,13 @@ onBeforeUnmount(() => {
 .violence__heading h2 {
   margin: 0;
 
-  font-size:
+   font-size:
     clamp(
-      3.5rem,
-      5.8vw,
-      6.8rem
+      3rem,
+      4.7vw,
+      4.2rem
     );
+
 
   line-height: 0.93;
 
@@ -474,7 +486,7 @@ onBeforeUnmount(() => {
   font-size:
     clamp(
       2.2rem,
-      3.7vw,
+      2.4vw,
       4.1rem
     );
 

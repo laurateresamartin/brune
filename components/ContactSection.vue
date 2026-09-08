@@ -355,9 +355,9 @@ const sendForm = async () => {
 
   margin-bottom:
     clamp(
-      70px,
-      9vw,
-      125px
+      38px,
+      5vw,
+      68px
     );
 }
 
@@ -384,9 +384,9 @@ const sendForm = async () => {
 
   font-size:
     clamp(
-      3.7rem,
-      6.5vw,
-      4.4rem
+      3.1rem,
+      5vw,
+      4rem
     );
 
   line-height: 0.91;
@@ -419,9 +419,9 @@ const sendForm = async () => {
 
   gap:
     clamp(
-      70px,
-      11vw,
-      170px
+      45px,
+      6vw,
+      90px
     );
 
   align-items: start;
@@ -444,9 +444,9 @@ const sendForm = async () => {
 
   font-size:
     clamp(
-      1.8rem,
-      3vw,
-      3.1rem
+      1.65rem,
+      2.4vw,
+      2.6rem
     );
 
   line-height: 1.12;
@@ -469,7 +469,7 @@ const sendForm = async () => {
   margin:
     8px
     0
-    55px;
+    32px;
 
   padding:
     11px
@@ -571,7 +571,7 @@ const sendForm = async () => {
   gap: 25px;
 
   padding:
-    22px
+    16px
     0;
 
   border-bottom:
@@ -632,7 +632,7 @@ const sendForm = async () => {
 
 .contact__map {
   width: 100%;
-  height: 290px;
+  height: 240px;
 
   margin-top: 14px;
 
@@ -664,9 +664,9 @@ const sendForm = async () => {
 .contact__form-wrapper {
   padding:
     clamp(
-      35px,
-      5vw,
-      65px
+      28px,
+      3.5vw,
+      46px
     );
 
   background:
@@ -687,16 +687,16 @@ const sendForm = async () => {
   margin:
     0
     0
-    55px;
+    34px;
 
   font-family:
     var(--font-serif);
 
   font-size:
     clamp(
-      2rem,
-      3.5vw,
-      3.6rem
+      1.85rem,
+      2.8vw,
+      3rem
     );
 
   line-height: 1.05;
@@ -723,7 +723,7 @@ const sendForm = async () => {
 .contact__form {
   display: grid;
 
-  gap: 30px;
+  gap: 20px;
 }
 
 .contact__field {
@@ -779,7 +779,7 @@ const sendForm = async () => {
 }
 
 .contact__field textarea {
-  min-height: 125px;
+  min-height: 52px;
 
   resize: vertical;
 }
@@ -1007,12 +1007,12 @@ span:last-child {
 @media (max-width: 680px) {
   .contact {
     padding:
-      95px
+      72px
       20px;
   }
 
   .contact__header {
-    margin-bottom: 60px;
+    margin-bottom: 38px;
   }
 
   .contact__header h2 {
@@ -1029,7 +1029,7 @@ span:last-child {
   }
 
   .contact__appointment {
-    margin-bottom: 40px;
+    margin-bottom: 28px;
   }
 
   .contact__detail {
@@ -1040,7 +1040,7 @@ span:last-child {
 
   .contact__map {
     width: 100%;
-    height: 290px;
+    height: 240px;
 
     margin-top: 14px;
 
@@ -1055,12 +1055,15 @@ span:last-child {
   }
   .contact__form-wrapper {
     padding:
-      35px
+      30px
       22px;
   }
 
   .contact__form-heading {
-    margin-bottom: 42px;
+    margin-bottom: 30px;
+  }
+   .contact__form {
+    gap: 18px;
   }
 
 }

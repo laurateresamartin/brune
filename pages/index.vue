@@ -119,13 +119,23 @@ useHead({
               'ES'
           },
 
-          areaServed: {
+          areaServed: [
+          {
+            '@type':
+              'City',
+
+            name:
+              'León'
+          },
+
+          {
             '@type':
               'Country',
 
             name:
               'España'
-          },
+          }
+        ],
 
           serviceType: [
             'Derecho de Familia y Menores',

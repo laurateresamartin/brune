@@ -258,7 +258,10 @@
           jurídica adaptada a tus circunstancias.
         </p>
 
-        <NuxtLink to="/#contacto">
+       
+        <a  href="https://calendly.com/bruneabogaciaymediacion"
+            target="_blank"
+            rel="noopener noreferrer"">
           <span>
             Solicita una consulta
           </span>
@@ -280,7 +283,7 @@
               />
             </svg>
           </span>
-        </NuxtLink>
+        </a>
       </div>
     </div>
   </section>

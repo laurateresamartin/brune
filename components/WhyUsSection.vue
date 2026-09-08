@@ -926,23 +926,32 @@ span:last-child {
   }
 
   .why__item {
-    min-height: auto;
+   min-height: auto;
 
-    grid-template-columns:
-      58px
-      minmax(0, 1fr);
+  grid-template-columns:
+    52px
+    minmax(0, 1fr);
 
-    gap:
-      20px
-      22px;
+  gap:
+    18px
+    18px;
 
-    padding:
-      32px
-      0;
+  margin:
+    0
+    8px;
+
+  padding:
+    28px
+    22px;
+
+  border:
+    1px solid
+    rgba(72, 63, 56, 0.10);
   }
 
   .why__item:hover {
-    padding-left: 0;
+    padding-left: 22px;
+    transform: none;
   }
 
   .why__symbol {

@@ -888,19 +888,32 @@ span:last-child {
   }
 
   .violence-service {
-    grid-template-columns:
-      25px
-      minmax(0, 1fr);
+ grid-template-columns:
+    25px
+    minmax(0, 1fr);
 
-    gap: 18px;
+  gap: 18px;
 
-    padding:
-      30px
-      0;
+  margin:
+    0
+    8px
+    14px;
+
+  padding:
+    26px
+    20px;
+
+  border:
+    1px solid
+    rgba(72, 63, 56, 0.10);
+
+  background:
+    rgba(255, 255, 255, 0.32);
   }
 
   .violence-service:hover {
-    padding-left: 0;
+    padding-left: 20px;
+  transform: none;
   }
 
   .violence-service__content {

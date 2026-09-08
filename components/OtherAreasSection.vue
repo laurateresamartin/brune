@@ -819,7 +819,7 @@ margin-bottom:
   }
 
   .other-area__title {
-    margin-top: 80px;
+    margin-top: 10px;
   }
 
   .other-area__arrow {
@@ -1005,6 +1005,7 @@ margin-bottom:
     height: 34px;
 
     font-size: 0.76rem;
+     margin-bottom:   0px;
   }
 
   .other-area__title {

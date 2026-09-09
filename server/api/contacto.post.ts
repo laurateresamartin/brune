@@ -26,7 +26,7 @@ export default defineEventHandler(async (event) => {
       },
 
       body: {
-        from: 'Bruné Web <onboarding@resend.dev>',
+        from: 'Bruné Web <web@bruneabogaciaymediacion.es>',
 
         to: [
           'consultabrune@gmail.com'
